@@ -1,0 +1,27 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+
+:root {
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+    font-family: 'Libre Baskerville', serif;
+}
