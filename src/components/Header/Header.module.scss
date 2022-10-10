@@ -2,6 +2,9 @@
     width: 100%;
     height: 10rem;
     padding: 0 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .container {
     width: 100%;
@@ -27,7 +30,7 @@
 }
 
 .options_6 {
-    padding-right: 12rem;
+    margin-right: 12rem;
     ul {
         display: flex;
         gap: 5rem;
@@ -58,7 +61,7 @@
                 font-size: 1.6rem;
             }
             .total_price {
-                color: #f45d96;
+                color: var(--pink);
             }
         }
     }

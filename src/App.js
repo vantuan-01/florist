@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import { DefaultLayout } from './components/Layout';
+import { DefaultLayout } from '~/Layout';
 import { Fragment } from 'react';
 import { publicRoutes } from '~/routes';
 
@@ -17,7 +17,9 @@ function App() {
                         } else if (route.layout === null) {
                             Layout = Fragment;
                         }
-
+                        {
+                            console.log(Layout);
+                        }
                         const Page = route.component;
                         return (
                             <Route

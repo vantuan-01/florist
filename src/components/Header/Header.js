@@ -19,15 +19,25 @@ function Header() {
                         <div className={styles.options_6}>
                             <ul>
                                 <li>
-                                    <Link to={config.home}>home</Link>
+                                    <Link style={{ color: '#f45d96' }} to={config.home}>
+                                        home
+                                    </Link>
                                 </li>
-                                <li>about</li>
-                                <li>services</li>
+                                <li>
+                                    <Link to={config.about}>about</Link>
+                                </li>
+                                <li>
+                                    <Link to={config.services}>services</Link>
+                                </li>
                                 <li>
                                     <Link to={config.products}>shop</Link>
                                 </li>
-                                <li>blog</li>
-                                <li>contact</li>
+                                <li>
+                                    <Link to={config.blog}>blog</Link>
+                                </li>
+                                <li>
+                                    <Link to={config.contact}>contact</Link>
+                                </li>
                             </ul>
                         </div>
                         <div className={styles.options_3}>
