@@ -1,9 +1,20 @@
+import React, { useEffect, useState } from 'react';
+
 import Images from '~/assets/images';
 import { Link } from 'react-router-dom';
-import React from 'react';
+import config from '~/config/routes';
 import styles from './Banner.module.scss';
 
 function Banner() {
+    const [bannerText, setBannerText] = useState('');
+    const presentURL = window.location.href.slice(22);
+
+    useEffect(() => {
+        if (bannerText !== presentURL) {
+            setBannerText(presentURL);
+        }
+    });
+
     return (
         <div className={styles.banner}>
             <div className={styles.banner_img}>
@@ -11,10 +22,10 @@ function Banner() {
             </div>
             <div className={styles.container}>
                 <div className={styles.banner_text}>
-                    <h1>About us</h1>
+                    <h1>{presentURL}</h1>
                     <div className={styles.banner_link}>
-                        <Link>Home</Link>
-                        <span>about</span>
+                        <Link to={config.home}>Home</Link>
+                        <span>{presentURL}</span>
                     </div>
                 </div>
             </div>
