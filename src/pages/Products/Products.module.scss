@@ -1,0 +1,45 @@
+.products {
+    width: 100%;
+}
+
+.container {
+}
+
+.sortable {
+    height: 5rem;
+    background-color: red;
+}
+
+.all_items {
+}
+
+.list_items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1.5rem;
+}
+
+.item {
+    max-width: 20%;
+    width: 100%;
+    padding: 0 1.5rem;
+    list-style: none;
+    margin-bottom: 5rem;
+    img {
+        width: 100%;
+    }
+}
+
+.item_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.item_price {
+    font: size 1.8rem;
+    font-weight: 600;
+    text-align: center;
+}

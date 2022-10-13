@@ -81,7 +81,7 @@ function Footer() {
                                 <p>Subcribe to our newsletter to get more free tips. No Spam, Promise.</p>
                                 <form action="">
                                     <input type="text" placeholder="Email" />
-                                    <button type="submit">Subscribe</button>
+                                    <button>Subscribe</button>
                                 </form>
                             </div>
                         </div>
