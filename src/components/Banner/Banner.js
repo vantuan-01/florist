@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '~/config/routes';
 import styles from './Banner.module.scss';
 
-function Banner() {
+function Banner({ banner }) {
     const [bannerText, setBannerText] = useState('');
     const presentURL = window.location.href.slice(22);
 
@@ -22,10 +22,10 @@ function Banner() {
             </div>
             <div className={styles.container}>
                 <div className={styles.banner_text}>
-                    <h1>{presentURL}</h1>
+                    <h1>{banner}</h1>
                     <div className={styles.banner_link}>
                         <Link to={config.home}>Home</Link>
-                        <span>{presentURL}</span>
+                        <span>{banner}</span>
                     </div>
                 </div>
             </div>

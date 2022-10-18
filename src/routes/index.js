@@ -12,12 +12,12 @@ import routesConfig from '~/config/routes';
 
 const publicRoutes = [
     { path: routesConfig.home, component: Home, layout: HomeLayout },
-    { path: routesConfig.products, component: Products },
-    { path: routesConfig.productDetail, component: ProductDetail },
-    { path: routesConfig.services, component: Services },
-    { path: routesConfig.blog, component: Blog },
-    { path: routesConfig.contact, component: Contact },
-    { path: routesConfig.about, component: About },
+    { path: routesConfig.products, component: Products, banner: 'products' },
+    { path: routesConfig.productDetail, component: ProductDetail, banner: 'product detail' },
+    { path: routesConfig.services, component: Services, banner: 'services' },
+    { path: routesConfig.blog, component: Blog, banner: 'blog' },
+    { path: routesConfig.contact, component: Contact, banner: 'contact' },
+    { path: routesConfig.about, component: About, banner: 'about' },
 ];
 
 const privateRoutes = [];

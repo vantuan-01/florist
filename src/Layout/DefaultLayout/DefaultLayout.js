@@ -3,14 +3,12 @@ import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import styles from '~/components/GlobalStyles/GlobalStyles.module.scss';
 
-function DefaultLayout({ children }) {
+function DefaultLayout({ children, banner }) {
     return (
         <div className={styles.wrapper}>
             <Header />
-            <Banner />
-            <div className={styles.container}>
-                <div>{children}</div>
-            </div>
+            <Banner banner={banner} />
+            <div className={styles.container}>{children}</div>
             <Footer />
         </div>
     );

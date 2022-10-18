@@ -23,7 +23,7 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
+                                    <Layout banner={route.banner}>
                                         <Page />
                                     </Layout>
                                 }

@@ -1,0 +1,51 @@
+.productDetail {
+    width: 100%;
+    // background-color: #ccc;
+}
+
+.container {
+    display: flex;
+}
+
+.groupImg {
+    width: 50%;
+    // background-color: red;
+    display: flex;
+}
+
+.main_img {
+    width: 80%;
+    // background-color: yellow;
+
+    img {
+        width: 55rem;
+        height: 72rem;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.sub_img {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ul {
+        height: 100%;
+        li {
+            margin-bottom: 1rem;
+            list-style: none;
+            img {
+                width: 10rem;
+                height: 10rem;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.groupInfo {
+    width: 50%;
+    background-color: blue;
+}
