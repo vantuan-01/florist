@@ -1,9 +1,27 @@
+import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
+import { useState } from 'react';
 
 function ProductDetail() {
+    const [amount, setAmount] = useState(1);
+
+    const increaseAmount = () => {
+        setAmount(amount + 1);
+    };
+    const decreaseAmount = () => {
+        if (amount > 1) {
+            setAmount(amount - 1);
+        } else if (amount === 1) {
+            return;
+        } else {
+            console.log('decreaseAmount error');
+        }
+    };
+
     return (
         <div className={styles.productDetail}>
             <div className={styles.container}>
@@ -35,12 +53,12 @@ function ProductDetail() {
                     </div>
                 </div>
                 <div className={styles.groupInfo}>
-                    <div className={styles.row}>
+                    <div className={styles.groupInfo_row}>
                         <div className={styles.main_info}>
                             <div className={styles.name_rate}>
-                                <span>succulent</span>
-                                <h4>fly me to the moon</h4>
-                                <ul>
+                                <span className={styles.category}>succulent</span>
+                                <h4 className={styles.name}>fly me to the moon</h4>
+                                <ul className={styles.reviews}>
                                     <li>
                                         <FontAwesomeIcon icon={faStar} />
                                         <FontAwesomeIcon icon={faStar} />
@@ -48,9 +66,7 @@ function ProductDetail() {
                                         <FontAwesomeIcon icon={faStar} />
                                         <FontAwesomeIcon icon={faStar} />
                                     </li>
-                                    <li>
-                                        <span>03 reviews</span>
-                                    </li>
+                                    <li>03 reviews</li>
                                 </ul>
                             </div>
                             <div className={styles.price}>$34.00</div>
@@ -62,11 +78,49 @@ function ProductDetail() {
                                 </li>
                                 <li>
                                     product code: <span>pm 01</span>
-                                    <li>
-                                        availability: <span>in stock</span>
-                                    </li>
+                                </li>
+                                <li>
+                                    availability: <span>in stock</span>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div className={styles.groupInfo_row}>
+                        <div className={styles.btn_group}>
+                            <div className={styles.btn_amount}>
+                                <button onClick={decreaseAmount}>-</button>
+                                <span>{amount}</span>
+                                <button onClick={increaseAmount}>+</button>
+                            </div>
+                            <button className={styles.btn_add}>
+                                <div className={styles.cart_icon}>
+                                    <FontAwesomeIcon icon={faShoppingBag} />
+                                </div>
+                                <span>add to cart</span>
+                            </button>
+                            <button className={styles.btn_love}>
+                                <FontAwesomeIcon icon={faHeart} />
+                            </button>
+                        </div>
+                    </div>
+                    <div className={styles.groupInfo_row}>
+                        <div className={styles.description}>
+                            <ul>
+                                <li>
+                                    <button>Description</button>
+                                </li>
+                                <li>
+                                    <button>Shipping & Returns</button>
+                                </li>
+                                <li>
+                                    <button>Reviews </button>
+                                </li>
+                            </ul>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
+                                Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                            </p>
                         </div>
                     </div>
                 </div>
