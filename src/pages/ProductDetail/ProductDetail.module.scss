@@ -126,21 +126,9 @@
 .btn_amount {
     width: 17rem;
     height: 5rem;
+    padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 3rem;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    button {
-        width: 3rem;
-        background-color: transparent;
-        border: none;
-        font-size: 3rem;
-    }
-    span {
-        font-size: 2rem;
-    }
 }
 
 .btn_add {

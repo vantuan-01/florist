@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
 import Images from '~/assets/images';
 import { Link } from 'react-router-dom';
 import config from '~/config/routes';
 import styles from './Banner.module.scss';
 
 function Banner({ banner }) {
-    const [bannerText, setBannerText] = useState('');
-    const presentURL = window.location.href.slice(22);
-
-    useEffect(() => {
-        if (bannerText !== presentURL) {
-            setBannerText(presentURL);
-        }
-    });
-
     return (
         <div className={styles.banner}>
             <div className={styles.banner_img}>

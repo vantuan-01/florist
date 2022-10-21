@@ -2,6 +2,7 @@
 
 import About from '~/pages/About';
 import Blog from '~/pages/Blog';
+import Cart from '~/pages/Cart';
 import Contact from '~/pages/Contact';
 import Home from '~/pages/Home';
 import { HomeLayout } from '~/Layout';
@@ -18,6 +19,7 @@ const publicRoutes = [
     { path: routesConfig.blog, component: Blog, banner: 'blog' },
     { path: routesConfig.contact, component: Contact, banner: 'contact' },
     { path: routesConfig.about, component: About, banner: 'about' },
+    { path: routesConfig.cart, component: Cart, banner: 'shopping cart' },
 ];
 
 const privateRoutes = [];

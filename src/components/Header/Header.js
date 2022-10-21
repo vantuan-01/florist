@@ -43,16 +43,22 @@ function Header() {
                         <div className={styles.options_3}>
                             <ul>
                                 <li>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                    <Link>
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                    </Link>
                                 </li>
                                 <li>
-                                    <FontAwesomeIcon icon={faHeart} />
-                                    <span>(05)</span>
+                                    <Link>
+                                        <FontAwesomeIcon icon={faHeart} />
+                                        <span>(05)</span>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <FontAwesomeIcon icon={faCartShopping} />
-                                    <span>(01)</span>
-                                    <span className={styles.total_price}>$ 65.0</span>
+                                    <Link to={config.cart}>
+                                        <FontAwesomeIcon icon={faCartShopping} />
+                                        <span>(01)</span>
+                                        <span className={styles.total_price}>$ 65.0</span>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

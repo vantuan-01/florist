@@ -17,22 +17,36 @@ function Footer() {
                             <img src={Images.ig1} alt="ig1" />
                             <div className={styles.instagram_hover}>
                                 <FontAwesomeIcon className={styles.instagram_icon} icon={faInstagram} size="lg" />
-                                <h6>
-                                    Follow us <a>@florist</a>
-                                </h6>
+                                <h6>Follow us @florist</h6>
                             </div>
                         </div>
                         <div className={styles.instagram_img}>
                             <img src={Images.ig2} alt="ig2" />
+                            <div className={styles.instagram_hover}>
+                                <FontAwesomeIcon className={styles.instagram_icon} icon={faInstagram} size="lg" />
+                                <h6>Follow us @florist</h6>
+                            </div>
                         </div>
                         <div className={styles.instagram_img}>
                             <img src={Images.ig3} alt="ig3" />
+                            <div className={styles.instagram_hover}>
+                                <FontAwesomeIcon className={styles.instagram_icon} icon={faInstagram} size="lg" />
+                                <h6>Follow us @florist</h6>
+                            </div>
                         </div>
                         <div className={styles.instagram_img}>
                             <img src={Images.ig4} alt="ig4" />
+                            <div className={styles.instagram_hover}>
+                                <FontAwesomeIcon className={styles.instagram_icon} icon={faInstagram} size="lg" />
+                                <h6>Follow us @florist</h6>
+                            </div>
                         </div>
                         <div className={styles.instagram_img}>
                             <img src={Images.ig5} alt="ig5" />
+                            <div className={styles.instagram_hover}>
+                                <FontAwesomeIcon className={styles.instagram_icon} icon={faInstagram} size="lg" />
+                                <h6>Follow us @florist</h6>
+                            </div>
                         </div>
                     </div>
                 </div>

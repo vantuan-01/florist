@@ -1,0 +1,140 @@
+.cart {
+    width: 100%;
+}
+
+.container {
+    display: flex;
+}
+
+.col_8 {
+    padding: 0 1.5rem;
+    width: 66.67%;
+}
+
+.cart_table {
+    margin-top: -3.5rem;
+    padding-right: 4rem;
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        tr {
+            border-bottom: 0.1rem solid #e1e1e1;
+        }
+        td,
+        th {
+            text-align: left;
+            padding: 3.5rem 0;
+            &:nth-child(3) {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.item {
+    display: flex;
+    .item_img {
+        img {
+            width: 10rem;
+            height: 10rem;
+        }
+    }
+
+    .item_text {
+        margin-left: 3rem;
+        display: flex;
+        flex-direction: column;
+        h4 {
+            margin-top: 1rem;
+            font-size: 2.4rem;
+            text-transform: capitalize;
+            font-weight: 400;
+        }
+        span {
+            margin-top: 1rem;
+            font-size: 2rem;
+            font-weight: 500;
+        }
+    }
+}
+
+.qty_btn {
+    width: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.total {
+    width: 100%;
+    width: 15rem;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.del_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+        background-color: transparent;
+        border: none;
+        padding: 1rem;
+        svg {
+            path {
+                color: var(--pink);
+            }
+        }
+    }
+}
+
+.col_4 {
+    padding: 0 1.5rem;
+    width: 33.33%;
+
+    .payment {
+        padding: 3rem;
+        background-color: #f7f5fa;
+        .cart_total {
+            h2 {
+                text-transform: capitalize;
+                margin-bottom: 3rem;
+            }
+            ul {
+                margin-bottom: 3rem;
+                li {
+                    text-transform: capitalize;
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: #888;
+                    margin-bottom: 2rem;
+                    p {
+                        font-weight: 700;
+                    }
+                    &:nth-child(2) {
+                        p {
+                            color: var(--pink);
+                        }
+                    }
+                }
+            }
+            .payment_btn {
+                width: 100%;
+                background-color: #000;
+                text-align: center;
+                button {
+                    width: 100%;
+                    padding: 1.4rem 2rem 1.2rem;
+                    text-transform: uppercase;
+                    font-weight: 700;
+                    font-size: 1.6rem;
+                    background-color: transparent;
+                    border: none;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

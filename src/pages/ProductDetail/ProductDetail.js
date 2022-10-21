@@ -2,26 +2,11 @@ import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/';
+import QtyButton from '~/components/QtyButton';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
-import { useState } from 'react';
 
 function ProductDetail() {
-    const [amount, setAmount] = useState(1);
-
-    const increaseAmount = () => {
-        setAmount(amount + 1);
-    };
-    const decreaseAmount = () => {
-        if (amount > 1) {
-            setAmount(amount - 1);
-        } else if (amount === 1) {
-            return;
-        } else {
-            console.log('decreaseAmount error');
-        }
-    };
-
     return (
         <div className={styles.productDetail}>
             <div className={styles.container}>
@@ -88,9 +73,7 @@ function ProductDetail() {
                     <div className={styles.groupInfo_row}>
                         <div className={styles.btn_group}>
                             <div className={styles.btn_amount}>
-                                <button onClick={decreaseAmount}>-</button>
-                                <span>{amount}</span>
-                                <button onClick={increaseAmount}>+</button>
+                                <QtyButton />
                             </div>
                             <button className={styles.btn_add}>
                                 <div className={styles.cart_icon}>

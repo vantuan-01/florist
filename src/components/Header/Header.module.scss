@@ -49,19 +49,21 @@
         display: flex;
         gap: 5rem;
         li {
-            font-size: 2.5rem;
-            font-weight: 500;
             list-style: none;
-            line-height: 4rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 0.5rem;
-            span {
-                font-size: 1.6rem;
-            }
-            .total_price {
-                color: var(--pink);
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 2.5rem;
+                font-weight: 500;
+                gap: 1rem;
+                span {
+                    font-size: 1.6rem;
+                }
+                .total_price {
+                    color: var(--pink);
+                }
             }
         }
     }
