@@ -30,7 +30,7 @@ function Header() {
                                     <Link to={config.services}>services</Link>
                                 </li>
                                 <li>
-                                    <Link to={config.products}>shop</Link>
+                                    <Link to={config.product}>shop</Link>
                                 </li>
                                 <li>
                                     <Link to={config.blog}>blog</Link>

@@ -1,15 +1,30 @@
+import * as httpRequest from '~/utils/httpRequest';
+
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { faClipboard, faHeart } from '@fortawesome/free-regular-svg-icons';
+import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images';
 import { Link } from 'react-router-dom';
+import ListItems from './ListItems';
+import ProductDetail from '../ProductDetail';
 import SelectSort from '~/components/SelectSort';
+import Widget from '~/components/Widget';
 import config from '~/config/routes';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import routes from '~/config/routes';
 import styles from './Products.module.scss';
 
 function Products() {
+    const [items, setItems] = useState();
+
+    useEffect(() => {
+        httpRequest.get('/product/products').then((res) => {
+            setItems(res.data);
+        });
+    }, []);
+
     return (
         <div className={styles.products}>
             <div className={styles.container}>
@@ -17,28 +32,10 @@ function Products() {
                     <SelectSort />
                 </div>
                 <div className={styles.all_items}>
-                    <ul className={styles.list_items}>
-                        <li className={styles.item}>
-                            <img src={Images.item1} alt="item1" />
-                            <div className={styles.menu_link_widget}>
-                                <Link to={routes.productDetail} className={styles.widget}>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
-                                </Link>
-                                <Link className={styles.widget}>
-                                    <FontAwesomeIcon icon={faClipboard} size="lg" />
-                                </Link>
-                                <Link className={styles.widget}>
-                                    <FontAwesomeIcon icon={faHeart} size="lg" />
-                                </Link>
-                            </div>
-                            <h6>
-                                <Link to={config.productDetail} className={styles.item_name}>
-                                    Fly Me To The Moon
-                                </Link>
-                            </h6>
-                            <p className={styles.item_price}>$27.50</p>
-                        </li>
-                    </ul>
+                    <Routes>
+                        <Route path=":id" element={<ProductDetail items={items} />} />
+                        <Route path="/" element={<ListItems items={items} />} />
+                    </Routes>
                 </div>
             </div>
         </div>

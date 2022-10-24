@@ -86,6 +86,13 @@
     font-weight: 300;
     z-index: 2;
     background-color: #fff;
+    text-align: center;
+    text-transform: capitalize;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .item_price {
