@@ -1,11 +1,17 @@
 import styles from './QtyButton.module.scss';
 import { useState } from 'react';
 
-function QtyButton() {
+function QtyButton({ qty }) {
     const [amount, setAmount] = useState(1);
 
     const increaseAmount = () => {
-        setAmount(amount + 1);
+        if (amount < qty) {
+            setAmount(amount + 1);
+        } else if (amount === qty) {
+            return;
+        } else {
+            console.log('inreaseAmount error');
+        }
     };
     const decreaseAmount = () => {
         if (amount > 1) {

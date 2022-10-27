@@ -1,43 +1,51 @@
+import * as httpRequest from '~/utils/httpRequest';
+
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Images from '~/assets/images/';
 import QtyButton from '~/components/QtyButton';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
 import { useParams } from 'react-router-dom';
 
-function ProductDetail({ items }) {
+function ProductDetail() {
     const { id } = useParams();
-    console.log(items);
+    const [detailItems, setDetailItems] = useState();
+    const [description, setDescription] = useState();
+    const [changeImg, setChangeImg] = useState();
+    useEffect(() => {
+        httpRequest.get(`/product/products/${id}`).then((res) => {
+            setDetailItems(res.data);
+        });
+    }, [id]);
+
     return (
         <div className={styles.productDetail}>
-            {
+            {detailItems && detailItems.length !== 0 && (
                 <div className={styles.container}>
                     <div className={styles.groupImg}>
                         <div className={styles.main_img}>
-                            <img src={Images.ig3} alt="item1" />
+                            <img
+                                src={changeImg && changeImg.length !== 0 ? changeImg : detailItems.imageUrl}
+                                alt={detailItems.name}
+                            />
                         </div>
                         <div className={styles.sub_img}>
                             <ul>
-                                <li>
-                                    <img src={Images.item2} alt="item2" />
-                                </li>
-                                <li>
-                                    <img src={Images.item2} alt="item2" />
-                                </li>
-                                <li>
-                                    <img src={Images.item2} alt="item2" />
-                                </li>
-                                <li>
-                                    <img src={Images.item2} alt="item2" />
-                                </li>
-                                <li>
-                                    <img src={Images.item2} alt="item2" />
-                                </li>
-                                <li>
-                                    <img src={Images.item2} alt="item2" />
-                                </li>
+                                {detailItems.imageTags &&
+                                    detailItems.imageTags !== 0 &&
+                                    detailItems.imageTags.map((imageTag, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <img
+                                                    onClick={() => setChangeImg(imageTag.imageUrl)}
+                                                    src={imageTag.imageUrl}
+                                                    alt={imageTag.id}
+                                                />
+                                            </li>
+                                        );
+                                    })}
                             </ul>
                         </div>
                     </div>
@@ -45,8 +53,8 @@ function ProductDetail({ items }) {
                         <div className={styles.groupInfo_row}>
                             <div className={styles.main_info}>
                                 <div className={styles.name_rate}>
-                                    <span className={styles.category}>succulent</span>
-                                    <h4 className={styles.name}>fly me to the moon</h4>
+                                    <span className={styles.category}>{detailItems.category}</span>
+                                    <h4 className={styles.name}>{detailItems.name}</h4>
                                     <ul className={styles.reviews}>
                                         <li>
                                             <FontAwesomeIcon icon={faStar} />
@@ -55,21 +63,21 @@ function ProductDetail({ items }) {
                                             <FontAwesomeIcon icon={faStar} />
                                             <FontAwesomeIcon icon={faStar} />
                                         </li>
-                                        <li>03 reviews</li>
+                                        <li>00 reviews</li>
                                     </ul>
                                 </div>
-                                <div className={styles.price}>$34.00</div>
+                                <div className={styles.price}>{`$${detailItems.price}.00`}</div>
                             </div>
                             <div className={styles.sub_info}>
                                 <ul>
                                     <li>
-                                        catigories: <span>succulent</span>
+                                        catigories: <span>{detailItems.category}</span>
                                     </li>
                                     <li>
-                                        product code: <span>pm 01</span>
+                                        product code: <span>{detailItems.id}</span>
                                     </li>
                                     <li>
-                                        availability: <span>in stock</span>
+                                        availability: <span>{detailItems.qty}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -77,7 +85,7 @@ function ProductDetail({ items }) {
                         <div className={styles.groupInfo_row}>
                             <div className={styles.btn_group}>
                                 <div className={styles.btn_amount}>
-                                    <QtyButton />
+                                    <QtyButton qty={detailItems.qty} />
                                 </div>
                                 <button className={styles.btn_add}>
                                     <div className={styles.cart_icon}>
@@ -94,25 +102,25 @@ function ProductDetail({ items }) {
                             <div className={styles.description}>
                                 <ul>
                                     <li>
-                                        <button>Description</button>
+                                        <button onClick={() => setDescription(detailItems.description)}>
+                                            Description
+                                        </button>
                                     </li>
                                     <li>
-                                        <button>Shipping & Returns</button>
+                                        <button onClick={() => setDescription(detailItems.returnPolicy)}>
+                                            Shipping & Returns
+                                        </button>
                                     </li>
                                     <li>
-                                        <button>Reviews </button>
+                                        <button>Reviews</button>
                                     </li>
                                 </ul>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                    gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                                </p>
+                                <p>{description}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            }
+            )}
         </div>
     );
 }

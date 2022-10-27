@@ -50,38 +50,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        svg {
-            path {
-                color: #000;
-            }
-        }
-        .widget {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 5rem;
-            height: 5rem;
-            border: 1px solid transparent;
-            background-color: #fff;
-            border-radius: 50%;
-            transition: transform 300ms ease-in-out;
-            &:hover {
-                background-color: var(--pink);
-                transform: rotate(360deg);
-                svg {
-                    path {
-                        color: #fff;
-                    }
-                }
-            }
-        }
     }
 }
 
 .item_name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 2rem;
     font-weight: 300;
     z-index: 2;
@@ -93,6 +65,7 @@
     -webkit-line-clamp: 1;
     text-overflow: ellipsis;
     overflow: hidden;
+    transition: all 100ms linear;
 }
 
 .item_price {
