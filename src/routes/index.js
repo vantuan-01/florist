@@ -6,10 +6,14 @@ import Cart from '~/pages/Cart';
 import Contact from '~/pages/Contact';
 import Home from '~/pages/Home';
 import { HomeLayout } from '~/Layout';
-import ProductDetail from '~/pages/ProductDetail';
 import Products from '~/pages/Products';
 import Services from '~/pages/Services';
 import routesConfig from '~/config/routes';
+
+// import ProductDetail from '~/pages/ProductDetail';
+
+
+
 
 const publicRoutes = [
     { path: routesConfig.home, component: Home, layout: HomeLayout },

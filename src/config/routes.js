@@ -4,7 +4,7 @@ const routes = {
     home: '/',
     products: '/products/*',
     product: '/products',
-    productDetail: '/productDetail',
+    // productDetail: '/productDetail',
     about: '/about',
     services: '/services',
     blog: '/blog',

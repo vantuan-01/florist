@@ -1,11 +1,12 @@
 import * as httpRequest from '~/utils/httpRequest';
 
 import { Route, Routes } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 
-import ListItems from './ListItems';
-import ProductDetail from '../ProductDetail';
 import styles from './Products.module.scss';
+
+const ListItems = lazy(() => import('./ListItems'));
+const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
 
 function Products() {
     const [items, setItems] = useState();

@@ -1,16 +1,22 @@
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { Link } from 'react-router-dom';
-import SelectSort from '~/components/SelectSort';
-import Widget from '~/components/Widget';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { lazy } from 'react';
 import styles from './Products.module.scss';
 
+const SelectSort = lazy(() => import('~/components/SelectSort'));
+const Widget = lazy(() => import('~/components/Widget'));
+
 function ListItem({ items }) {
+    const sortPrice = (childData) => {
+        const opt = childData;
+        return opt;
+    };
     return (
         <>
             <div className={styles.sortable}>
-                <SelectSort />
+                <SelectSort child={sortPrice} />
             </div>
             <ul className={styles.list_items}>
                 {items &&
@@ -21,15 +27,20 @@ function ListItem({ items }) {
                                 <img src={item.imageUrl} alt={item.imageUrl} />
                                 <div className={styles.menu_link_widget}>
                                     <Widget icon={faMagnifyingGlass} id={item.id} />
-                                    <Widget icon={faCartShopping} />
-                                    <Widget icon={faHeart} />
+                                    <Widget icon={faCartShopping} id={item.id} />
+                                    <Widget icon={faHeart} id={item.id} />
                                 </div>
                                 <h6>
                                     <Link to={`/products/${item.id}`} className={styles.item_name}>
                                         {item.name}
                                     </Link>
                                 </h6>
-                                <p className={styles.item_price}>{`$ ${item.price}.00`}</p>
+                                <p>
+                                    <Link
+                                        to={`/products/${item.id}`}
+                                        className={styles.item_price}
+                                    >{`$ ${item.price}.00`}</Link>
+                                </p>
                             </li>
                         );
                     })}

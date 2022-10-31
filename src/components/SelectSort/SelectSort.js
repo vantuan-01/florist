@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './SelectSort.module.scss';
 
-function SelectSort() {
-    const options = ['low to height', 'height to low', ' a- z', 'z - a'];
+function SelectSort({ child }) {
+    const options = ['low to height', 'height to low', 'a - z', 'z - a'];
     const [openOption, setOpenOption] = useState(false);
 
     useEffect(() => {
@@ -16,6 +16,11 @@ function SelectSort() {
     const handleOpen = () => {
         setOpenOption(!openOption);
     };
+
+    const sendOptions = (opt) => {
+        child(opt);
+    };
+
     return (
         <div className={styles.select_sort}>
             <div className={styles.custom_sort} onClick={handleOpen}>
@@ -23,7 +28,7 @@ function SelectSort() {
                 {openOption && (
                     <ul className={styles.custom_select}>
                         {options.map((option, index) => (
-                            <li key={index} className={styles.custom_option}>
+                            <li onClick={() => sendOptions(option)} key={index} className={styles.custom_option}>
                                 {option}
                             </li>
                         ))}

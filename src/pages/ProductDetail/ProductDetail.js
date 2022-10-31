@@ -1,24 +1,33 @@
 import * as httpRequest from '~/utils/httpRequest';
 
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import QtyButton from '~/components/QtyButton';
+import { addProduct } from '~/reducers/Cart';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+const QtyButton = lazy(() => import('~/components/QtyButton'));
 
 function ProductDetail() {
     const { id } = useParams();
     const [detailItems, setDetailItems] = useState();
     const [description, setDescription] = useState();
     const [changeImg, setChangeImg] = useState();
+    const dispatch = useDispatch();
+
     useEffect(() => {
         httpRequest.get(`/product/products/${id}`).then((res) => {
             setDetailItems(res.data);
         });
     }, [id]);
+
+    const handleAddToCart = () => {
+        dispatch(addProduct(detailItems));
+    };
 
     return (
         <div className={styles.productDetail}>
@@ -74,7 +83,7 @@ function ProductDetail() {
                                         catigories: <span>{detailItems.category}</span>
                                     </li>
                                     <li>
-                                        product code: <span>{detailItems.id}</span>
+                                        product code: <span>{`PM 0${detailItems.id}`}</span>
                                     </li>
                                     <li>
                                         availability: <span>{detailItems.qty}</span>
@@ -87,7 +96,7 @@ function ProductDetail() {
                                 <div className={styles.btn_amount}>
                                     <QtyButton qty={detailItems.qty} />
                                 </div>
-                                <button className={styles.btn_add}>
+                                <button onClick={handleAddToCart} className={styles.btn_add}>
                                     <div className={styles.cart_icon}>
                                         <FontAwesomeIcon icon={faShoppingBag} />
                                     </div>
@@ -115,7 +124,7 @@ function ProductDetail() {
                                         <button>Reviews</button>
                                     </li>
                                 </ul>
-                                <p>{description}</p>
+                                <p>{description && description.length !== 0 ? description : detailItems.description}</p>
                             </div>
                         </div>
                     </div>

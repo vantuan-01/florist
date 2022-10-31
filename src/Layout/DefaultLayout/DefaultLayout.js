@@ -1,7 +1,9 @@
-import Banner from '~/components/Banner';
-import Footer from '~/components/Footer';
-import Header from '~/components/Header';
+import { lazy } from 'react';
 import styles from '~/components/GlobalStyles/GlobalStyles.module.scss';
+
+const Banner = lazy(() => import('~/components/Banner'));
+const Header = lazy(() => import('~/components/Header'));
+const Footer = lazy(() => import('~/components/Footer'));
 
 function DefaultLayout({ children, banner }) {
     return (

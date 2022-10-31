@@ -3,9 +3,13 @@ import Images from '~/assets/images';
 import QtyButton from '~/components/QtyButton';
 import React from 'react';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { selectOrderList } from '~/reducers/Cart';
 import styles from './Cart.module.scss';
+import { useSelector } from 'react-redux';
 
 function Cart() {
+    const productList = useSelector(selectOrderList);
+
     return (
         <div className={styles.cart}>
             <div className={styles.container}>
@@ -26,34 +30,38 @@ function Cart() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div className={styles.item}>
-                                            <div className={styles.item_img}>
-                                                <img src={Images.item12} alt="img_item" />
-                                            </div>
-                                            <div className={styles.item_text}>
-                                                <h4>fly me to the moon</h4>
-                                                <span>$21.00</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={styles.qty_btn}>
-                                            <QtyButton />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={styles.total}>$21.00</div>
-                                    </td>
-                                    <td>
-                                        <div className={styles.del_btn}>
-                                            <button>
-                                                <FontAwesomeIcon icon={faCircleXmark} size="lg" />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {productList &&
+                                    productList.length !== 0 &&
+                                    productList.map((product, index) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <div className={styles.item}>
+                                                    <div className={styles.item_img}>
+                                                        <img src={product.imageUrl} alt="img_item" />
+                                                    </div>
+                                                    <div className={styles.item_text}>
+                                                        <h4>{product.name}</h4>
+                                                        <span>{`$ ${product.price}.00`}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className={styles.qty_btn}>
+                                                    <QtyButton qty={product.qty} />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className={styles.total}>{`$ ${product.price}.00`}</div>
+                                            </td>
+                                            <td>
+                                                <div className={styles.del_btn}>
+                                                    <button>
+                                                        <FontAwesomeIcon icon={faCircleXmark} size="lg" />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>

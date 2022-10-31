@@ -34,22 +34,26 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
     img {
         width: 100%;
         user-select: none;
     }
-    // &:hover .menu_link_widget {
-    //     transition: all 300ms linear;
-    //     transform: translateY(-10rem);
-    // }
+    &:hover .menu_link_widget {
+        opacity: 1;
+        transform: translateY(-10rem);
+    }
     .menu_link_widget {
+        opacity: 0;
+        display: flex;
         width: 100%;
         position: absolute;
-        bottom: 10rem;
+        bottom: 0rem;
         gap: 2rem;
-        display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 0;
+        transition: all 200ms linear;
     }
 }
 
@@ -66,6 +70,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
     transition: all 100ms linear;
+    &:hover {
+        color: var(--pink);
+    }
 }
 
 .item_price {

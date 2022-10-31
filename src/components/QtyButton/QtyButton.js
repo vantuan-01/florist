@@ -22,6 +22,7 @@ function QtyButton({ qty }) {
             console.log('decreaseAmount error');
         }
     };
+
     return (
         <div className={styles.QtyButton}>
             <button onClick={decreaseAmount}>-</button>
