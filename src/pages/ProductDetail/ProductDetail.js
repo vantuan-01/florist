@@ -1,13 +1,13 @@
 import * as httpRequest from '~/utils/httpRequest';
 
+import { addProduct, selectOrderList, selectQty } from '~/reducers/Cart';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { lazy, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { addProduct } from '~/reducers/Cart';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 const QtyButton = lazy(() => import('~/components/QtyButton'));
@@ -26,8 +26,12 @@ function ProductDetail() {
     }, [id]);
 
     const handleAddToCart = () => {
-        dispatch(addProduct(detailItems));
+        const groupDetailItem = { detailItems, presentQty };
+        dispatch(addProduct(groupDetailItem));
     };
+
+    const presentQty = useSelector(selectQty);
+    const orderList = useSelector(selectOrderList);
 
     return (
         <div className={styles.productDetail}>
@@ -94,7 +98,7 @@ function ProductDetail() {
                         <div className={styles.groupInfo_row}>
                             <div className={styles.btn_group}>
                                 <div className={styles.btn_amount}>
-                                    <QtyButton qty={detailItems.qty} />
+                                    <QtyButton qty={detailItems} />
                                 </div>
                                 <button onClick={handleAddToCart} className={styles.btn_add}>
                                     <div className={styles.cart_icon}>

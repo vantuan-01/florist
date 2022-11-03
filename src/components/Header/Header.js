@@ -1,4 +1,5 @@
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
@@ -6,8 +7,12 @@ import { Link } from 'react-router-dom';
 import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './Header.module.scss';
+import { useSelector } from 'react-redux';
 
 function Header() {
+    const totalItems = useSelector(selectTotalQty);
+    const totalPrices = useSelector(selectTotalPrice);
+
     return (
         <div className={styles.header}>
             <div className={styles.container}>
@@ -56,8 +61,10 @@ function Header() {
                                 <li>
                                     <Link to={config.cart}>
                                         <FontAwesomeIcon icon={faCartShopping} />
-                                        <span>(01)</span>
-                                        <span className={styles.total_price}>$ 65.0</span>
+                                        <span>({totalItems && totalItems !== 0 ? totalItems : 0})</span>
+                                        <span className={styles.total_price}>
+                                            $ {totalPrices && totalItems !== 0 ? totalPrices : 0}.00
+                                        </span>
                                     </Link>
                                 </li>
                             </ul>

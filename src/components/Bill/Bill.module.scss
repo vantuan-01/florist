@@ -1,0 +1,64 @@
+.payment {
+    padding: 3rem;
+    background-color: #f7f5fa;
+    font-family: 'Libre Baskerville', serif;
+    .container {
+        h2 {
+            text-transform: capitalize;
+            margin-bottom: 3rem;
+            width: 100%;
+            border-bottom: 1px solid #000;
+            line-height: 0.1em;
+            span {
+                background: #f7f5fa;
+                padding: 0 1rem 0 0;
+            }
+        }
+        ul {
+            margin-bottom: 3rem;
+            li {
+                text-transform: capitalize;
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2rem;
+                p {
+                    font-weight: 700;
+                }
+            }
+        }
+        .bill_details {
+            border-bottom: 1px solid #000;
+        }
+        .bill_total {
+            margin-top: 3rem;
+            ul {
+                li {
+                    font-size: 2rem;
+                    font-weight: 600;
+                    &:nth-child(2) {
+                        p {
+                            color: var(--pink);
+                        }
+                    }
+                }
+            }
+        }
+        .payment_btn {
+            width: 100%;
+            background-color: #000;
+            text-align: center;
+            button {
+                width: 100%;
+                padding: 1.4rem 2rem 1.2rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 1.6rem;
+                background-color: transparent;
+                border: none;
+                color: #fff;
+            }
+        }
+    }
+}

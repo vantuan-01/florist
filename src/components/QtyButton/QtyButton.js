@@ -1,33 +1,25 @@
+import { decreaseQty, increaseQty, selectQty } from '~/reducers/Cart';
+import { useDispatch, useSelector } from 'react-redux';
+
 import styles from './QtyButton.module.scss';
-import { useState } from 'react';
 
 function QtyButton({ qty }) {
-    const [amount, setAmount] = useState(1);
+    const dispatch = useDispatch();
 
-    const increaseAmount = () => {
-        if (amount < qty) {
-            setAmount(amount + 1);
-        } else if (amount === qty) {
-            return;
-        } else {
-            console.log('inreaseAmount error');
-        }
+    const handleIncreaseQty = () => {
+        dispatch(increaseQty(qty));
     };
-    const decreaseAmount = () => {
-        if (amount > 1) {
-            setAmount(amount - 1);
-        } else if (amount === 1) {
-            return;
-        } else {
-            console.log('decreaseAmount error');
-        }
+    const handleDecreaseQty = () => {
+        dispatch(decreaseQty(qty));
     };
+
+    const presentQty = useSelector(selectQty);
 
     return (
         <div className={styles.QtyButton}>
-            <button onClick={decreaseAmount}>-</button>
-            <span>{amount}</span>
-            <button onClick={increaseAmount}>+</button>
+            <button onClick={handleDecreaseQty}>-</button>
+            <span>{presentQty}</span>
+            <button onClick={handleIncreaseQty}>+</button>
         </div>
     );
 }
