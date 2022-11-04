@@ -1,13 +1,15 @@
+import { removeProduct, selectOrderList } from '~/reducers/Cart';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Bill from '~/components/Bill';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { selectOrderList } from '~/reducers/Cart';
 import styles from './Cart.module.scss';
-import { useSelector } from 'react-redux';
 
 function Cart() {
     const productList = useSelector(selectOrderList);
+    const dispatch = useDispatch();
 
     return (
         <div className={styles.cart}>
@@ -53,7 +55,9 @@ function Cart() {
                                             </td>
                                             <td>
                                                 <div className={styles.del_btn}>
-                                                    <button>
+                                                    <button
+                                                        onClick={() => dispatch(removeProduct(product.detailItems.id))}
+                                                    >
                                                         <FontAwesomeIcon icon={faCircleXmark} size="lg" />
                                                     </button>
                                                 </div>

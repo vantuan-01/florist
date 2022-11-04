@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const cartSlice = createSlice({
     name: 'cartSlice',
     initialState: {
-        orderList: [],
+        orderList: JSON.parse(localStorage.getItem('cart')) || [],
         presentQty: 1,
-        totalPrice: 0,
-        totalQty: 0,
+        totalPrice: JSON.parse(localStorage.getItem('totalPrice')) || 0,
+        totalQty: JSON.parse(localStorage.getItem('totalQty')) || 0,
     },
     reducers: {
         addProduct(state, action) {
@@ -14,13 +14,31 @@ const cartSlice = createSlice({
 
             if (findId === -1) {
                 state.orderList = [...state.orderList, action.payload];
-                // state.totalPrice += action.payload.detailItems.price * action.payload.presentQty;
-                // state.totalQty += action.payload.presentQty;
+                localStorage.setItem('cart', JSON.stringify(state.orderList));
             } else {
                 state.orderList[findId].presentQty = action.payload.presentQty;
-                // state.totalPrice = state.totalPrice;
-                // state.totalQty = state.totalQty;
             }
+            state.totalPrice = state.orderList.reduce((total, item) => {
+                return total + item.presentQty * item.detailItems.price;
+            }, 0);
+            localStorage.setItem('totalPrice', state.totalPrice);
+            state.totalQty = state.orderList.reduce((total, item) => {
+                return total + item.presentQty;
+            }, 0);
+            localStorage.setItem('totalQty', state.totalQty);
+        },
+        removeProduct(state, action) {
+            let index = state.orderList.findIndex((item) => item.detailItems.id === action.payload);
+            state.orderList.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(state.orderList));
+            state.totalPrice = state.orderList.reduce((total, item) => {
+                return total + item.presentQty * item.detailItems.price;
+            }, 0);
+            localStorage.setItem('totalPrice', state.totalPrice);
+            state.totalQty = state.orderList.reduce((total, item) => {
+                return total + item.presentQty;
+            }, 0);
+            localStorage.setItem('totalQty', state.totalQty);
         },
         increaseQty(state, action) {
             if (state.presentQty < action.payload.qty) {
@@ -43,7 +61,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addProduct, increaseQty, decreaseQty } = cartSlice.actions;
+export const { addProduct, removeProduct, increaseQty, decreaseQty } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
 export const selectOrderList = (state) => state.cartReducer.orderList;
 export const selectQty = (state) => state.cartReducer.presentQty;

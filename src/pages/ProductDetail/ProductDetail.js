@@ -1,6 +1,6 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-import { addProduct, selectOrderList, selectQty } from '~/reducers/Cart';
+import { addProduct, selectQty } from '~/reducers/Cart';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { lazy, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +31,6 @@ function ProductDetail() {
     };
 
     const presentQty = useSelector(selectQty);
-    const orderList = useSelector(selectOrderList);
 
     return (
         <div className={styles.productDetail}>

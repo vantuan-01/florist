@@ -1,18 +1,9 @@
-import { selectOrderList, selectTotalPrice } from '~/reducers/Cart';
-
+import { selectTotalPrice } from '~/reducers/Cart';
 import styles from './Bill.module.scss';
 import { useSelector } from 'react-redux';
 
 function Bill({ checkout }) {
-    const total = useSelector(selectOrderList);
-
-    const subtotalPrice =
-        total &&
-        total !== 0 &&
-        total.reduce((total, item) => {
-            return total + item.presentQty * item.detailItems.price;
-        }, 0);
-    console.log(subtotalPrice);
+    const totalPrice = useSelector(selectTotalPrice);
 
     return (
         <div className={styles.payment}>
@@ -41,10 +32,10 @@ function Bill({ checkout }) {
                 <div className={styles.bill_total}>
                     <ul>
                         <li>
-                            subtotal <p>{`$ ${subtotalPrice}.00`}</p>
+                            subtotal <p>{`$ ${totalPrice}.00`}</p>
                         </li>
                         <li>
-                            total <p>{`$ ${subtotalPrice}.00`}</p>
+                            total <p>{`$ ${totalPrice}.00`}</p>
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,109 @@
+// @import 'compass';
+
+// $flower-size: 40px;
+// $flower-colors: #fd8 #e96;
+// $flower-speed: 5s;
+
+// $flower-petal: nth($flower-colors, 1);
+// $flower-center: nth($flower-colors, 2);
+
+// $flower-segment: $flower-size / 10;
+// $flower-dot-size: $flower-segment * 4;
+
+// @mixin keyframes($name) {
+//     @-webkit-keyframes #{$name} {
+//         @content;
+//     }
+//     @-moz-keyframes #{$name} {
+//         @content;
+//     }
+//     @-o-keyframes #{$name} {
+//         @content;
+//     }
+//     @keyframes #{$name} {
+//         @content;
+//     }
+// }
+
+// @mixin experimental($property, $value, $moz: true, $webkit: true, $o: true, $ms: true, $khtml: true, $official: true) {
+//     @if $webkit {
+//         -webkit-#{$property}: $value;
+//     }
+//     @if $khtml {
+//         -khtml-#{$property}: $value;
+//     }
+//     @if $moz {
+//         -moz-#{$property}: $value;
+//     }
+//     @if $ms {
+//         -ms-#{$property}: $value;
+//     }
+//     @if $o {
+//         -o-#{$property}: $value;
+//     }
+//     @if $official {
+//         #{$property}: $value;
+//     }
+// }
+
+// @mixin animation($value) {
+//     @include experimental(animation, $value, -webkit, -moz, -ms, -o, official);
+// }
+
+// @include keyframes(flower) {
+//     0% {
+//         @include rotateZ(0deg);
+//         @include box-shadow(
+//             white 0 0 15px 0,
+//             $flower-petal (-3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
+//             $flower-petal (3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
+//             $flower-petal (3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
+//             $flower-petal (-3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment
+//         );
+//     }
+//     50% {
+//         @include rotateZ(3 * 360deg);
+//         @include box-shadow(
+//             white 0 0 15px 0,
+//             $flower-petal (3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
+//             $flower-petal (-3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
+//             $flower-petal (-3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
+//             $flower-petal (3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment
+//         );
+//     }
+// }
+
+// body {
+//     text-align: center;
+//     padding: 50px;
+// }
+
+// /* Styles for old versions of IE */
+// .flower {
+//     font-family: sans-serif;
+//     font-weight: 100;
+// }
+
+// /* :not(:required) hides this rule from IE9 and below */
+// .flower:not(:required) {
+//     overflow: hidden;
+//     position: relative;
+//     text-indent: -9999px;
+
+//     display: inline-block;
+//     width: $flower-dot-size;
+//     height: $flower-dot-size;
+
+//     background: $flower-center;
+//     border-radius: 100%;
+//     @include box-shadow(
+//         white 0 0 15px 0,
+//         $flower-petal (-3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
+//         $flower-petal (3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
+//         $flower-petal (3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
+//         $flower-petal (-3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment
+//     );
+
+//     @include animation(flower $flower-speed infinite ease-in-out);
+//     @include transform-origin(50%, 50%);
+// }

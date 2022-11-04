@@ -63,7 +63,7 @@ function Header() {
                                         <FontAwesomeIcon icon={faCartShopping} />
                                         <span>({totalItems && totalItems !== 0 ? totalItems : 0})</span>
                                         <span className={styles.total_price}>
-                                            $ {totalPrices && totalItems !== 0 ? totalPrices : 0}.00
+                                            $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}.00
                                         </span>
                                     </Link>
                                 </li>
