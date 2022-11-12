@@ -8,10 +8,12 @@ import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './Header.module.scss';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 function Header() {
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
+    const [logged, setLogged] = useState(false);
 
     return (
         <div className={styles.header}>
@@ -46,28 +48,34 @@ function Header() {
                             </ul>
                         </div>
                         <div className={styles.options_3}>
-                            <ul>
-                                <li>
-                                    <Link>
-                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link>
-                                        <FontAwesomeIcon icon={faHeart} />
-                                        <span>(05)</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={config.cart}>
-                                        <FontAwesomeIcon icon={faCartShopping} />
-                                        <span>({totalItems && totalItems !== 0 ? totalItems : 0})</span>
-                                        <span className={styles.total_price}>
-                                            $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}.00
-                                        </span>
-                                    </Link>
-                                </li>
-                            </ul>
+                            {logged ? (
+                                <ul>
+                                    <li>
+                                        <Link>
+                                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link>
+                                            <FontAwesomeIcon icon={faHeart} />
+                                            <span>(05)</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={config.cart}>
+                                            <FontAwesomeIcon icon={faCartShopping} />
+                                            <span>({totalItems && totalItems !== 0 ? totalItems : 0})</span>
+                                            <span className={styles.total_price}>
+                                                $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}.00
+                                            </span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            ) : (
+                                <Link className={styles.loginBtn} to={config.signIn}>
+                                    log in
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>

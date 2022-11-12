@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './SelectSort.module.scss';
 
-function SelectSort({ child }) {
+function SelectSort() {
     const options = ['low to height', 'height to low', 'a - z', 'z - a'];
     const [openOption, setOpenOption] = useState(false);
+    const [presentOpt, setPresentOpt] = useState('Sort by popularity');
 
     useEffect(() => {
         if (openOption) {
@@ -12,23 +13,19 @@ function SelectSort({ child }) {
         } else if (!openOption) {
             setOpenOption(false);
         }
-    }, [openOption]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const handleOpen = () => {
         setOpenOption(!openOption);
     };
-
-    const sendOptions = (opt) => {
-        child(opt);
-    };
-
     return (
         <div className={styles.select_sort}>
             <div className={styles.custom_sort} onClick={handleOpen}>
-                <span>Sort by popularity</span>
+                <span>{presentOpt}</span>
                 {openOption && (
                     <ul className={styles.custom_select}>
                         {options.map((option, index) => (
-                            <li onClick={() => sendOptions(option)} key={index} className={styles.custom_option}>
+                            <li onClick={() => setPresentOpt(option)} key={index} className={styles.custom_option}>
                                 {option}
                             </li>
                         ))}

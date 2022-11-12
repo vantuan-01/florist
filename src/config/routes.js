@@ -2,6 +2,7 @@
 
 const routes = {
     home: '/',
+    signIn: '/signIn',
     products: '/products/*',
     product: '/products',
     // productDetail: '/productDetail',

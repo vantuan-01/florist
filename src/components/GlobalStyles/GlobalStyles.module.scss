@@ -63,6 +63,10 @@ html *::-webkit-scrollbar-track {
 
 // Layout
 
+.loginScreen {
+    overflow-y: hidden;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;

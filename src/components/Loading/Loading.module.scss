@@ -1,109 +1,129 @@
-// @import 'compass';
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
 
-// $flower-size: 40px;
-// $flower-colors: #fd8 #e96;
-// $flower-speed: 5s;
+.container {
+    text-align: center;
+    background-color: #e74c3c;
+    overflow: hidden;
+}
 
-// $flower-petal: nth($flower-colors, 1);
-// $flower-center: nth($flower-colors, 2);
+.box:nth-child(2n-1) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 
-// $flower-segment: $flower-size / 10;
-// $flower-dot-size: $flower-segment * 4;
+.box {
+    display: inline-block;
+    height: 200px;
+    width: 33.3%;
+    float: left;
+    position: relative;
+    /*margin:0 -4px -5px -2px;*/
+    transition: all 0.2s ease;
+}
 
-// @mixin keyframes($name) {
-//     @-webkit-keyframes #{$name} {
-//         @content;
-//     }
-//     @-moz-keyframes #{$name} {
-//         @content;
-//     }
-//     @-o-keyframes #{$name} {
-//         @content;
-//     }
-//     @keyframes #{$name} {
-//         @content;
-//     }
-// }
+.box p {
+    color: #777;
+    font-family: Lato, 'Helvetica Neue';
+    font-weight: 300;
+    position: absolute;
+    font-size: 20px;
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    bottom: 0px;
+    margin: 0;
+    top: 160px;
+    background-color: #fff;
+    opacity: 0;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
 
-// @mixin experimental($property, $value, $moz: true, $webkit: true, $o: true, $ms: true, $khtml: true, $official: true) {
-//     @if $webkit {
-//         -webkit-#{$property}: $value;
-//     }
-//     @if $khtml {
-//         -khtml-#{$property}: $value;
-//     }
-//     @if $moz {
-//         -moz-#{$property}: $value;
-//     }
-//     @if $ms {
-//         -ms-#{$property}: $value;
-//     }
-//     @if $o {
-//         -o-#{$property}: $value;
-//     }
-//     @if $official {
-//         #{$property}: $value;
-//     }
-// }
+.box:hover p {
+    bottom: 0px;
+    top: 175px;
+    opacity: 1;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
 
-// @mixin animation($value) {
-//     @include experimental(animation, $value, -webkit, -moz, -ms, -o, official);
-// }
+/* MEDIA QUERIES */
+@media (max-width: 700px) {
+    .box {
+        width: 50%;
+    }
 
-// @include keyframes(flower) {
-//     0% {
-//         @include rotateZ(0deg);
-//         @include box-shadow(
-//             white 0 0 15px 0,
-//             $flower-petal (-3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
-//             $flower-petal (3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
-//             $flower-petal (3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
-//             $flower-petal (-3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment
-//         );
-//     }
-//     50% {
-//         @include rotateZ(3 * 360deg);
-//         @include box-shadow(
-//             white 0 0 15px 0,
-//             $flower-petal (3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
-//             $flower-petal (-3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
-//             $flower-petal (-3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
-//             $flower-petal (3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment
-//         );
-//     }
-// }
+    .box:nth-child(2n-1) {
+        background-color: inherit;
+    }
 
-// body {
-//     text-align: center;
-//     padding: 50px;
-// }
+    .box:nth-child(4n),
+    .box:nth-child(4n-3) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
 
-// /* Styles for old versions of IE */
-// .flower {
-//     font-family: sans-serif;
-//     font-weight: 100;
-// }
+@media (max-width: 420px) {
+    .box {
+        width: 100%;
+    }
 
-// /* :not(:required) hides this rule from IE9 and below */
-// .flower:not(:required) {
-//     overflow: hidden;
-//     position: relative;
-//     text-indent: -9999px;
+    .box:nth-child(4n),
+    .box:nth-child(4n-3) {
+        background-color: inherit;
+    }
 
-//     display: inline-block;
-//     width: $flower-dot-size;
-//     height: $flower-dot-size;
+    .box:nth-child(2n-1) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
 
-//     background: $flower-center;
-//     border-radius: 100%;
-//     @include box-shadow(
-//         white 0 0 15px 0,
-//         $flower-petal (-3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
-//         $flower-petal (3 * $flower-segment) (-3 * $flower-segment) 0 $flower-segment,
-//         $flower-petal (3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment,
-//         $flower-petal (-3 * $flower-segment) (3 * $flower-segment) 0 $flower-segment
-//     );
+/* -------------- Loader1 -------------- */
 
-//     @include animation(flower $flower-speed infinite ease-in-out);
-//     @include transform-origin(50%, 50%);
-// }
+.loader1 {
+    position: relative;
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+    border: 3px solid rgba(255, 255, 255, 0.7);
+
+    top: 28%;
+    top: -webkit-calc(50% - 43px);
+    top: calc(50% - 43px);
+    left: 35%;
+    left: -webkit-calc(50% - 43px);
+    left: calc(50% - 43px);
+
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: loader1 3s linear infinite;
+    animation: loader1 3s linear infinite;
+}
+
+.loader1:after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    width: 11px;
+    height: 11px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+@-webkit-keyframes loader1 {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes loader1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

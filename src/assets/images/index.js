@@ -1,5 +1,7 @@
 const Images = {
     logo: require('../images/logo-florist.jpg'),
+    lightGreen: require('../images/lightGreen.jpg'),
+    tableTree: require('../images/tableTree.jpg'),
     banner: require('../images/breadcrumb-bg.jpg'),
     ig1: require('../images/insta-1.jpg'),
     ig2: require('../images/insta-2.jpg'),

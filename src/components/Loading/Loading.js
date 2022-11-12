@@ -1,7 +1,14 @@
 import styles from './Loading.module.scss';
 
 function Loading() {
-    return <span className={styles.flower}>Loading...</span>;
+    return (
+        <div className={styles.container}>
+            <div className={styles.box}>
+                <div className={styles.loader1}></div>
+                <p>Loader 1</p>
+            </div>
+        </div>
+    );
 }
 
 export default Loading;

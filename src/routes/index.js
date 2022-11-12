@@ -1,19 +1,18 @@
 // routes này chỉ tuyến đường này sẽ đi tới page nào
 
+import { HomeLayout, SignInLayout } from '~/Layout';
+
 import About from '~/pages/About';
 import Blog from '~/pages/Blog';
 import Cart from '~/pages/Cart';
 import Contact from '~/pages/Contact';
 import Home from '~/pages/Home';
-import { HomeLayout } from '~/Layout';
 import Products from '~/pages/Products';
 import Services from '~/pages/Services';
+import SignIn from '~/pages/SignIn';
 import routesConfig from '~/config/routes';
 
 // import ProductDetail from '~/pages/ProductDetail';
-
-
-
 
 const publicRoutes = [
     { path: routesConfig.home, component: Home, layout: HomeLayout },
@@ -24,6 +23,7 @@ const publicRoutes = [
     { path: routesConfig.contact, component: Contact, banner: 'contact' },
     { path: routesConfig.about, component: About, banner: 'about' },
     { path: routesConfig.cart, component: Cart, banner: 'shopping cart' },
+    { path: routesConfig.signIn, component: SignIn, layout: SignInLayout },
 ];
 
 const privateRoutes = [];
