@@ -5,6 +5,7 @@ import { HomeLayout, SignInLayout } from '~/Layout';
 import About from '~/pages/About';
 import Blog from '~/pages/Blog';
 import Cart from '~/pages/Cart';
+import Checkout from '~/pages/Checkout';
 import Contact from '~/pages/Contact';
 import Home from '~/pages/Home';
 import Products from '~/pages/Products';
@@ -24,6 +25,7 @@ const publicRoutes = [
     { path: routesConfig.about, component: About, banner: 'about' },
     { path: routesConfig.cart, component: Cart, banner: 'shopping cart' },
     { path: routesConfig.signIn, component: SignIn, layout: SignInLayout },
+    { path: routesConfig.checkout, component: Checkout, banner: 'checkout' },
 ];
 
 const privateRoutes = [];

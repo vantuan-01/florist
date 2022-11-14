@@ -40,12 +40,16 @@
             line-height: 4rem;
             list-style: none;
             text-transform: uppercase;
-            a {
+            .navItem {
                 padding: 2.5rem;
                 transition: color 200ms ease-out;
                 &:hover {
                     color: var(--pink);
                 }
+            }
+            .active {
+                font-weight: 600;
+                color: var(--pink);
             }
         }
     }

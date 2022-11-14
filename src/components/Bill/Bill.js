@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import config from '~/config/routes';
 import { selectTotalPrice } from '~/reducers/Cart';
 import styles from './Bill.module.scss';
 import { useSelector } from 'react-redux';
@@ -39,9 +41,10 @@ function Bill({ checkout }) {
                         </li>
                     </ul>
                 </div>
-                <div className={styles.payment_btn}>
-                    <button>proceed to checkout</button>
-                </div>
+
+                <Link className={styles.payment_btn} to={config.checkout}>
+                    {checkout ? 'tiểu nhị tính tiền' : 'proceed to checkout'}
+                </Link>
             </div>
         </div>
     );

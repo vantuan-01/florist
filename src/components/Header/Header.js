@@ -1,9 +1,10 @@
+import { Link, NavLink } from 'react-router-dom';
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
-import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './Header.module.scss';
@@ -13,7 +14,34 @@ import { useState } from 'react';
 function Header() {
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState(true);
+
+    const list = [
+        {
+            name: 'home',
+            config: config.home,
+        },
+        {
+            name: 'about',
+            config: config.about,
+        },
+        {
+            name: 'services',
+            config: config.services,
+        },
+        {
+            name: 'shop',
+            config: config.product,
+        },
+        {
+            name: 'blog',
+            config: config.blog,
+        },
+        {
+            name: 'contact',
+            config: config.contact,
+        },
+    ];
 
     return (
         <div className={styles.header}>
@@ -25,26 +53,20 @@ function Header() {
                     <div className={styles.options}>
                         <div className={styles.options_6}>
                             <ul>
-                                <li>
-                                    <Link style={{ color: '#f45d96' }} to={config.home}>
-                                        home
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={config.about}>about</Link>
-                                </li>
-                                <li>
-                                    <Link to={config.services}>services</Link>
-                                </li>
-                                <li>
-                                    <Link to={config.product}>shop</Link>
-                                </li>
-                                <li>
-                                    <Link to={config.blog}>blog</Link>
-                                </li>
-                                <li>
-                                    <Link to={config.contact}>contact</Link>
-                                </li>
+                                {list &&
+                                    list.map((item, index) => (
+                                        <li key={index}>
+                                            <NavLink
+                                                end
+                                                className={(nav) =>
+                                                    clsx(styles.navItem, { [styles.active]: nav.isActive })
+                                                }
+                                                to={item.config}
+                                            >
+                                                {item.name}
+                                            </NavLink>
+                                        </li>
+                                    ))}
                             </ul>
                         </div>
                         <div className={styles.options_3}>

@@ -11,6 +11,7 @@ const routes = {
     blog: '/blog',
     contact: '/contact',
     cart: '/cart',
+    checkout: '/checkout',
 };
 
 export default routes;
