@@ -142,6 +142,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    &:hover {
+    }
+
     .cart_icon {
         position: absolute;
         width: 5rem;
@@ -175,8 +178,15 @@
     height: 5rem;
     border-radius: 30rem;
     border: none;
+    font-size: 2rem;
+}
+
+.btn_love_active {
+    background-color: var(--pink);
     svg {
-        font-size: 2rem;
+        path {
+            color: #fff;
+        }
     }
 }
 

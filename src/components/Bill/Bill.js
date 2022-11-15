@@ -1,11 +1,14 @@
+import { removeAllProducts, selectOrderList, selectTotalPrice } from '~/reducers/Cart';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 import config from '~/config/routes';
-import { selectTotalPrice } from '~/reducers/Cart';
 import styles from './Bill.module.scss';
-import { useSelector } from 'react-redux';
 
 function Bill({ checkout }) {
+    const productList = useSelector(selectOrderList);
     const totalPrice = useSelector(selectTotalPrice);
+    const dispatch = useDispatch();
 
     return (
         <div className={styles.payment}>
@@ -15,20 +18,16 @@ function Bill({ checkout }) {
                 </h2>
                 {checkout && (
                     <div className={styles.bill_details}>
-                        <ul>
-                            <li>
-                                1 x succlent <p>$21.00</p>
-                            </li>
-                            <li>
-                                1 x succlent <p>$21.00</p>
-                            </li>
-                            <li>
-                                1 x succlent <p>$21.00</p>
-                            </li>
-                            <li>
-                                1 x succlent <p>$21.00</p>
-                            </li>
-                        </ul>
+                        {productList && productList.lenght !== 0
+                            ? productList.map((product, index) => (
+                                  <ul key={index}>
+                                      <li>
+                                          {product.presentQty}x {product.detailItems.category}
+                                          <p>${product.detailItems.price * product.presentQty}.00</p>
+                                      </li>
+                                  </ul>
+                              ))
+                            : null}
                     </div>
                 )}
                 <div className={styles.bill_total}>
@@ -42,9 +41,15 @@ function Bill({ checkout }) {
                     </ul>
                 </div>
 
-                <Link className={styles.payment_btn} to={config.checkout}>
-                    {checkout ? 'tiểu nhị tính tiền' : 'proceed to checkout'}
-                </Link>
+                {checkout ? (
+                    <Link className={styles.payment_btn} to={config.home} onClick={() => dispatch(removeAllProducts())}>
+                        Accept payment
+                    </Link>
+                ) : (
+                    <Link className={styles.payment_btn} to={config.checkout}>
+                        proceed to checkout
+                    </Link>
+                )}
             </div>
         </div>
     );

@@ -1,0 +1,54 @@
+.checkout {
+    font-family: 'Quicksand', sans-serif;
+
+    width: 100%;
+    display: flex;
+    .checkout_col_8 {
+        width: 66.67%;
+        padding: 0 1.5rem;
+        h2 {
+            display: flex;
+            margin-bottom: 2rem;
+            p {
+                font-size: 2rem;
+                color: red;
+            }
+        }
+        .row_2 {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            .input_group {
+                width: 48%;
+            }
+        }
+        .input_group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+            label {
+                display: flex;
+                margin-bottom: 1rem;
+                color: #444444;
+                p {
+                    font-size: 2rem;
+                    color: red;
+                }
+            }
+            input {
+                border: 1px solid #e1e1e1;
+                font-size: 1.6rem;
+                height: 4.6rem;
+                padding-left: 2rem;
+                &:placeholder-shown {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+    .checkout_col_4 {
+        width: 33.33%;
+        padding: 0 1.5rem;
+    }
+}

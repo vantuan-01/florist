@@ -6,6 +6,7 @@ import { lazy, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import clsx from 'clsx';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
 import { useParams } from 'react-router-dom';
@@ -17,6 +18,7 @@ function ProductDetail() {
     const [detailItems, setDetailItems] = useState();
     const [description, setDescription] = useState();
     const [changeImg, setChangeImg] = useState();
+    const [changeLove, setChangeLove] = useState();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -105,7 +107,12 @@ function ProductDetail() {
                                     </div>
                                     <span>add to cart</span>
                                 </button>
-                                <button className={styles.btn_love}>
+                                <button
+                                    onClick={() => {
+                                        setChangeLove(!changeLove);
+                                    }}
+                                    className={clsx(styles.btn_love, { [styles.btn_love_active]: changeLove })}
+                                >
                                     <FontAwesomeIcon icon={faHeart} />
                                 </button>
                             </div>

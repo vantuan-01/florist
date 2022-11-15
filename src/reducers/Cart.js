@@ -26,6 +26,7 @@ const cartSlice = createSlice({
                 return total + item.presentQty;
             }, 0);
             localStorage.setItem('totalQty', state.totalQty);
+            state.presentQty = 1;
         },
         removeProduct(state, action) {
             let index = state.orderList.findIndex((item) => item.detailItems.id === action.payload);
@@ -39,6 +40,9 @@ const cartSlice = createSlice({
                 return total + item.presentQty;
             }, 0);
             localStorage.setItem('totalQty', state.totalQty);
+        },
+        removeAllProducts(state, action) {
+            localStorage.clear();
         },
         increaseQty(state, action) {
             if (state.presentQty < action.payload.qty) {
@@ -61,7 +65,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addProduct, removeProduct, increaseQty, decreaseQty } = cartSlice.actions;
+export const { addProduct, removeProduct, increaseQty, decreaseQty, removeAllProducts } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
 export const selectOrderList = (state) => state.cartReducer.orderList;
 export const selectQty = (state) => state.cartReducer.presentQty;

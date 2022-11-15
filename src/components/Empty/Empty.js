@@ -5,7 +5,11 @@ import styles from './Empty.module.scss';
 function Empty() {
     return (
         <div className={styles.empty}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="479" height="450" viewBox="0 0 479 450" fill="none">
+            <span>Your cart is empty</span>
+            <Link className={styles.back_btn} to={config.product}>
+                Back to shopping
+            </Link>
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 479 450" fill="none">
                 <path
                     d="M205.193 42.8874C119.169 28.7909 64.2098 126.856 47.4832 177.651C2.79672 325.964 87.781 365.336 135.859 366.483C199.577 357.465 256.525 375.182 277.034 385.168C456.862 435.543 470.442 311.685 454.753 243.459C418.895 105.017 356.345 112.621 329.552 133.728C261.497 181.576 244.904 133.468 245.115 103.433C249.365 52.8489 220.271 41.9926 205.193 42.8874Z"
                     fill="#EEEDFC"
@@ -80,8 +84,7 @@ function Empty() {
                 <line x1="213.466" y1="146.536" x2="213.469" y2="150.824" stroke="#CECDDE" strokeWidth="2" />
                 <line x1="212.34" y1="145.383" x2="208.052" y2="145.383" stroke="#CECDDE" strokeWidth="2" />
                 <line x1="214.661" y1="145.442" x2="218.949" y2="145.44" stroke="#CECDDE" strokeWidth="2" />
-            </svg>
-            <Link to={config.product}>back to shopping</Link>
+            </svg> */}
         </div>
     );
 }
