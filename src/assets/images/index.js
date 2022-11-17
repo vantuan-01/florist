@@ -3,6 +3,8 @@ const Images = {
     lightGreen: require('../images/lightGreen.jpg'),
     tableTree: require('../images/tableTree.jpg'),
     banner: require('../images/breadcrumb-bg.jpg'),
+    slider1: require('../images/hero-1.jpg'),
+    slider2: require('../images/hero-2.jpg'),
     ig1: require('../images/insta-1.jpg'),
     ig2: require('../images/insta-2.jpg'),
     ig3: require('../images/insta-3.jpg'),
@@ -20,6 +22,14 @@ const Images = {
     item10: require('../images/product-10.jpg'),
     item11: require('../images/product-11.jpg'),
     item12: require('../images/product-12.jpg'),
+    benefit1: require('../images/benefit-1.png'),
+    benefit2: require('../images/benefit-2.png'),
+    benefit3: require('../images/benefit-3.png'),
+    benefit4: require('../images/benefit-4.png'),
+    flower: require('../images/pexels-secret-garden-2879813.jpg'),
+    succulent: require('../images/succulent-plants-g358028f2a_1920.jpg'),
+    catus: require('../images/garden-geb2cec4f5_1920.jpg'),
+    funiture: require('../images/pexels-alexander-schimpf-1824189.jpg'),
 };
 
 export default Images;

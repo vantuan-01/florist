@@ -80,7 +80,7 @@ function Header() {
                                     <li>
                                         <Link>
                                             <FontAwesomeIcon icon={faHeart} />
-                                            <span>(05)</span>
+                                            <span>(00)</span>
                                         </Link>
                                     </li>
                                     <li>

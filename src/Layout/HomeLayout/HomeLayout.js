@@ -9,7 +9,7 @@ function HomeLayout({ children }) {
     return (
         <>
             <Header />
-            <div className={styles.container}>{children}</div>
+            <div className={styles.container_home}>{children}</div>
             <Footer />
         </>
     );

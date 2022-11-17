@@ -27,7 +27,7 @@ function ListItem({ items }) {
                                 <img src={item.imageUrl} alt={item.imageUrl} />
                                 <div className={styles.menu_link_widget}>
                                     <Widget icon={faMagnifyingGlass} id={item.id} />
-                                    <Widget icon={faCartShopping} id={item.id} />
+                                    <Widget icon={faCartShopping} addOne />
                                     <Widget icon={faHeart} id={item.id} />
                                 </div>
                                 <h6>

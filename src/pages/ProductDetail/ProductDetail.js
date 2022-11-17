@@ -2,16 +2,15 @@ import * as httpRequest from '~/utils/httpRequest';
 
 import { addProduct, selectQty } from '~/reducers/Cart';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
-import { lazy, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import QtyButton from '~/components/QtyButton';
 import clsx from 'clsx';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './ProductDetail.module.scss';
 import { useParams } from 'react-router-dom';
-
-const QtyButton = lazy(() => import('~/components/QtyButton'));
 
 function ProductDetail() {
     const { id } = useParams();
@@ -19,6 +18,7 @@ function ProductDetail() {
     const [description, setDescription] = useState();
     const [changeImg, setChangeImg] = useState();
     const [changeLove, setChangeLove] = useState();
+    const presentQty = useSelector(selectQty);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,8 +31,6 @@ function ProductDetail() {
         const groupDetailItem = { detailItems, presentQty };
         dispatch(addProduct(groupDetailItem));
     };
-
-    const presentQty = useSelector(selectQty);
 
     return (
         <div className={styles.productDetail}>
