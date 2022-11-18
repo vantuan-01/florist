@@ -12,7 +12,7 @@ function Home() {
 
                     <div className={styles.carousel_text}>
                         <span>fresh flower & gift shop</span>
-                        <h1>Making beautiful flowers a part of your life </h1>
+                        <h2>Making beautiful flowers a part of your life. </h2>
                         <Link to={config.product}>shop now</Link>
                     </div>
                 </div>
@@ -72,6 +72,37 @@ function Home() {
                             <img src={Images.funiture} alt="categories" />
                             <div className={styles.categories_text}>
                                 <h2>Funiture tree</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.about}>
+                        <div className={styles.header}>
+                            <div className={styles.title}>
+                                <span>about us</span>
+                                <h4>We provide all kinds of fresh flower services</h4>
+                            </div>
+                            <span className={styles.title_content}>
+                                For Heather Henson, of Boreal Blooms in Cold Lake, Alberta, Canada, growing flowers that
+                                can be dried and incorporated into late fall and winter floral arrangements has been a
+                                game-changer. During her growing season, this farmer-florist relies on a vivid palette
+                                of annuals, perennials and ornamental grasses to supply her studio.
+                            </span>
+                        </div>
+                        <div className={styles.body}>
+                            <div className={styles.body_img}>
+                                <img src={Images.girl_florist} alt="video1" />
+                            </div>
+                            <div className={styles.body_content}>
+                                <div className={styles.body_content_text}>
+                                    <span>SLOW FLOWERS’ FLORAL INSIGHTS</span>
+                                    <h4>Dried flowers are having a renaissance </h4>
+                                    <p>
+                                        This awareness has been stimulated by sustainable sourcing practices and the
+                                        desire on the part of North American flower growers to “extend the season”
+                                        beyond the last frost.
+                                    </p>
+                                    <Link>contact us</Link>
+                                </div>
                             </div>
                         </div>
                     </div>

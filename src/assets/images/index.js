@@ -30,6 +30,7 @@ const Images = {
     succulent: require('../images/succulent-plants-g358028f2a_1920.jpg'),
     catus: require('../images/garden-geb2cec4f5_1920.jpg'),
     funiture: require('../images/pexels-alexander-schimpf-1824189.jpg'),
+    girl_florist: require('../images/girl-florist.jpg'),
 };
 
 export default Images;
