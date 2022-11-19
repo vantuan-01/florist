@@ -1,27 +1,37 @@
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import SelectSort from '~/components/SelectSort';
+import Widget from '~/components/Widget';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { lazy } from 'react';
+import { selectSorted } from '~/reducers/Products';
 import styles from './Products.module.scss';
-
-const SelectSort = lazy(() => import('~/components/SelectSort'));
-const Widget = lazy(() => import('~/components/Widget'));
+import { useSelector } from 'react-redux';
 
 function ListItem({ items }) {
-    const sortPrice = (childData) => {
-        const opt = childData;
-        return opt;
-    };
+    const listItemSorted = useSelector(selectSorted);
+    // let productList = items;
+    // if (listItemSorted) {
+    //     productList = listItemSorted;
+    // } else if (!listItemSorted) {
+    //     productList = items;
+    // }
+    const [productList, setProductList] = useState(items);
+    useEffect(() => {
+        if (listItemSorted) {
+            setProductList(listItemSorted);
+        }
+    });
     return (
         <>
             <div className={styles.sortable}>
-                <SelectSort child={sortPrice} />
+                <SelectSort items={items} />
             </div>
             <ul className={styles.list_items}>
-                {items &&
-                    items.length !== 0 &&
-                    items.map((item, index) => {
+                {productList &&
+                    productList.length !== 0 &&
+                    productList.map((item, index) => {
                         return (
                             <li className={styles.item} key={index}>
                                 <img src={item.imageUrl} alt={item.imageUrl} />
