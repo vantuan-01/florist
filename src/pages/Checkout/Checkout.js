@@ -24,6 +24,12 @@ function Checkout() {
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="">
+                        Phone number <p>*</p>
+                    </label>
+                    <input type="number" />
+                </div>
+                <div className={styles.input_group}>
+                    <label htmlFor="">
                         Address <p>*</p>
                     </label>
                     <input type="text" placeholder="Street address, district, city " />

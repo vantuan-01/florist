@@ -11,18 +11,20 @@ import { useSelector } from 'react-redux';
 
 function ListItem({ items }) {
     const listItemSorted = useSelector(selectSorted);
-    // let productList = items;
-    // if (listItemSorted) {
-    //     productList = listItemSorted;
-    // } else if (!listItemSorted) {
-    //     productList = items;
-    // }
-    const [productList, setProductList] = useState(items);
+
+    const [productList, setProductList] = useState(null);
     useEffect(() => {
         if (listItemSorted) {
             setProductList(listItemSorted);
         }
-    });
+    }, [listItemSorted]);
+
+    useEffect(() => {
+        if (items) {
+            setProductList(items);
+            console.log('🚀 ~ file: ListItems.js ~ line 16 ~ ListItem ~ productList', productList);
+        }
+    }, [items]);
     return (
         <>
             <div className={styles.sortable}>

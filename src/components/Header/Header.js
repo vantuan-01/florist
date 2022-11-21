@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
+import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
@@ -9,12 +10,30 @@ import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './Header.module.scss';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 
 function Header() {
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [logged, setLogged] = useState(true);
+    const [logged, setLogged] = useState(false);
+    const [resize, setReSize] = useState('');
+
+    const listenToScroll = () => {
+        const limitHeight = 150;
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        // console.log('🚀 ~ file: Header.js ~ line 23 ~ listenToScroll ~ winScroll', winScroll);
+        if (winScroll > limitHeight) {
+            setReSize('header_onScroll');
+        } else if (winScroll <= limitHeight) {
+            setReSize('');
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', listenToScroll);
+        return () => {
+            window.removeEventListener('scroll', listenToScroll);
+        };
+    });
 
     const list = [
         {
@@ -44,10 +63,16 @@ function Header() {
     ];
 
     return (
-        <div className={styles.header}>
+        <div
+            className={clsx(styles.header, {
+                [styles.header_onScroll]: resize,
+            })}
+        >
             <div className={styles.container}>
                 <div className={styles.col_2}>
-                    <img className={styles.logo} src={Images.logo} alt="logo" />
+                    <Link to={config.home}>
+                        <img className={styles.logo} src={Images.logo} alt="logo" />
+                    </Link>
                 </div>
                 <div className={styles.col_10}>
                     <div className={styles.options}>
@@ -59,7 +84,9 @@ function Header() {
                                             <NavLink
                                                 end
                                                 className={(nav) =>
-                                                    clsx(styles.navItem, { [styles.active]: nav.isActive })
+                                                    clsx(styles.navItem, {
+                                                        [styles.active]: nav.isActive,
+                                                    })
                                                 }
                                                 to={item.config}
                                             >
@@ -88,7 +115,8 @@ function Header() {
                                             <FontAwesomeIcon icon={faCartShopping} />
                                             <span>({totalItems && totalItems !== 0 ? totalItems : 0})</span>
                                             <span className={styles.total_price}>
-                                                $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}.00
+                                                $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
+                                                .00
                                             </span>
                                         </Link>
                                     </li>

@@ -43,6 +43,9 @@ const cartSlice = createSlice({
         },
         removeAllProducts(state, action) {
             localStorage.clear();
+            state.orderList = [];
+            state.totalQty = 0;
+            state.totalPrice = 0;
         },
         increaseQty(state, action) {
             if (state.presentQty < action.payload.qty) {

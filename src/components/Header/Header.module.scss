@@ -1,11 +1,21 @@
 .header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
     width: 100%;
     height: 10rem;
     padding: 0 4rem;
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Quicksand', sans-serif;
+    transition: height 200ms;
+}
+.header_onScroll {
+    height: 6rem;
+    box-shadow: 0 0.3rem 2rem rgb(99 134 137 / 20%);
 }
 .container {
     width: 141rem;
