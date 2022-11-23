@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 function Header() {
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState(true);
     const [resize, setReSize] = useState('');
 
     const listenToScroll = () => {

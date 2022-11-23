@@ -11,7 +11,7 @@
     border: 1px solid transparent;
     background-color: #fff;
     border-radius: 50%;
-    transition: transform 300ms ease-in-out;
+    transition: all 350ms ease-in-out;
     &:hover {
         background-color: var(--pink);
         transform: rotate(360deg);

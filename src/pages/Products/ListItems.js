@@ -11,8 +11,7 @@ import { useSelector } from 'react-redux';
 
 function ListItem({ items }) {
     const listItemSorted = useSelector(selectSorted);
-
-    const [productList, setProductList] = useState(null);
+    const [productList, setProductList] = useState();
     useEffect(() => {
         if (listItemSorted) {
             setProductList(listItemSorted);
@@ -22,14 +21,15 @@ function ListItem({ items }) {
     useEffect(() => {
         if (items) {
             setProductList(items);
-            console.log('🚀 ~ file: ListItems.js ~ line 16 ~ ListItem ~ productList', productList);
         }
     }, [items]);
     return (
         <>
-            <div className={styles.sortable}>
-                <SelectSort items={items} />
-            </div>
+            {items && items.length !== 0 && (
+                <div className={styles.sortable}>
+                    <SelectSort items={items} />
+                </div>
+            )}
             <ul className={styles.list_items}>
                 {productList &&
                     productList.length !== 0 &&
@@ -39,8 +39,8 @@ function ListItem({ items }) {
                                 <img src={item.imageUrl} alt={item.imageUrl} />
                                 <div className={styles.menu_link_widget}>
                                     <Widget icon={faMagnifyingGlass} id={item.id} />
-                                    <Widget icon={faCartShopping} addOne />
-                                    <Widget icon={faHeart} id={item.id} />
+                                    <Widget icon={faCartShopping} addOne={item} />
+                                    <Widget icon={faHeart} />
                                 </div>
                                 <h6>
                                     <Link to={`/products/${item.id}`} className={styles.item_name}>
