@@ -11,7 +11,6 @@ const cartSlice = createSlice({
     reducers: {
         addProduct(state, action) {
             let findId = state.orderList.findIndex((item) => item.detailItems.id === action.payload.detailItems.id);
-
             if (findId === -1) {
                 state.orderList = [...state.orderList, action.payload];
                 localStorage.setItem('cart', JSON.stringify(state.orderList));
