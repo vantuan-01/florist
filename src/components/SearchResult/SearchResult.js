@@ -1,6 +1,7 @@
 import Portal from '~/components/Portal';
 import SlidingPanel from 'react-sliding-side-panel';
 import clsx from 'clsx';
+import { forwardRef } from 'react';
 import styles from './SearchResult.module.scss';
 import { useState } from 'react';
 

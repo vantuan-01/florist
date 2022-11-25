@@ -10,19 +10,20 @@ import clsx from 'clsx';
 import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './Header.module.scss';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 function Header() {
+    const [logged, setLogged] = useState(true);
     const [openPanel, setOpenPanel] = useState(false);
+    const ref = useRef();
+    const [resize, setReSize] = useState('');
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [logged, setLogged] = useState(true);
-    const [resize, setReSize] = useState('');
 
     const listenToScroll = () => {
         const limitHeight = 150;
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        // console.log('🚀 ~ file: Header.js ~ line 23 ~ listenToScroll ~ winScroll', winScroll);
         if (winScroll > limitHeight) {
             setReSize('header_onScroll');
         } else if (winScroll <= limitHeight) {
@@ -36,6 +37,18 @@ function Header() {
             window.removeEventListener('scroll', listenToScroll);
         };
     });
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setOpenPanel(false);
+            }
+        };
+        document.addEventListener('mouseover', handleClickOutside);
+        return () => {
+            document.removeEventListener('mouseover', handleClickOutside);
+        };
+    }, [ref]);
 
     const list = [
         {
