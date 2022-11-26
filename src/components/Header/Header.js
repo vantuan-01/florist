@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { useEffect, useState } from 'react';
 
@@ -149,9 +149,45 @@ function Header() {
             </div>
 
             <SearchResult openPanel={openPanel}>
-                <div ref={ref}>
-                    <h1>search result</h1>
-                    <button onClick={() => setOpenPanel(!openPanel)}>close</button>
+                <div className={styles.searchResult_inner} ref={ref}>
+                    <button className={styles.searchResult_delbtn} onClick={() => setOpenPanel(!openPanel)}>
+                        <FontAwesomeIcon icon={faXmark} size="2x" />
+                    </button>
+                    <h1>Search</h1>
+                    <div className={styles.searchResult_container}>
+                        <div className={styles.searchResult_input}>
+                            {/* need auto focus */}
+                            <input type="text" placeholder="Name..." />
+                            <button className={styles.searchResult_searchIcon}>
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </button>
+                        </div>
+                        <div className={styles.searchResult_results}>
+                            <ul>
+                                <li className={styles.searchResult_item}>
+                                    <img src={Images.catus} alt="searchResult_item" />
+                                    <div className={styles.searchResult_item_content}>
+                                        <p>category</p>
+                                        <span>Green Hydrangeas Flower</span>
+                                    </div>
+                                </li>
+                                <li className={styles.searchResult_item}>
+                                    <img src={Images.catus} alt="searchResult_item" />
+                                    <div className={styles.searchResult_item_content}>
+                                        <p>category</p>
+                                        <span>Green Hydrangeas Flower</span>
+                                    </div>
+                                </li>
+                                <li className={styles.searchResult_item}>
+                                    <img src={Images.catus} alt="searchResult_item" />
+                                    <div className={styles.searchResult_item_content}>
+                                        <p>category</p>
+                                        <span>Green Hydrangeas Flower</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </SearchResult>
         </>

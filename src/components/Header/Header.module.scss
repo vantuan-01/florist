@@ -107,3 +107,104 @@
         }
     }
 }
+
+// Search results
+
+.searchResult_inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    .searchResult_delbtn {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background-color: #fff;
+        margin-bottom: 4rem;
+    }
+    .searchResult_container {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .searchResult_input {
+            display: flex;
+            width: 80%;
+            height: 6rem;
+            border-radius: 1rem;
+            border: 0.3rem solid var(--pink);
+            overflow: hidden;
+            margin-bottom: 4rem;
+            input {
+                padding: 0 1.5rem;
+                width: 80%;
+                height: 100%;
+                border: none;
+                color: var(--pink);
+                font-size: 1.6rem;
+                text-transform: capitalize;
+                &:placeholder-shown {
+                    color: var(--pink);
+                }
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
+            }
+            .searchResult_searchIcon {
+                position: relative;
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: transparent;
+                border: none;
+                &::before {
+                    position: absolute;
+                    content: '';
+                    height: 70%;
+                    left: 0;
+                    border-left: 0.3rem dashed var(--pink);
+                }
+                svg {
+                    font-size: 2rem;
+                    path {
+                        color: var(--pink);
+                    }
+                }
+            }
+        }
+        .searchResult_results {
+            width: 100%;
+            overflow: scroll;
+            height: 100%;
+            ul {
+                .searchResult_item {
+                    width: 100%;
+                    height: 6rem;
+                    overflow: hidden;
+                    display: flex;
+                    border: 0.3rem solid var(--pink);
+                    margin-bottom: 0.5rem;
+                    img {
+                        width: 20%;
+                        // height: 16rem;
+                        object-fit: cover;
+                    }
+                    .searchResult_item_content {
+                        width: 80%;
+                        padding-left: 1rem;
+                        text-transform: capitalize;
+                        p {
+                        }
+                        span {
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
