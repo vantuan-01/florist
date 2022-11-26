@@ -1,5 +1,17 @@
+@keyframes dropdownY {
+    0% {
+        transform: scaleY(0);
+    }
+    80% {
+        transform: scaleY(1.1);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
 .select_sort {
     position: relative;
+    user-select: none;
 }
 
 .custom_sort {
@@ -43,12 +55,20 @@
 }
 
 .custom_select {
+    display: none;
     position: absolute;
     left: 0;
     top: 3.6rem;
     width: 100%;
     background-color: #fff;
     z-index: 1;
+    // perspective: 1000px;
+}
+
+.custom_select_slide {
+    display: block;
+    animation: dropdownY 350ms ease-in-out forwards;
+    transform-origin: top center;
 }
 
 .custom_option {
@@ -56,10 +76,12 @@
     align-items: center;
     width: 100%;
     height: 4rem;
-    list-style: none;
     padding-left: 3rem;
     font-weight: 500;
+    background-color: #fff;
+
     &:hover {
-        background-color: rgba(204, 204, 204, 0.3);
+        background-color: rgb(227, 224, 224);
+        font-weight: 700;
     }
 }

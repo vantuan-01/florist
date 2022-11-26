@@ -44,9 +44,9 @@ function Header() {
                 setOpenPanel(false);
             }
         };
-        document.addEventListener('mouseover', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            document.removeEventListener('mouseover', handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [ref]);
 
@@ -149,8 +149,10 @@ function Header() {
             </div>
 
             <SearchResult openPanel={openPanel}>
-                <h1>search result</h1>
-                <button onClick={() => setOpenPanel(!openPanel)}>close</button>
+                <div ref={ref}>
+                    <h1>search result</h1>
+                    <button onClick={() => setOpenPanel(!openPanel)}>close</button>
+                </div>
             </SearchResult>
         </>
     );

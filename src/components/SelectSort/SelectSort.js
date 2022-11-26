@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { selectSortOption, sortName, sortPrice } from '~/reducers/Products';
 import { useDispatch, useSelector } from 'react-redux';
 
+import clsx from 'clsx';
 import styles from './SelectSort.module.scss';
 import { useRef } from 'react';
 
@@ -39,42 +40,40 @@ function SelectSort({ items }) {
         <div className={styles.select_sort} ref={ref}>
             <div className={styles.custom_sort} onClick={handleOpen}>
                 <span>{!sortOpt ? 'Sort by popularity' : sortOpt}</span>
-                {openOption && (
-                    <ul className={styles.custom_select}>
-                        <li
-                            onClick={() => {
-                                dispatch(sortPrice({ optionNum: 1, items }));
-                            }}
-                            className={styles.custom_option}
-                        >
-                            low to height
-                        </li>
-                        <li
-                            onClick={() => {
-                                dispatch(sortPrice({ optionNum: 2, items }));
-                            }}
-                            className={styles.custom_option}
-                        >
-                            height to low
-                        </li>
-                        <li
-                            onClick={() => {
-                                dispatch(sortName({ optionNum: 3, items }));
-                            }}
-                            className={styles.custom_option}
-                        >
-                            a - z
-                        </li>
-                        <li
-                            onClick={() => {
-                                dispatch(sortName({ optionNum: 4, items }));
-                            }}
-                            className={styles.custom_option}
-                        >
-                            z - a
-                        </li>
-                    </ul>
-                )}
+                <ul className={clsx(styles.custom_select, { [styles.custom_select_slide]: openOption })}>
+                    <li
+                        onClick={() => {
+                            dispatch(sortPrice({ optionNum: 1, items }));
+                        }}
+                        className={styles.custom_option}
+                    >
+                        low to height
+                    </li>
+                    <li
+                        onClick={() => {
+                            dispatch(sortPrice({ optionNum: 2, items }));
+                        }}
+                        className={styles.custom_option}
+                    >
+                        height to low
+                    </li>
+                    <li
+                        onClick={() => {
+                            dispatch(sortName({ optionNum: 3, items }));
+                        }}
+                        className={styles.custom_option}
+                    >
+                        a - z
+                    </li>
+                    <li
+                        onClick={() => {
+                            dispatch(sortName({ optionNum: 4, items }));
+                        }}
+                        className={styles.custom_option}
+                    >
+                        z - a
+                    </li>
+                </ul>
             </div>
         </div>
     );
