@@ -5,6 +5,7 @@ const productSlide = createSlice({
     initialState: {
         listAfterSort: [],
         sortOption: '',
+        listSearched: [],
     },
     reducers: {
         sortPrice(state, action) {
@@ -29,10 +30,12 @@ const productSlide = createSlice({
                 state.sortOption = 'z - a';
             }
         },
+        searchValue(state, action) {},
     },
 });
 
-export const { sortPrice, sortName } = productSlide.actions;
+export const { sortPrice, sortName, searchValue } = productSlide.actions;
 export const productReducer = productSlide.reducer;
 export const selectSorted = (state) => state.productReducer.listAfterSort;
 export const selectSortOption = (state) => state.productReducer.sortOption;
+export const selectSearch = (state) => state.productReducer.listSearched;

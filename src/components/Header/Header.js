@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { faCartShopping, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { useEffect, useState } from 'react';
 
@@ -15,40 +15,43 @@ import { useSelector } from 'react-redux';
 
 function Header() {
     const [logged, setLogged] = useState(true);
-    const [openPanel, setOpenPanel] = useState(false);
+    const [openPanel, setOpenPanel] = useState(true);
     const ref = useRef();
     const [resize, setReSize] = useState('');
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
 
-    const listenToScroll = () => {
-        const limitHeight = 150;
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        if (winScroll > limitHeight) {
-            setReSize('header_onScroll');
-        } else if (winScroll <= limitHeight) {
-            setReSize('');
-        }
-    };
-
     useEffect(() => {
+        const listenToScroll = () => {
+            const limitHeight = 150;
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            if (winScroll > limitHeight) {
+                setReSize('header_onScroll');
+            } else if (winScroll <= limitHeight) {
+                setReSize('');
+            }
+        };
         window.addEventListener('scroll', listenToScroll);
         return () => {
             window.removeEventListener('scroll', listenToScroll);
         };
     });
 
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) {
-                setOpenPanel(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [ref]);
+    // useEffect(() => {
+    //     const handleClickOutside = (e) => {
+    //         if (ref.current && !ref.current.contains(e.target)) {
+    //             setOpenPanel(false);
+    //         }
+    //     };
+    //     document.addEventListener('mousedown', handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, [ref]);
+
+    const handleClose = (value) => {
+        setOpenPanel(value);
+    };
 
     const list = [
         {
@@ -148,48 +151,7 @@ function Header() {
                 </div>
             </div>
 
-            <SearchResult openPanel={openPanel}>
-                <div className={styles.searchResult_inner} ref={ref}>
-                    <button className={styles.searchResult_delbtn} onClick={() => setOpenPanel(!openPanel)}>
-                        <FontAwesomeIcon icon={faXmark} size="2x" />
-                    </button>
-                    <h1>Search</h1>
-                    <div className={styles.searchResult_container}>
-                        <div className={styles.searchResult_input}>
-                            {/* need auto focus */}
-                            <input type="text" placeholder="Name..." />
-                            <button className={styles.searchResult_searchIcon}>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </button>
-                        </div>
-                        <div className={styles.searchResult_results}>
-                            <ul>
-                                <li className={styles.searchResult_item}>
-                                    <img src={Images.catus} alt="searchResult_item" />
-                                    <div className={styles.searchResult_item_content}>
-                                        <p>category</p>
-                                        <span>Green Hydrangeas Flower</span>
-                                    </div>
-                                </li>
-                                <li className={styles.searchResult_item}>
-                                    <img src={Images.catus} alt="searchResult_item" />
-                                    <div className={styles.searchResult_item_content}>
-                                        <p>category</p>
-                                        <span>Green Hydrangeas Flower</span>
-                                    </div>
-                                </li>
-                                <li className={styles.searchResult_item}>
-                                    <img src={Images.catus} alt="searchResult_item" />
-                                    <div className={styles.searchResult_item_content}>
-                                        <p>category</p>
-                                        <span>Green Hydrangeas Flower</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </SearchResult>
+            <SearchResult handleClose={handleClose} openPanel={openPanel} />
         </>
     );
 }
