@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 
 function Header() {
     const [logged, setLogged] = useState(true);
-    const [openPanel, setOpenPanel] = useState(true);
+    const [openPanel, setOpenPanel] = useState(false);
     const ref = useRef();
     const [resize, setReSize] = useState('');
     const totalItems = useSelector(selectTotalQty);
@@ -37,20 +37,26 @@ function Header() {
         };
     });
 
-    // useEffect(() => {
-    //     const handleClickOutside = (e) => {
-    //         if (ref.current && !ref.current.contains(e.target)) {
-    //             setOpenPanel(false);
-    //         }
-    //     };
-    //     document.addEventListener('mousedown', handleClickOutside);
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-    // }, [ref]);
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setOpenPanel(false);
+                document.body.style.overflow = '';
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [ref]);
 
     const handleClose = (value) => {
         setOpenPanel(value);
+        document.body.style.overflow = '';
+    };
+    const handleOpen = () => {
+        setOpenPanel(true);
+        document.body.style.overflow = 'hidden';
     };
 
     const list = [
@@ -119,7 +125,7 @@ function Header() {
                                 {logged ? (
                                     <ul>
                                         <li>
-                                            <button onClick={() => setOpenPanel(!openPanel)}>
+                                            <button onClick={handleOpen}>
                                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                                             </button>
                                         </li>
@@ -151,7 +157,7 @@ function Header() {
                 </div>
             </div>
 
-            <SearchResult handleClose={handleClose} openPanel={openPanel} />
+            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} />
         </>
     );
 }

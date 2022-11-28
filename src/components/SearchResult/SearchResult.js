@@ -7,22 +7,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images';
 import Portal from '~/components/Portal';
 import clsx from 'clsx';
+import { forwardRef } from 'react';
 import styles from './SearchResult.module.scss';
 import { useRef } from 'react';
 
-function SearchResult({ openPanel, handleClose }) {
+function SearchResult({ openPanel, handleClose }, ref) {
     const inputRef = useRef();
-    const htmlRef = useRef();
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    // useEffect(() => {
-    //     const checkFocus = () => {
-    //         if (openPanel) {
-    //             inputRef.current.focus();
-    //         }
-    //     };
-    //     return checkFocus;
-    // }, [openPanel]);
+    useEffect(() => {
+        if (openPanel) {
+            inputRef.current.focus();
+        }
+    }, [openPanel]);
+
     useEffect(() => {
         const value = searchValue.trim();
         if (value) {
@@ -52,48 +50,43 @@ function SearchResult({ openPanel, handleClose }) {
 
     return (
         <Portal>
-            <div
-                className={clsx(styles.overlay, { [styles.overlay_slide]: openPanel })}
-                onClick={() => handleClose(!openPanel)}
-            >
-                <div className={clsx(styles.searchResult, { [styles.searchResult_slide]: !openPanel })}>
-                    <div className={styles.wrapper}>
-                        <div className={styles.searchResult_inner}>
-                            <button className={styles.searchResult_delbtn} onClick={() => handleClose(!openPanel)}>
-                                <FontAwesomeIcon icon={faXmark} size="2x" />
-                            </button>
-                            <h1>Search</h1>
-                            <div className={styles.searchResult_container}>
-                                <div className={styles.searchResult_input}>
-                                    <input
-                                        ref={inputRef}
-                                        value={searchValue}
-                                        onChange={handleChange}
-                                        type="text"
-                                        placeholder="Name..."
-                                    />
-                                    {searchValue && (
-                                        <button className={styles.clear_btn} onClick={handleClear}>
-                                            <FontAwesomeIcon icon={faCircleXmark} />
-                                        </button>
-                                    )}
-                                    <button className={styles.searchResult_searchIcon}>
-                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <div ref={ref} className={clsx(styles.searchResult, { [styles.searchResult_slide]: !openPanel })}>
+                <div className={styles.wrapper}>
+                    <div className={styles.searchResult_inner}>
+                        <button className={styles.searchResult_delbtn} onClick={() => handleClose(!openPanel)}>
+                            <FontAwesomeIcon icon={faXmark} size="2x" />
+                        </button>
+                        <h1>Search</h1>
+                        <div className={styles.searchResult_container}>
+                            <div className={styles.searchResult_input}>
+                                <input
+                                    ref={inputRef}
+                                    value={searchValue}
+                                    onChange={handleChange}
+                                    type="text"
+                                    placeholder="Name..."
+                                />
+                                {searchValue && (
+                                    <button className={styles.clear_btn} onClick={handleClear}>
+                                        <FontAwesomeIcon icon={faCircleXmark} />
                                     </button>
-                                </div>
-                                <div className={styles.searchResult_results}>
-                                    {searchValue.trim() !== 0 && searchResult.length !== 0 && (
-                                        <ul>
-                                            <li className={styles.searchResult_item}>
-                                                <img src={Images.catus} alt="searchResult_item" />
-                                                <div className={styles.searchResult_item_content}>
-                                                    <p>category</p>
-                                                    <span>Green Hydrangeas Flower</span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    )}
-                                </div>
+                                )}
+                                <button className={styles.searchResult_searchIcon}>
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                </button>
+                            </div>
+                            <div className={styles.searchResult_results}>
+                                {searchValue.trim() !== 0 && searchResult.length !== 0 && (
+                                    <ul>
+                                        <li className={styles.searchResult_item}>
+                                            <img src={Images.catus} alt="searchResult_item" />
+                                            <div className={styles.searchResult_item_content}>
+                                                <p>category</p>
+                                                <span>Green Hydrangeas Flower</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -103,4 +96,4 @@ function SearchResult({ openPanel, handleClose }) {
     );
 }
 
-export default SearchResult;
+export default forwardRef(SearchResult);
