@@ -30,7 +30,12 @@ function SearchResult({ openPanel, handleClose }, ref) {
     });
 
     useEffect(() => {
-        searchLogic();
+        const handler = setTimeout(() => {
+            searchLogic();
+        }, 3000);
+        return () => {
+            clearTimeout(handler);
+        };
     }, [searchValue]);
 
     const searchLogic = () => {
@@ -63,7 +68,13 @@ function SearchResult({ openPanel, handleClose }, ref) {
             <div ref={ref} className={clsx(styles.searchResult, { [styles.searchResult_slide]: !openPanel })}>
                 <div className={styles.wrapper}>
                     <div className={styles.searchResult_inner}>
-                        <button className={styles.searchResult_delbtn} onClick={() => handleClose(!openPanel)}>
+                        <button
+                            className={styles.searchResult_delbtn}
+                            onClick={() => {
+                                handleClose(!openPanel);
+                                handleClear();
+                            }}
+                        >
                             <FontAwesomeIcon icon={faXmark} size="2x" />
                         </button>
                         <h1>Search</h1>
