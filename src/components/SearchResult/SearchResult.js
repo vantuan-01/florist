@@ -4,9 +4,10 @@ import { faCircleXmark, faMagnifyingGlass, faXmark } from '@fortawesome/free-sol
 import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Images from '~/assets/images';
+import { Link } from 'react-router-dom';
 import Portal from '~/components/Portal';
 import clsx from 'clsx';
+import config from '~/config/routes';
 import { forwardRef } from 'react';
 import styles from './SearchResult.module.scss';
 import { useRef } from 'react';
@@ -14,7 +15,8 @@ import { useRef } from 'react';
 function SearchResult({ openPanel, handleClose }, ref) {
     const inputRef = useRef();
     const [searchValue, setSearchValue] = useState('');
-    const [searchResult, setSearchResult] = useState([]);
+    const [listProduct, setListProduct] = useState([]);
+    var [filterResult, setFilterResult] = useState([]);
     useEffect(() => {
         if (openPanel) {
             inputRef.current.focus();
@@ -22,24 +24,32 @@ function SearchResult({ openPanel, handleClose }, ref) {
     }, [openPanel]);
 
     useEffect(() => {
+        httpRequest.get('/product/products').then((res) => {
+            setListProduct(res.data);
+        });
+    });
+
+    useEffect(() => {
+        searchLogic();
+    }, [searchValue]);
+
+    const searchLogic = () => {
         const value = searchValue.trim();
         if (value) {
-            const handler = setTimeout(() => {
-                httpRequest.get('/product/products').then((res) => {
-                    setSearchResult(res.data);
-                });
-            }, 3000);
-
-            return () => {
-                clearTimeout(handler);
-            };
+            const filterItem = listProduct.filter((item) => {
+                return item.name.includes(value) || item.category.includes(value);
+            });
+            filterResult = filterItem;
+            setFilterResult(filterResult);
+            console.log(filterResult);
         }
-    }, [searchValue]);
+    };
 
     const handleClear = () => {
         inputRef.current.focus();
         setSearchValue('');
-        setSearchResult([]);
+        setListProduct([]);
+        setFilterResult([]);
     };
     const handleChange = (e) => {
         const value = e.target.value;
@@ -76,15 +86,23 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                 </button>
                             </div>
                             <div className={styles.searchResult_results}>
-                                {searchValue.trim() !== 0 && searchResult.length !== 0 && (
+                                {listProduct.length !== 0 && filterResult.length !== 0 && (
                                     <ul>
-                                        <li className={styles.searchResult_item}>
-                                            <img src={Images.catus} alt="searchResult_item" />
-                                            <div className={styles.searchResult_item_content}>
-                                                <p>category</p>
-                                                <span>Green Hydrangeas Flower</span>
-                                            </div>
-                                        </li>
+                                        {filterResult &&
+                                            filterResult.map((item, index) => (
+                                                <li key={index} className={styles.searchResult_item}>
+                                                    <Link
+                                                        to={`${config.product}/${item.id}`}
+                                                        onClick={() => (document.body.style.overflow = '')}
+                                                    >
+                                                        <img src={item.imageUrl} alt="searchResult_item" />
+                                                        <div className={styles.searchResult_item_content}>
+                                                            <p>{item.category}</p>
+                                                            <span>{item.name}</span>
+                                                        </div>
+                                                    </Link>
+                                                </li>
+                                            ))}
                                     </ul>
                                 )}
                             </div>

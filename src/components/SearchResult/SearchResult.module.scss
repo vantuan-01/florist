@@ -117,24 +117,27 @@
             ul {
                 .searchResult_item {
                     width: 100%;
-                    height: 6rem;
-                    overflow: hidden;
-                    display: flex;
                     border: 0.3rem solid var(--pink);
                     margin-bottom: 0.5rem;
-                    img {
-                        width: 20%;
-                        // height: 16rem;
-                        object-fit: cover;
-                    }
-                    .searchResult_item_content {
-                        width: 80%;
-                        padding-left: 1rem;
-                        text-transform: capitalize;
-                        p {
+                    a {
+                        width: 100%;
+                        height: 6rem;
+                        display: flex;
+                        overflow: hidden;
+                        img {
+                            width: 20%;
+                            // height: 16rem;
+                            object-fit: cover;
                         }
-                        span {
-                            font-weight: 700;
+                        .searchResult_item_content {
+                            width: 80%;
+                            padding-left: 1rem;
+                            text-transform: capitalize;
+                            p {
+                            }
+                            span {
+                                font-weight: 700;
+                            }
                         }
                     }
                 }
