@@ -30,11 +30,22 @@ const productSlide = createSlice({
                 state.sortOption = 'z - a';
             }
         },
-        searchValue(state, action) {},
+        searchName(state, action) {
+            const value = action.payload.searchValue.trim();
+            if (value) {
+                const filterItem = action.payload.listProduct.filter((item) => {
+                    return item.name.includes(value) || item.category.includes(value);
+                });
+                state.listSearched = filterItem;
+                console.log(state.listSearched);
+            } else if (!value) {
+                state.listSearched = [];
+            }
+        },
     },
 });
 
-export const { sortPrice, sortName, searchValue } = productSlide.actions;
+export const { sortPrice, sortName, searchName } = productSlide.actions;
 export const productReducer = productSlide.reducer;
 export const selectSorted = (state) => state.productReducer.listAfterSort;
 export const selectSortOption = (state) => state.productReducer.sortOption;

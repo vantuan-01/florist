@@ -1,6 +1,8 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-import { faCircleXmark, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faMagnifyingGlass, faSpinner, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { searchName, selectSearch } from '~/reducers/Products';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,9 +16,11 @@ import { useRef } from 'react';
 
 function SearchResult({ openPanel, handleClose }, ref) {
     const inputRef = useRef();
+    const dispatch = useDispatch();
+    const searched = useSelector(selectSearch);
     const [searchValue, setSearchValue] = useState('');
     const [listProduct, setListProduct] = useState([]);
-    var [filterResult, setFilterResult] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         if (openPanel) {
             inputRef.current.focus();
@@ -30,31 +34,25 @@ function SearchResult({ openPanel, handleClose }, ref) {
     });
 
     useEffect(() => {
+        if (searchValue) {
+            setLoading(true);
+        }
         const handler = setTimeout(() => {
-            searchLogic();
-        }, 3000);
+            dispatch(searchName({ listProduct, searchValue }));
+            setLoading(false);
+        }, 2000);
+
         return () => {
             clearTimeout(handler);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchValue]);
-
-    const searchLogic = () => {
-        const value = searchValue.trim();
-        if (value) {
-            const filterItem = listProduct.filter((item) => {
-                return item.name.includes(value) || item.category.includes(value);
-            });
-            filterResult = filterItem;
-            setFilterResult(filterResult);
-            console.log(filterResult);
-        }
-    };
 
     const handleClear = () => {
         inputRef.current.focus();
         setSearchValue('');
         setListProduct([]);
-        setFilterResult([]);
+        dispatch(searchName({ listProduct, searchValue: '' }));
     };
     const handleChange = (e) => {
         const value = e.target.value;
@@ -87,34 +85,36 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                     type="text"
                                     placeholder="Name..."
                                 />
-                                {searchValue && (
+                                {searchValue && !loading && (
                                     <button className={styles.clear_btn} onClick={handleClear}>
                                         <FontAwesomeIcon icon={faCircleXmark} />
                                     </button>
                                 )}
+                                {loading && <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />}
                                 <button className={styles.searchResult_searchIcon}>
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                 </button>
                             </div>
                             <div className={styles.searchResult_results}>
-                                {listProduct.length !== 0 && filterResult.length !== 0 && (
+                                {listProduct.length !== 0 && searched.length !== 0 ? (
                                     <ul>
-                                        {filterResult &&
-                                            filterResult.map((item, index) => (
-                                                <li key={index} className={styles.searchResult_item}>
-                                                    <Link
-                                                        to={`${config.product}/${item.id}`}
-                                                        onClick={() => (document.body.style.overflow = '')}
-                                                    >
-                                                        <img src={item.imageUrl} alt="searchResult_item" />
-                                                        <div className={styles.searchResult_item_content}>
-                                                            <p>{item.category}</p>
-                                                            <span>{item.name}</span>
-                                                        </div>
-                                                    </Link>
-                                                </li>
-                                            ))}
+                                        {searched.map((item, index) => (
+                                            <li key={index} className={styles.searchResult_item}>
+                                                <Link
+                                                    to={`${config.product}/${item.id}`}
+                                                    onClick={() => (document.body.style.overflow = '')}
+                                                >
+                                                    <img src={item.imageUrl} alt="searchResult_item" />
+                                                    <div className={styles.searchResult_item_content}>
+                                                        <p>{item.category}</p>
+                                                        <span>{item.name}</span>
+                                                    </div>
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
+                                ) : (
+                                    <p className={styles.nothing}>Nothing found</p>
                                 )}
                             </div>
                         </div>

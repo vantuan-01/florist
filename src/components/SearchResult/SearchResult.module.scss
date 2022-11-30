@@ -1,19 +1,11 @@
-// .overlay {
-//     position: fixed;
-//     width: 100%;
-//     height: 100vh;
-//     top: 0;
-//     left: 0;
-//     background-color: rgb(204, 204, 204, 0.5);
-//     z-index: 11;
-//     display: none;
-//     justify-content: end;
-//     align-items: center;
-//     transition: all 300ms ease-in-out;
-// }
-// .overlay_slide {
-//     display: flex;
-// }
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 .searchResult {
     position: fixed;
@@ -80,11 +72,20 @@
                     outline: none;
                 }
             }
-            .clear_btn {
+            .clear_btn,
+            .spinner {
                 position: absolute;
                 right: 22%;
                 background-color: transparent;
                 border: none;
+                svg {
+                    path {
+                        color: var(--pink);
+                    }
+                }
+            }
+            .spinner {
+                animation: spin 1000ms linear infinite;
             }
             .searchResult_searchIcon {
                 position: relative;
@@ -141,6 +142,15 @@
                         }
                     }
                 }
+            }
+        }
+        .nothing {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            svg {
+                animation: spin 1000ms linear infinite;
             }
         }
     }
