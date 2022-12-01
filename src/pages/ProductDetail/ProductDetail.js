@@ -105,6 +105,7 @@ function ProductDetail() {
                                     </div>
                                     <span>add to cart</span>
                                 </button>
+                                {/* <button className={styles.add}>Add to cart</button> */}
                                 <button
                                     onClick={() => {
                                         setChangeLove(!changeLove);

@@ -44,10 +44,9 @@ function Bill({ checkout }) {
                 {checkout ? (
                     <Link
                         className={styles.payment_btn}
-                        to={config.home}
+                        to={config.thankyou}
                         onClick={() => {
                             dispatch(removeAllProducts());
-                            alert('Your order was successful');
                         }}
                     >
                         Accept payment

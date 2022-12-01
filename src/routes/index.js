@@ -11,6 +11,7 @@ import Home from '~/pages/Home';
 import Products from '~/pages/Products';
 import Services from '~/pages/Services';
 import SignIn from '~/pages/SignIn';
+import ThankYou from '~/components/ThankYou';
 import routesConfig from '~/config/routes';
 
 // import ProductDetail from '~/pages/ProductDetail';
@@ -26,6 +27,7 @@ const publicRoutes = [
     { path: routesConfig.cart, component: Cart, banner: 'shopping cart' },
     { path: routesConfig.signIn, component: SignIn, layout: SignInLayout },
     { path: routesConfig.checkout, component: Checkout, banner: 'checkout' },
+    { path: routesConfig.thankyou, component: ThankYou, layout: SignInLayout },
 ];
 
 const privateRoutes = [];

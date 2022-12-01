@@ -31,6 +31,7 @@ const Images = {
     catus: require('../images/garden-geb2cec4f5_1920.jpg'),
     funiture: require('../images/pexels-alexander-schimpf-1824189.jpg'),
     girl_florist: require('../images/girl-florist.jpg'),
+    Thank: require('../images/Thank.png'),
 };
 
 export default Images;

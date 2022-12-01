@@ -13,7 +13,6 @@ function Products() {
     useEffect(() => {
         // handleItems();
         httpRequest.get('/product/products').then((res) => {
-            // console.log('🚀 ~ file: Products.js ~ line 15 ~ httpRequest.get ~ res', res);
             setItems(res.data);
         });
     }, []);

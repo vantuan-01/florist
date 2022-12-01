@@ -12,6 +12,7 @@ const routes = {
     contact: '/contact',
     cart: '/cart',
     checkout: '/checkout',
+    thankyou: '/thankyou',
 };
 
 export default routes;

@@ -1,7 +1,20 @@
+import { selectOrderList, selectTotalPrice } from '~/reducers/Cart';
+
 import Bill from '~/components/Bill';
 import styles from './Checkout.module.scss';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Checkout() {
+    const cartStatus = useSelector(selectOrderList);
+    const totalPriceStatus = useSelector(selectTotalPrice);
+    const navigation = useNavigate();
+    useEffect(() => {
+        if (cartStatus.length === 0 && totalPriceStatus === 0) {
+            navigation('/');
+        }
+    });
     return (
         <div className={styles.checkout}>
             <div className={styles.checkout_col_8}>
