@@ -31,10 +31,10 @@ $green-lighter: #7cd392;
     }
 
     &::before {
-        width: 18rem;
-        height: 18rem;
+        width: 15rem;
+        height: 15rem;
         border-radius: 100%;
-        // background-color: #f2f7ff;
+        background-color: #f2f7ff;
         left: 50%;
         right: 50%;
         transform: translate3d(-50%, -50%, 0);

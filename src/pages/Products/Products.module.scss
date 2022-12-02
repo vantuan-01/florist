@@ -30,30 +30,32 @@
     padding: 0 1.5rem;
     list-style: none;
     margin-bottom: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     overflow: hidden;
-    img {
-        width: 100%;
-        user-select: none;
-    }
-    &:hover .menu_link_widget {
-        opacity: 1;
-        transform: translateY(-10rem);
-    }
-    .menu_link_widget {
-        opacity: 0;
+    a {
         display: flex;
-        width: 100%;
-        position: absolute;
-        bottom: 0rem;
-        gap: 2rem;
         justify-content: center;
         align-items: center;
-        z-index: 0;
-        transition: all 200ms linear;
+        flex-direction: column;
+        img {
+            width: 100%;
+            user-select: none;
+        }
+        &:hover .menu_link_widget {
+            opacity: 1;
+            transform: translateY(-10rem);
+        }
+        .menu_link_widget {
+            opacity: 0;
+            display: flex;
+            width: 100%;
+            position: absolute;
+            bottom: 0rem;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+            transition: all 200ms linear;
+        }
     }
 }
 
