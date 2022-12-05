@@ -36,25 +36,29 @@ function ListItem({ items }) {
                     productList.map((item, index) => {
                         return (
                             <li className={styles.item} key={index}>
-                                <Link to={`/products/${item.id}`}>
+                                <div className={styles.block_img}>
+                                    {/* <Link to={`/products/${item.id}`}> */}
                                     <img src={item.imageUrl} alt={item.imageUrl} />
-                                </Link>
-                                <div className={styles.menu_link_widget}>
-                                    <Widget icon={faMagnifyingGlass} id={item.id} />
-                                    <Widget icon={faCartShopping} addOne={item} />
-                                    <Widget icon={faHeart} />
+                                    {/* </Link> */}
+                                    <div className={styles.menu_link_widget}>
+                                        <Widget icon={faMagnifyingGlass} id={item.id} />
+                                        <Widget icon={faCartShopping} addOne={item} />
+                                        <Widget icon={faHeart} />
+                                    </div>
                                 </div>
-                                <h6>
-                                    <Link to={`/products/${item.id}`} className={styles.item_name}>
-                                        {item.name}
-                                    </Link>
-                                </h6>
-                                <p>
-                                    <Link
-                                        to={`/products/${item.id}`}
-                                        className={styles.item_price}
-                                    >{`$ ${item.price}.00`}</Link>
-                                </p>
+                                <div className={styles.block_content}>
+                                    <h6>
+                                        <Link to={`/products/${item.id}`} className={styles.item_name}>
+                                            {item.name}
+                                        </Link>
+                                    </h6>
+                                    <p>
+                                        <Link
+                                            to={`/products/${item.id}`}
+                                            className={styles.item_price}
+                                        >{`$ ${item.price}.00`}</Link>
+                                    </p>
+                                </div>
                             </li>
                         );
                     })}
