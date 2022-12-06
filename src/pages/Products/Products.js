@@ -4,28 +4,26 @@ import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import ListItems from './ListItems';
+import Pagination from '~/components/Pagination';
 import ProductDetail from '~/pages/ProductDetail';
 import styles from './Products.module.scss';
 
 function Products() {
     const [items, setItems] = useState();
-
+    const [pagination, setPagination] = useState({ _page: 1, _limit: 10, _totalRows: 1 });
+    const [filter, setFilter] = useState({ _page: 1, _limit: 10 });
     useEffect(() => {
-        // handleItems();
-        httpRequest.get('/product/products').then((res) => {
-            setItems(res.data);
+        httpRequest.get(`/product/products?_page=${filter._page}&_limit=${filter._limit}`).then((res) => {
+            setItems(res.data.data);
+            setPagination(res.data.pagination);
         });
-    }, []);
-
-    // const handleItems = async () => {
-    //     httpRequest.get('/product/products').then((res) => {
-    //         console.log('🚀 ~ file: Products.js ~ line 15 ~ httpRequest.get ~ res', res);
-    //         setItems(res.data);
-    //     });
-    //     // const res = await httpRequest.get('/product/products');
-    //     // setItems(res.data);
-    //     // console.log('item', items);
-    // };
+    }, [filter]);
+    const handlePageChange = (newPage) => {
+        setFilter({
+            ...pagination,
+            _page: newPage,
+        });
+    };
 
     return (
         <div className={styles.products}>
@@ -36,6 +34,7 @@ function Products() {
                         <Route path="/" element={<ListItems items={items} />} />
                     </Routes>
                 </div>
+                <Pagination pagination={pagination} handlePageChange={handlePageChange} />
             </div>
         </div>
     );
