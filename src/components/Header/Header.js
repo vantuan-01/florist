@@ -44,9 +44,9 @@ function Header() {
                 document.body.style.overflow = '';
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mouseup', handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('mouseup', handleClickOutside);
         };
     }, [ref]);
 
@@ -55,7 +55,7 @@ function Header() {
         document.body.style.overflow = '';
     };
     const handleOpen = () => {
-        setOpenPanel(true);
+        setOpenPanel(!openPanel);
         document.body.style.overflow = 'hidden';
     };
 
