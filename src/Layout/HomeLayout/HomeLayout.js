@@ -7,11 +7,11 @@ const Footer = lazy(() => import('~/components/Footer'));
 
 function HomeLayout({ children }) {
     return (
-        <>
+        <div className={styles.wrapper}>
             <Header />
             <div className={styles.container_home}>{children}</div>
             <Footer />
-        </>
+        </div>
     );
 }
 

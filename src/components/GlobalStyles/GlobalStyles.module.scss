@@ -90,37 +90,25 @@ html *::-webkit-scrollbar-track {
     width: 100%;
 }
 
-// @media only screen and (min-width: 145rem) {
-//     .container {
-//         max-width: 141rem;
-//     }
-// }
-
-/* Large screens ----------- */
-// @media only screen and (min-width: 182.4rem) {
-//     .container,
-//     .container_home {
-//         max-width: 141rem;
-//     }
-// }
-
-/* Desktops and laptops ----------- */
-@media only screen and (min-width: 122.4rem) {
-    .container {
-        max-width: 141rem;
+// ---------------- Break Points -----------------
+// PC
+@media (min-width: 1224px) {
+    .container,
+    .container_home {
+        width: 155rem;
     }
 }
-
-/* iPads (portrait) ----------- */
-@media only screen and (min-device-width: 76.8rem) and (max-device-width: 102.4rem) and (orientation: portrait) {
-    .container {
-        max-width: 72rem;
+// Tablet
+@media (min-width: 768px) and (max-width: 1224px) {
+    .container,
+    .container_home {
+        width: 100rem;
     }
 }
-
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width: 32rem) {
-    .container {
-        max-width: 54rem;
+// Mobile
+@media (max-width: 768px) {
+    .container,
+    .container_home {
+        width: 50rem;
     }
 }
