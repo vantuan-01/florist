@@ -213,10 +213,8 @@
 // Tablet
 @media (min-width: 768px) and (max-width: 1224px) {
     .header {
-        padding: 0rem;
+        padding: 0 2rem;
         .container {
-            width: 110rem;
-            background-color: #fff;
             .options_6 {
                 margin-right: 3rem;
                 ul {
@@ -243,9 +241,12 @@
 @media (max-width: 768px) {
     .header {
         padding: 0rem;
-        height: 6rem;
+        height: 5rem;
         .container {
-            width: 40rem;
+            width: 100%;
+            .logo {
+                width: 10rem;
+            }
         }
     }
 }

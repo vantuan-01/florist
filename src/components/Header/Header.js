@@ -101,7 +101,7 @@ function Header() {
                     </div>
                     <div className={styles.col_10}>
                         <div className={styles.options}>
-                            <div className={styles.options_6}>
+                            {/* <div className={styles.options_6}>
                                 <ul>
                                     {list &&
                                         list.map((item, index) => (
@@ -151,7 +151,9 @@ function Header() {
                                         log in
                                     </Link>
                                 )}
-                            </div>
+                            </div> */}
+
+                            <button>123</button>
                         </div>
                     </div>
                 </div>

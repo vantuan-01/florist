@@ -102,13 +102,13 @@ html *::-webkit-scrollbar-track {
 @media (min-width: 768px) and (max-width: 1224px) {
     .container,
     .container_home {
-        width: 100rem;
+        width: 100%;
     }
 }
 // Mobile
 @media (max-width: 768px) {
     .container,
     .container_home {
-        width: 50rem;
+        width: 100%;
     }
 }
