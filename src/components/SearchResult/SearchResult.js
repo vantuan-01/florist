@@ -24,6 +24,9 @@ function SearchResult({ openPanel, handleClose }, ref) {
     useEffect(() => {
         if (openPanel) {
             inputRef.current.focus();
+        } else if (!openPanel) {
+            setSearchValue('');
+            setListProduct([]);
         }
     }, [openPanel]);
 
@@ -63,6 +66,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
 
     return (
         <Portal>
+            <div className={clsx(styles.layer, { [styles.layer_slide]: !openPanel })}></div>
             <div ref={ref} className={clsx(styles.searchResult, { [styles.searchResult_slide]: !openPanel })}>
                 <div className={styles.wrapper}>
                     <div className={styles.searchResult_inner}>

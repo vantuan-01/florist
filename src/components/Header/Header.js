@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { useEffect, useState } from 'react';
 
@@ -14,17 +14,18 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 function Header() {
+    const ref = useRef();
     const [logged, setLogged] = useState(true);
     const [openPanel, setOpenPanel] = useState(false);
-    const ref = useRef();
     const [resize, setReSize] = useState('');
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
+    const [scale, setScale] = useState(false);
 
     useEffect(() => {
         const listenToScroll = () => {
-            const limitHeight = 150;
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const limitHeight = 120;
+            const winScroll = window.pageYOffset || document.documentElement.scrollTop;
             if (winScroll > limitHeight) {
                 setReSize('header_onScroll');
             } else if (winScroll <= limitHeight) {
@@ -32,10 +33,7 @@ function Header() {
             }
         };
         window.addEventListener('scroll', listenToScroll);
-        return () => {
-            window.removeEventListener('scroll', listenToScroll);
-        };
-    });
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -49,6 +47,21 @@ function Header() {
             document.removeEventListener('mouseup', handleClickOutside);
         };
     }, [ref]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width <= 1229) {
+                setScale(true);
+            } else if (width > 1229) {
+                setScale(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const handleClose = (value) => {
         setOpenPanel(value);
@@ -95,32 +108,39 @@ function Header() {
             >
                 <div className={styles.container}>
                     <div className={styles.col_2}>
+                        {scale && (
+                            <button>
+                                <FontAwesomeIcon icon={faBars} size="2x" />
+                            </button>
+                        )}
                         <Link to={config.home}>
                             <img className={styles.logo} src={Images.logo} alt="logo" />
                         </Link>
                     </div>
                     <div className={styles.col_10}>
                         <div className={styles.options}>
-                            {/* <div className={styles.options_6}>
-                                <ul>
-                                    {list &&
-                                        list.map((item, index) => (
-                                            <li key={index}>
-                                                <NavLink
-                                                    end
-                                                    className={(nav) =>
-                                                        clsx(styles.navItem, {
-                                                            [styles.active]: nav.isActive,
-                                                        })
-                                                    }
-                                                    to={item.config}
-                                                >
-                                                    {item.name}
-                                                </NavLink>
-                                            </li>
-                                        ))}
-                                </ul>
-                            </div>
+                            {!scale ? (
+                                <div className={styles.options_6}>
+                                    <ul>
+                                        {list &&
+                                            list.map((item, index) => (
+                                                <li key={index}>
+                                                    <NavLink
+                                                        end
+                                                        className={(nav) =>
+                                                            clsx(styles.navItem, {
+                                                                [styles.active]: nav.isActive,
+                                                            })
+                                                        }
+                                                        to={item.config}
+                                                    >
+                                                        {item.name}
+                                                    </NavLink>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </div>
+                            ) : null}
                             <div className={styles.options_3}>
                                 {logged ? (
                                     <ul>
@@ -151,9 +171,7 @@ function Header() {
                                         log in
                                     </Link>
                                 )}
-                            </div> */}
-
-                            <button>123</button>
+                            </div>
                         </div>
                     </div>
                 </div>

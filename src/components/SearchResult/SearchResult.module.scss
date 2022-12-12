@@ -7,6 +7,20 @@
     }
 }
 
+.layer {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 100%;
+    background-color: rgb(225 225 225/ 50%);
+    z-index: 10;
+}
+.layer_slide {
+    display: none;
+}
+
 .searchResult {
     position: fixed;
     top: 0;

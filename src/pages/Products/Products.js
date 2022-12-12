@@ -1,6 +1,6 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import ListItems from './ListItems';
