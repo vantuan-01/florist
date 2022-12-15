@@ -6,9 +6,11 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
 import SearchResult from '../SearchResult';
+import Sidebar from '../Sidebar';
 import clsx from 'clsx';
 import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import navlink from '~/config/navlink';
 import styles from './Header.module.scss';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
@@ -72,33 +74,6 @@ function Header() {
         document.body.style.overflow = 'hidden';
     };
 
-    const list = [
-        {
-            name: 'home',
-            config: config.home,
-        },
-        {
-            name: 'about',
-            config: config.about,
-        },
-        {
-            name: 'services',
-            config: config.services,
-        },
-        {
-            name: 'shop',
-            config: config.product,
-        },
-        {
-            name: 'blog',
-            config: config.blog,
-        },
-        {
-            name: 'contact',
-            config: config.contact,
-        },
-    ];
-
     return (
         <>
             <div
@@ -122,8 +97,8 @@ function Header() {
                             {!scale ? (
                                 <div className={styles.options_6}>
                                     <ul>
-                                        {list &&
-                                            list.map((item, index) => (
+                                        {navlink &&
+                                            navlink.map((item, index) => (
                                                 <li key={index}>
                                                     <NavLink
                                                         end
@@ -178,6 +153,7 @@ function Header() {
             </div>
 
             <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} />
+            <Sidebar />
         </>
     );
 }

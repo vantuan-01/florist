@@ -37,7 +37,6 @@ const productSlide = createSlice({
                     return item.name.includes(value) || item.category.includes(value);
                 });
                 state.listSearched = filterItem;
-                console.log(state.listSearched);
             } else if (!value) {
                 state.listSearched = [];
             }

@@ -34,7 +34,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
         httpRequest.get('/product/products').then((res) => {
             setListProduct(res.data);
         });
-    });
+    }, []);
 
     useEffect(() => {
         if (searchValue) {
@@ -65,8 +65,8 @@ function SearchResult({ openPanel, handleClose }, ref) {
     };
 
     return (
-        <Portal>
-            <div className={clsx(styles.layer, { [styles.layer_slide]: !openPanel })}></div>
+        <Portal id="search-result-id">
+            <div className={clsx(styles.modal, { [styles.modal_slide]: !openPanel })}></div>
             <div ref={ref} className={clsx(styles.searchResult, { [styles.searchResult_slide]: !openPanel })}>
                 <div className={styles.wrapper}>
                     <div className={styles.searchResult_inner}>

@@ -7,7 +7,7 @@
     }
 }
 
-.layer {
+.modal {
     display: block;
     position: absolute;
     top: 0;
@@ -17,7 +17,7 @@
     background-color: rgb(225 225 225/ 50%);
     z-index: 10;
 }
-.layer_slide {
+.modal_slide {
     display: none;
 }
 
