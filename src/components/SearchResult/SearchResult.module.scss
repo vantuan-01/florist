@@ -1,3 +1,5 @@
+// Side bar search web
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -31,7 +33,7 @@
     z-index: 10;
     box-shadow: -0.5rem 0 2rem rgb(255 173 203 / 70%);
     transition: width 300ms ease;
-    .wrapper {
+    .wrapper_search {
         height: 100%;
         overflow-y: scroll;
         padding: 2rem 2rem 1rem;
@@ -165,6 +167,96 @@
             justify-content: center;
             svg {
                 animation: spin 1000ms linear infinite;
+            }
+        }
+    }
+}
+
+// Sidebar header mobile
+@keyframes dropdownX {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+.wrapper {
+    font-family: 'Quicksand', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50rem;
+    height: 100vh;
+    padding: 2rem 0;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 0.5rem 0 2rem rgb(255 173 203 / 70%);
+    transition: width 300ms ease;
+}
+.wrapper_slide {
+    width: 0;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    .header_slide {
+        .header_backbtn,
+        .header_logo {
+            display: none;
+        }
+    }
+    .header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 0.2rem solid #e1e1e1;
+        padding-bottom: 1rem;
+        .header_backbtn {
+            position: absolute;
+            top: 0;
+            left: 5%;
+            border: none;
+            background-color: transparent;
+        }
+        .header_logo {
+            object-fit: cover;
+        }
+    }
+    .body {
+        .ul_slide {
+            display: block;
+            animation: dropdownX 350ms ease-in-out forwards;
+            transform-origin: left center;
+        }
+        ul {
+            display: none;
+            width: 100%;
+            background-color: #fff;
+            z-index: 1;
+            li {
+                width: 100%;
+                border: none;
+                outline: none;
+                font-weight: 700;
+                .navItem {
+                    display: flex;
+                    padding: 2rem 1.5rem;
+                    width: 100%;
+                    font-size: 2.5rem;
+                    text-transform: capitalize;
+                    background-color: #fff;
+                    color: var(--pink);
+                    letter-spacing: 0.1rem;
+                    border: none;
+                    outline: none;
+                }
+                .active {
+                    background-color: var(--pink);
+                    color: #fff;
+                }
             }
         }
     }

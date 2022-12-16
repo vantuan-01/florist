@@ -17,11 +17,11 @@ import { useSelector } from 'react-redux';
 
 function Header() {
     const ref = useRef();
+    const totalItems = useSelector(selectTotalQty);
+    const totalPrices = useSelector(selectTotalPrice);
     const [logged, setLogged] = useState(true);
     const [openPanel, setOpenPanel] = useState(false);
     const [resize, setReSize] = useState('');
-    const totalItems = useSelector(selectTotalQty);
-    const totalPrices = useSelector(selectTotalPrice);
     const [scale, setScale] = useState(false);
 
     useEffect(() => {
@@ -55,14 +55,13 @@ function Header() {
             const width = window.innerWidth;
             if (width <= 1229) {
                 setScale(true);
+                setOpenPanel(false);
             } else if (width > 1229) {
                 setScale(false);
+                setOpenPanel(false);
             }
         };
         window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
     }, []);
 
     const handleClose = (value) => {
@@ -84,7 +83,7 @@ function Header() {
                 <div className={styles.container}>
                     <div className={styles.col_2}>
                         {scale && (
-                            <button>
+                            <button onClick={handleOpen}>
                                 <FontAwesomeIcon icon={faBars} size="2x" />
                             </button>
                         )}
@@ -120,9 +119,13 @@ function Header() {
                                 {logged ? (
                                     <ul>
                                         <li>
-                                            <button onClick={handleOpen}>
-                                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                            </button>
+                                            {!scale ? (
+                                                <button onClick={handleOpen}>
+                                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                                </button>
+                                            ) : (
+                                                <p>hahaha</p>
+                                            )}
                                         </li>
                                         <li>
                                             <Link>
@@ -152,8 +155,7 @@ function Header() {
                 </div>
             </div>
 
-            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} />
-            <Sidebar />
+            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} scale={scale} />
         </>
     );
 }
