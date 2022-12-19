@@ -38,6 +38,10 @@
         opacity: 1;
         transform: translateY(-20rem);
     }
+    &:hover .item_name,
+    &:hover .item_price {
+        color: var(--pink);
+    }
 
     .block_img {
         position: relative;
@@ -86,14 +90,41 @@
             text-overflow: ellipsis;
             overflow: hidden;
             transition: all 100ms linear;
-            &:hover {
-                color: var(--pink);
-            }
         }
         .item_price {
-            font: size 1.8rem;
+            font-size: 1.8rem;
             font-weight: 600;
             text-align: center;
+        }
+    }
+}
+
+// ---------------- Break Points -----------------
+// Tablet
+@media (min-width: 768px) and (max-width: 1367px) {
+    .list_items {
+        justify-content: center;
+        .item {
+            max-width: 33.3333%;
+            height: 35rem;
+            margin-bottom: 2rem;
+            &:hover .menu_link_widget {
+                opacity: none;
+                transform: none;
+            }
+            .block_img {
+                .menu_link_widget {
+                    bottom: 2rem;
+                }
+            }
+            .block_content {
+                .item_name {
+                    font-size: 1.6rem;
+                }
+                .item_price {
+                    color: var(--pink);
+                }
+            }
         }
     }
 }

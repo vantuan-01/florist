@@ -35,6 +35,9 @@ function Header() {
             }
         };
         window.addEventListener('scroll', listenToScroll);
+        return () => {
+            document.removeEventListener('scroll', listenToScroll);
+        };
     }, []);
 
     useEffect(() => {

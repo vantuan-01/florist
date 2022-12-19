@@ -5,18 +5,10 @@ import { Link } from 'react-router-dom';
 import SelectSort from '~/components/SelectSort';
 import Widget from '~/components/Widget';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { selectSorted } from '~/reducers/Products';
 import styles from './Products.module.scss';
-import { useSelector } from 'react-redux';
 
 function ListItem({ items }) {
-    const listItemSorted = useSelector(selectSorted);
     const [productList, setProductList] = useState();
-    useEffect(() => {
-        if (listItemSorted) {
-            setProductList(listItemSorted);
-        }
-    }, [listItemSorted]);
 
     useEffect(() => {
         if (items) {

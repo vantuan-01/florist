@@ -59,7 +59,7 @@ function SelectSort({ items }) {
                     </li>
                     <li
                         onClick={() => {
-                            dispatch(sortName({ optionNum: 3, items }));
+                            dispatch(sortName({ optionNum: 1, items }));
                         }}
                         className={styles.custom_option}
                     >
@@ -67,7 +67,7 @@ function SelectSort({ items }) {
                     </li>
                     <li
                         onClick={() => {
-                            dispatch(sortName({ optionNum: 4, items }));
+                            dispatch(sortName({ optionNum: 2, items }));
                         }}
                         className={styles.custom_option}
                     >
