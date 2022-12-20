@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const productSlide = createSlice({
-    name: 'productSlide',
+const productSlice = createSlice({
+    name: 'productSlice',
     initialState: {
         sortPath: {
             _sort: '',
@@ -67,8 +67,8 @@ const productSlide = createSlice({
     },
 });
 
-export const { sortPrice, sortName, searchName } = productSlide.actions;
-export const productReducer = productSlide.reducer;
+export const { sortPrice, sortName, searchName } = productSlice.actions;
+export const productReducer = productSlice.reducer;
 export const selectSortPath = (state) => state.productReducer.sortPath;
 export const selectSortOption = (state) => state.productReducer.sortOption;
 export const selectSearch = (state) => state.productReducer.listSearched;

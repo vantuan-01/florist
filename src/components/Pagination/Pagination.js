@@ -1,27 +1,36 @@
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { selectPagination, setFilter } from '~/reducers/Pagination';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Pagination.module.scss';
 
-function Pagination({ pagination, handlePageChange }) {
+function Pagination() {
+    const dispatch = useDispatch();
+    const pagination = useSelector(selectPagination);
+
     const pageNumber = [];
     const totalPages = Math.ceil(pagination._totalRows / pagination._limit);
 
-    const onPageChange = (newPage) => {
-        if (handlePageChange) {
-            handlePageChange(newPage);
-        }
-    };
     for (let i = 1; i <= totalPages; i++) {
         pageNumber.push(i);
     }
+
+    const handlePageChange = (newPage) => {
+        dispatch(
+            setFilter({
+                ...pagination,
+                _page: newPage,
+            }),
+        );
+    };
 
     return (
         <div className={styles.wrapper}>
             <button
                 className={styles.change_page}
                 disabled={pagination._page <= 1}
-                onClick={() => onPageChange(pagination._page - 1)}
+                onClick={() => handlePageChange(pagination._page - 1)}
             >
                 <FontAwesomeIcon icon={faChevronLeft} />
             </button>
@@ -30,7 +39,7 @@ function Pagination({ pagination, handlePageChange }) {
                     className={styles.page}
                     key={key}
                     disabled={pagination._page === num}
-                    onClick={() => onPageChange(num)}
+                    onClick={() => handlePageChange(num)}
                 >
                     {num}
                 </button>
@@ -38,7 +47,7 @@ function Pagination({ pagination, handlePageChange }) {
             <button
                 className={styles.change_page}
                 disabled={pagination._page === totalPages}
-                onClick={() => onPageChange(pagination._page + 1)}
+                onClick={() => handlePageChange(pagination._page + 1)}
             >
                 <FontAwesomeIcon icon={faChevronRight} />
             </button>

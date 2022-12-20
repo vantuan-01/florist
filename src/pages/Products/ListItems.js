@@ -2,6 +2,7 @@ import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-i
 import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import Pagination from '~/components/Pagination';
 import SelectSort from '~/components/SelectSort';
 import Widget from '~/components/Widget';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
@@ -55,6 +56,7 @@ function ListItem({ items }) {
                         );
                     })}
             </ul>
+            <Pagination />
         </>
     );
 }
