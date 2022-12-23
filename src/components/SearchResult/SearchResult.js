@@ -109,7 +109,10 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
                                                 <li key={index} className={styles.searchResult_item}>
                                                     <Link
                                                         to={`${config.product}/${item.id}`}
-                                                        onClick={() => (document.body.style.overflow = '')}
+                                                        onClick={() => {
+                                                            document.body.style.overflow = '';
+                                                            handleClose(!openPanel);
+                                                        }}
                                                     >
                                                         <img src={item.imageUrl} alt="searchResult_item" />
                                                         <div className={styles.searchResult_item_content}>

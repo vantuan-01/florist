@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
 import SearchResult from '../SearchResult';
-import Sidebar from '../Sidebar';
 import clsx from 'clsx';
 import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
@@ -19,7 +18,7 @@ function Header() {
     const ref = useRef();
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [logged, setLogged] = useState(true);
+    const [logged, setLogged] = useState(false);
     const [openPanel, setOpenPanel] = useState(false);
     const [resize, setReSize] = useState('');
     const [scale, setScale] = useState(false);
