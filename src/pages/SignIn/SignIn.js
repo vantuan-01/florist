@@ -1,4 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { selectLogged, updateStatus } from '~/reducers/Login';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 import Images from '~/assets/images';
@@ -10,12 +12,13 @@ import { useState } from 'react';
 function SignIn() {
     const auth = getAuth(app);
     const [isRegist, setIsRegist] = useState(false);
-    const [isValid, setIsValid] = useState(false);
+    const [isValid, setIsValid] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [firmPassword, setFirmPassword] = useState('');
     const inputRef = useRef();
+    const isLogged = useSelector(selectLogged);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     useEffect(() => {
         inputRef.current.focus();
     }, [isRegist]);
@@ -38,35 +41,42 @@ function SignIn() {
         };
     });
 
+    useEffect(() => {
+        if (isLogged) {
+            navigate('/');
+        }
+    }, []);
+
     const Register = () => {
-        createUserWithEmailAndPassword(auth, email, password, firmPassword)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in
+                // Register
                 const user = userCredential.user;
-                setIsValid(false);
+                setIsValid('');
                 setIsRegist(false);
                 alert('Resgist successful');
                 console.log('Create account successful');
             })
             .catch((error) => {
                 const errorCode = error.code;
-                setIsValid(true);
+                setIsValid(error.code);
                 console.log(`register error: ${errorCode}`);
             });
     };
 
     const SignIn = () => {
-        signInWithEmailAndPassword(auth, email, password, firmPassword)
+        signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                setIsValid(false);
+                // Sign in
+                const user = auth.currentUser.uid;
+                setIsValid('');
                 navigate('/');
+                dispatch(updateStatus(user));
                 console.log('Login successful');
             })
             .catch((error) => {
                 const errorCode = error.code;
-                setIsValid(true);
+                setIsValid(error.code);
                 console.log(`login error: ${errorCode}`);
             });
     };
@@ -75,7 +85,6 @@ function SignIn() {
         setIsRegist(!isRegist);
         setEmail('');
         setPassword('');
-        setFirmPassword('');
     };
 
     return (
@@ -88,7 +97,7 @@ function SignIn() {
                         <img className={styles.login_logo} src={Images.logo} alt="logo" />
                     </div>
                     <div className={styles.body}>
-                        {isValid && <span className={styles.invalid_text}>Invalid user name or password</span>}
+                        {isValid && <span className={styles.invalid_text}>{isValid}</span>}
                         <input
                             ref={inputRef}
                             className={styles.login_input}
@@ -102,14 +111,9 @@ function SignIn() {
                             placeholder="password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {isRegist && (
-                            <input
-                                className={styles.login_input}
-                                type="password"
-                                placeholder="confirm password"
-                                onChange={(e) => setFirmPassword(e.target.value)}
-                            />
-                        )}
+                        {/* {isRegist && (
+                            <input className={styles.login_input} type="password" placeholder="confirm password" />
+                        )} */}
                         {!isRegist ? (
                             <button onClick={SignIn} className={styles.login_btn} type="submit">
                                 log in

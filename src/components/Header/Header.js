@@ -1,6 +1,9 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { selectLogged, updateStatus } from '~/reducers/Login';
 import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,21 +11,21 @@ import Images from '~/assets/images/index';
 import SearchResult from '../SearchResult';
 import clsx from 'clsx';
 import config from '~/config/routes';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { current } from '@reduxjs/toolkit';
 import navlink from '~/config/navlink';
 import styles from './Header.module.scss';
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
 
 function Header() {
     const ref = useRef();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [logged, setLogged] = useState(false);
     const [openPanel, setOpenPanel] = useState(false);
     const [resize, setReSize] = useState('');
     const [scale, setScale] = useState(false);
-
+    const isLogged = useSelector(selectLogged);
     useEffect(() => {
         const listenToScroll = () => {
             const limitHeight = 120;
@@ -66,6 +69,15 @@ function Header() {
         window.addEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        const unSub = onAuthStateChanged(auth, (currentUser) => {
+            dispatch(updateStatus(currentUser.uid));
+        });
+        return () => {
+            unSub();
+        };
+    }, []);
+
     const handleClose = (value) => {
         setOpenPanel(value);
         document.body.style.overflow = '';
@@ -73,6 +85,19 @@ function Header() {
     const handleOpen = () => {
         setOpenPanel(!openPanel);
         document.body.style.overflow = 'hidden';
+    };
+
+    const auth = getAuth();
+    const SignOut = () => {
+        signOut(auth)
+            .then(() => {
+                console.log('logged out');
+                navigate('/signIn');
+                dispatch(updateStatus(''));
+            })
+            .catch((error) => {
+                console.log('logout not worked');
+            });
     };
 
     return (
@@ -118,7 +143,7 @@ function Header() {
                                 </div>
                             ) : null}
                             <div className={styles.options_3}>
-                                {logged ? (
+                                {isLogged ? (
                                     <ul>
                                         <li>
                                             {!scale ? (
@@ -129,12 +154,7 @@ function Header() {
                                                 <p>hahaha</p>
                                             )}
                                         </li>
-                                        <li>
-                                            <Link>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                                <span>(00)</span>
-                                            </Link>
-                                        </li>
+
                                         <li>
                                             <Link to={config.cart}>
                                                 <FontAwesomeIcon icon={faCartShopping} />
@@ -144,6 +164,9 @@ function Header() {
                                                     .00
                                                 </span>
                                             </Link>
+                                        </li>
+                                        <li>
+                                            <button onClick={SignOut}>LogOut</button>
                                         </li>
                                     </ul>
                                 ) : (
