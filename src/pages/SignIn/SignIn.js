@@ -1,10 +1,12 @@
+import app, { db } from '~/utils/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { selectLogged, updateStatus } from '~/reducers/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 import Images from '~/assets/images';
-import app from '~/utils/firebase';
+import { setOrderList } from '~/reducers/Cart';
 import styles from './SignIn.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -42,16 +44,16 @@ function SignIn() {
     });
 
     useEffect(() => {
-        if (isLogged) {
+        if (isLogged.length !== 0) {
             navigate('/');
         }
-    }, []);
+    }, [isLogged]);
 
     const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Register
-                const user = userCredential.user;
+                // const user = userCredential.user;
                 setIsValid('');
                 setIsRegist(false);
                 alert('Resgist successful');
@@ -66,12 +68,14 @@ function SignIn() {
 
     const SignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 // Sign in
-                const user = auth.currentUser.uid;
+                const userUID = auth.currentUser ? auth.currentUser.uid : null;
+                // const user = { userUID, email };
                 setIsValid('');
                 navigate('/');
-                dispatch(updateStatus(user));
+                dispatch(updateStatus(userUID));
+                getCartHistory();
                 console.log('Login successful');
             })
             .catch((error) => {
@@ -79,6 +83,17 @@ function SignIn() {
                 setIsValid(error.code);
                 console.log(`login error: ${errorCode}`);
             });
+    };
+
+    const getCartHistory = () => {
+        const colRef = collection(db, 'cartDetail');
+        getDocs(colRef).then((snapshot) => {
+            let cart = [];
+            snapshot.docs.forEach((doc) => {
+                cart.push({ ...doc.data() });
+            });
+            dispatch(setOrderList(cart));
+        });
     };
 
     const handleChangeForm = () => {
@@ -102,7 +117,7 @@ function SignIn() {
                             ref={inputRef}
                             className={styles.login_input}
                             type="text"
-                            placeholder="user name"
+                            placeholder="Email"
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <input

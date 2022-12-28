@@ -9,6 +9,9 @@ const cartSlice = createSlice({
         totalQty: JSON.parse(localStorage.getItem('totalQty')) || 0,
     },
     reducers: {
+        setOrderList(state, action) {
+            state.testList = action.payload;
+        },
         addProduct(state, action) {
             let findId = state.orderList.findIndex((item) => item.detailItems.id === action.payload.detailItems.id);
             if (findId === -1) {
@@ -67,7 +70,8 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addProduct, removeProduct, increaseQty, decreaseQty, removeAllProducts } = cartSlice.actions;
+export const { setOrderList, addProduct, removeProduct, increaseQty, decreaseQty, removeAllProducts } =
+    cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
 export const selectOrderList = (state) => state.cartReducer.orderList;
 export const selectQty = (state) => state.cartReducer.presentQty;

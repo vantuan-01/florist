@@ -11,7 +11,6 @@ import Images from '~/assets/images/index';
 import SearchResult from '../SearchResult';
 import clsx from 'clsx';
 import config from '~/config/routes';
-import { current } from '@reduxjs/toolkit';
 import navlink from '~/config/navlink';
 import styles from './Header.module.scss';
 import { useRef } from 'react';
@@ -143,7 +142,7 @@ function Header() {
                                 </div>
                             ) : null}
                             <div className={styles.options_3}>
-                                {isLogged ? (
+                                {isLogged && isLogged.length !== 0 ? (
                                     <ul>
                                         <li>
                                             {!scale ? (

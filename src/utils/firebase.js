@@ -1,13 +1,7 @@
-// Import the functions you need from the SDKs you need
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
-import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // const firebaseConfig = {
 //     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 //     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -19,16 +13,28 @@ import { initializeApp } from 'firebase/app';
 // };
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyAvfedWs6ucRauueppjq8t_MFFlxPS8HAw',
-    authDomain: 'florist-67cb0.firebaseapp.com',
-    projectId: 'florist-67cb0',
-    storageBucket: 'florist-67cb0.appspot.com',
-    messagingSenderId: '895605952905',
-    appId: '1:895605952905:web:517178fb8530d7f27a5158',
-    measurementId: 'G-GNFEEYF4J7',
+    apiKey: 'AIzaSyDt5Y3ibRNehHE2qPD1vG0LZiGtw3zN1w8',
+    authDomain: 'florist-firebase.firebaseapp.com',
+    projectId: 'florist-firebase',
+    storageBucket: 'florist-firebase.appspot.com',
+    messagingSenderId: '209344269249',
+    appId: '1:209344269249:web:dfdad5c825158908377d40',
+    measurementId: 'G-JFVXSJ9CEE',
 };
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 export default app;
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
+
+// const colRef = collection(db, 'cart');
+
+// getDocs(colRef).then((snapshot) => {
+//     let cart = [];
+//     snapshot.docs.forEach((doc) => {
+//         cart.push({ ...doc.data(), id: doc.id });
+//     });
+//     console.log(cart);
+// });

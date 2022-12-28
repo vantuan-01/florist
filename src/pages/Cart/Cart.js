@@ -1,16 +1,29 @@
-import { removeProduct, selectOrderList } from '~/reducers/Cart';
+import React, { useEffect } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import { removeProduct, selectOrderList, selectTotalPrice } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Bill from '~/components/Bill';
 import Empty from '~/components/Empty';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import { db } from '~/utils/firebase';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { selectLogged } from '~/reducers/Login';
 import styles from './Cart.module.scss';
 
 function Cart() {
     const productList = useSelector(selectOrderList);
     const dispatch = useDispatch();
+    const userUID = useSelector(selectLogged);
+    const orderList = useSelector(selectOrderList);
+    const totalPrice = useSelector(selectTotalPrice);
+
+    useEffect(() => {
+        const updateCart = async () => {
+            await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...orderList, totalPrice });
+        };
+        updateCart();
+    }, [orderList]);
 
     return (
         <div className={styles.cart}>

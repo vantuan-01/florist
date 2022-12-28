@@ -1,6 +1,7 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-import { addProduct, selectQty } from '~/reducers/Cart';
+import { addProduct, selectOrderList, selectQty, selectTotalPrice } from '~/reducers/Cart';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -8,24 +9,35 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QtyButton from '~/components/QtyButton';
 import clsx from 'clsx';
+import { db } from '~/utils/firebase';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { selectLogged } from '~/reducers/Login';
 import styles from './ProductDetail.module.scss';
 import { useParams } from 'react-router-dom';
 
 function ProductDetail() {
+    const dispatch = useDispatch();
     const { id } = useParams();
     const [detailItems, setDetailItems] = useState();
     const [description, setDescription] = useState();
     const [changeImg, setChangeImg] = useState();
     const [changeLove, setChangeLove] = useState();
     const presentQty = useSelector(selectQty);
-    const dispatch = useDispatch();
+    const userUID = useSelector(selectLogged);
+    const orderList = useSelector(selectOrderList);
+    const totalPrice = useSelector(selectTotalPrice);
 
     useEffect(() => {
         httpRequest.get(`/product/products/${id}`).then((res) => {
             setDetailItems(res.data);
         });
     }, [id]);
+    useEffect(() => {
+        const updateCart = async () => {
+            await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...orderList, totalPrice, totalPrice });
+        };
+        updateCart();
+    }, [orderList]);
 
     const handleAddToCart = () => {
         const groupDetailItem = { detailItems, presentQty };
