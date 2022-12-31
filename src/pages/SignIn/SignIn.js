@@ -1,12 +1,12 @@
 import app, { db } from '~/utils/firebase';
-import { collection, getDocs } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 import { selectLogged, updateStatus } from '~/reducers/Login';
+import { setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 import Images from '~/assets/images';
-import { setOrderList } from '~/reducers/Cart';
 import styles from './SignIn.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -46,6 +46,7 @@ function SignIn() {
     useEffect(() => {
         if (isLogged.length !== 0) {
             navigate('/');
+            // getCartHistory(isLogged);
         }
     }, [isLogged]);
 
@@ -75,7 +76,7 @@ function SignIn() {
                 setIsValid('');
                 navigate('/');
                 dispatch(updateStatus(userUID));
-                getCartHistory();
+                getCartHistory(userUID);
                 console.log('Login successful');
             })
             .catch((error) => {
@@ -85,15 +86,20 @@ function SignIn() {
             });
     };
 
-    const getCartHistory = () => {
-        const colRef = collection(db, 'cartDetail');
-        getDocs(colRef).then((snapshot) => {
-            let cart = [];
-            snapshot.docs.forEach((doc) => {
-                cart.push({ ...doc.data() });
-            });
-            dispatch(setOrderList(cart));
-        });
+    const getCartHistory = async (userUID) => {
+        const docRef = doc(db, 'cartDetail', `${userUID}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const obList = docSnap.data();
+            const arraylist = Object.values(obList);
+            console.log('Document data:', arraylist);
+            dispatch(setOrderList(arraylist));
+            dispatch(setTotalPrice(obList.totalPrice));
+            dispatch(setTotalQty(obList.totalQty));
+        } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+        }
     };
 
     const handleChangeForm = () => {

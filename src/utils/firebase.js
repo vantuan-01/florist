@@ -28,13 +28,3 @@ export default app;
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-
-// const colRef = collection(db, 'cart');
-
-// getDocs(colRef).then((snapshot) => {
-//     let cart = [];
-//     snapshot.docs.forEach((doc) => {
-//         cart.push({ ...doc.data(), id: doc.id });
-//     });
-//     console.log(cart);
-// });

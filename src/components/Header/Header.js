@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { selectLogged, updateStatus } from '~/reducers/Login';
-import { selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
+import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -93,6 +93,9 @@ function Header() {
                 console.log('logged out');
                 navigate('/signIn');
                 dispatch(updateStatus(''));
+                dispatch(setOrderList([]));
+                dispatch(setTotalPrice(0));
+                dispatch(setTotalQty(0));
             })
             .catch((error) => {
                 console.log('logout not worked');

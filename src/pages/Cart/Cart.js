@@ -15,15 +15,16 @@ function Cart() {
     const productList = useSelector(selectOrderList);
     const dispatch = useDispatch();
     const userUID = useSelector(selectLogged);
-    const orderList = useSelector(selectOrderList);
     const totalPrice = useSelector(selectTotalPrice);
 
-    useEffect(() => {
-        const updateCart = async () => {
-            await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...orderList, totalPrice });
-        };
-        updateCart();
-    }, [orderList]);
+    console.log(productList);
+
+    // const updateCart = async () => {
+    //     await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...productList });
+    // };
+    // useEffect(() => {
+    //     updateCart();
+    // });
 
     return (
         <div className={styles.cart}>
@@ -51,6 +52,7 @@ function Cart() {
                                             productList.length !== 0 &&
                                             productList.map((product, index) => (
                                                 <tr key={index}>
+                                                    {console.log(product)}
                                                     <td>
                                                         <div className={styles.item}>
                                                             <div className={styles.item_img}>

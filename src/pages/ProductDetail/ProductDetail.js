@@ -1,6 +1,6 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-import { addProduct, selectOrderList, selectQty, selectTotalPrice } from '~/reducers/Cart';
+import { addProduct, selectOrderList, selectQty, selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,7 @@ function ProductDetail() {
     const userUID = useSelector(selectLogged);
     const orderList = useSelector(selectOrderList);
     const totalPrice = useSelector(selectTotalPrice);
+    const totalQty = useSelector(selectTotalQty);
 
     useEffect(() => {
         httpRequest.get(`/product/products/${id}`).then((res) => {
@@ -34,7 +35,7 @@ function ProductDetail() {
     }, [id]);
     useEffect(() => {
         const updateCart = async () => {
-            await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...orderList, totalPrice, totalPrice });
+            await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...orderList, totalPrice, totalQty });
         };
         updateCart();
     }, [orderList]);
