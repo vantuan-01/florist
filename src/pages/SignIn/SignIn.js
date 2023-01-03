@@ -76,7 +76,7 @@ function SignIn() {
                 setIsValid('');
                 navigate('/');
                 dispatch(updateStatus(userUID));
-                getCartHistory(userUID);
+                getCartHistory(auth);
                 console.log('Login successful');
             })
             .catch((error) => {
@@ -86,18 +86,17 @@ function SignIn() {
             });
     };
 
-    const getCartHistory = async (userUID) => {
-        const docRef = doc(db, 'cartDetail', `${userUID}`);
+    const getCartHistory = async (auth) => {
+        const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const obList = docSnap.data();
-            const arraylist = Object.values(obList);
-            console.log('Document data:', arraylist);
-            dispatch(setOrderList(arraylist));
+            console.log('Document data:', obList);
+            dispatch(setOrderList(obList.orderList));
             dispatch(setTotalPrice(obList.totalPrice));
             dispatch(setTotalQty(obList.totalQty));
+            console.log(obList.orderList);
         } else {
-            // doc.data() will be undefined in this case
             console.log('No such document!');
         }
     };

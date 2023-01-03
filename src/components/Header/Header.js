@@ -70,7 +70,7 @@ function Header() {
 
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (currentUser) => {
-            dispatch(updateStatus(currentUser.uid));
+            dispatch(updateStatus(currentUser ? currentUser.uid : ''));
         });
         return () => {
             unSub();

@@ -11,11 +11,13 @@ import QtyButton from '~/components/QtyButton';
 import clsx from 'clsx';
 import { db } from '~/utils/firebase';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { getAuth } from 'firebase/auth';
 import { selectLogged } from '~/reducers/Login';
 import styles from './ProductDetail.module.scss';
 import { useParams } from 'react-router-dom';
 
 function ProductDetail() {
+    const auth = getAuth();
     const dispatch = useDispatch();
     const { id } = useParams();
     const [detailItems, setDetailItems] = useState();
@@ -34,10 +36,10 @@ function ProductDetail() {
         });
     }, [id]);
     useEffect(() => {
-        const updateCart = async () => {
-            await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...orderList, totalPrice, totalQty });
+        const updateCart = async (auth) => {
+            await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
         };
-        updateCart();
+        updateCart(auth);
     }, [orderList]);
 
     const handleAddToCart = () => {

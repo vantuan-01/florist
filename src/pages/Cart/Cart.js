@@ -1,6 +1,14 @@
 import React, { useEffect } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
-import { removeProduct, selectOrderList, selectTotalPrice } from '~/reducers/Cart';
+import { deleteDoc, doc, getDoc, onSnapshot, setDoc } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import {
+    removeProduct,
+    selectOrderList,
+    selectTotalPrice,
+    setOrderList,
+    setTotalPrice,
+    setTotalQty,
+} from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Bill from '~/components/Bill';
@@ -12,19 +20,44 @@ import { selectLogged } from '~/reducers/Login';
 import styles from './Cart.module.scss';
 
 function Cart() {
+    const auth = getAuth();
     const productList = useSelector(selectOrderList);
     const dispatch = useDispatch();
     const userUID = useSelector(selectLogged);
     const totalPrice = useSelector(selectTotalPrice);
 
-    console.log(productList);
+    useEffect(() => {
+        const unSub = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                getCartHistory(auth);
+            } else {
+                console.log('no user');
+            }
+        });
+        return () => {
+            unSub();
+        };
+    }, []);
 
-    // const updateCart = async () => {
-    //     await setDoc(doc(db, 'cartDetail', `${userUID}`), { ...productList });
-    // };
-    // useEffect(() => {
-    //     updateCart();
-    // });
+    const handleDelItem = async (id) => {
+        dispatch(removeProduct(id));
+        // const docRef = doc(db, 'cartDetail', `${userUID}`);
+        // await deleteDoc(docRef);
+    };
+
+    const getCartHistory = async (auth) => {
+        const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const obList = docSnap.data();
+            console.log('Document data:', obList);
+            dispatch(setOrderList(obList.orderList));
+            dispatch(setTotalPrice(obList.totalPrice));
+            dispatch(setTotalQty(obList.totalQty));
+        } else {
+            console.log('No such document!');
+        }
+    };
 
     return (
         <div className={styles.cart}>
@@ -52,7 +85,6 @@ function Cart() {
                                             productList.length !== 0 &&
                                             productList.map((product, index) => (
                                                 <tr key={index}>
-                                                    {console.log(product)}
                                                     <td>
                                                         <div className={styles.item}>
                                                             <div className={styles.item_img}>
@@ -78,9 +110,7 @@ function Cart() {
                                                     <td>
                                                         <div className={styles.del_btn}>
                                                             <button
-                                                                onClick={() =>
-                                                                    dispatch(removeProduct(product.detailItems.id))
-                                                                }
+                                                                onClick={() => handleDelItem(product.detailItems.id)}
                                                             >
                                                                 <FontAwesomeIcon icon={faCircleXmark} size="lg" />
                                                             </button>
