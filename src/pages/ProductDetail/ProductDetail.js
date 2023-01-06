@@ -1,7 +1,7 @@
 import * as httpRequest from '~/utils/httpRequest';
 
 import { addProduct, selectOrderList, selectQty, selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
-import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,6 @@ import clsx from 'clsx';
 import { db } from '~/utils/firebase';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { getAuth } from 'firebase/auth';
-import { selectLogged } from '~/reducers/Login';
 import styles from './ProductDetail.module.scss';
 import { useParams } from 'react-router-dom';
 
@@ -25,7 +24,6 @@ function ProductDetail() {
     const [changeImg, setChangeImg] = useState();
     const [changeLove, setChangeLove] = useState();
     const presentQty = useSelector(selectQty);
-    const userUID = useSelector(selectLogged);
     const orderList = useSelector(selectOrderList);
     const totalPrice = useSelector(selectTotalPrice);
     const totalQty = useSelector(selectTotalQty);
@@ -35,12 +33,12 @@ function ProductDetail() {
             setDetailItems(res.data);
         });
     }, [id]);
-    useEffect(() => {
-        const updateCart = async (auth) => {
-            await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
-        };
-        updateCart(auth);
-    }, [orderList]);
+    // useEffect(() => {
+    //     const updateCart = async () => {
+    //         await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
+    //     };
+    //     updateCart();
+    // }, [orderList]);
 
     const handleAddToCart = () => {
         const groupDetailItem = { detailItems, presentQty };

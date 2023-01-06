@@ -1,0 +1,215 @@
+.wrapper {
+    .about {
+        .about_header {
+            height: 25.3rem;
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: 15px;
+            margin-left: 15px;
+            .title {
+                font-family: 'Quicksand', sans-serif;
+                width: 33.33%;
+                span {
+                    display: block;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 4px;
+                    margin-bottom: 0.8rem;
+                    color: var(--pink);
+                }
+                h4 {
+                    font-weight: 500;
+                    font-size: 4.2rem;
+                }
+            }
+            .title_content {
+                font-size: 18px;
+                line-height: 30px;
+                width: 58.33%;
+                margin-left: 8.33%;
+            }
+        }
+        .about_body {
+            height: 56.5rem;
+            display: flex;
+
+            .body_img {
+                width: 58.333%;
+                height: 53.5rem;
+                margin: 0 1.5rem;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .body_content {
+                width: 41.667%;
+                margin-right: 15px;
+                margin-left: 15px;
+                .body_content_text {
+                    background-color: #ffffff;
+                    -webkit-box-shadow: 0 1rem 2.1rem rgb(99 134 137 / 16%);
+                    box-shadow: 0 1rem 2.1rem rgb(99 134 137 / 16%);
+                    padding: 10rem 9rem 10.5rem 7rem;
+                    margin-left: -9.5rem;
+                    margin-top: -7rem;
+                    margin-bottom: 3rem;
+                    span {
+                        display: block;
+                        font-weight: 700;
+                        letter-spacing: 0.4rem;
+                        color: var(--pink);
+                        text-transform: uppercase;
+                        margin-bottom: 0.8rem;
+                    }
+                    h4 {
+                        font-size: 3.8rem;
+                        font-weight: 500;
+                        line-height: 1.4;
+                        margin-bottom: 2.6rem;
+                    }
+                    p {
+                        font-size: 1.8rem;
+                        line-height: 1.8;
+                        margin-bottom: 3rem;
+                    }
+                    a {
+                        font-family: 'Quicksand', sans-serif;
+                        display: inline-block;
+                        padding: 1.4rem 3rem 1.2rem;
+                        font-weight: 700;
+                        letter-spacing: 0.2rem;
+                        text-transform: uppercase;
+                        color: #ffffff;
+                        background-color: var(--pink);
+                        border-radius: 5rem;
+                    }
+                }
+            }
+        }
+    }
+    .services {
+        width: 100%;
+        margin-top: 8rem;
+        .services_header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 8rem;
+            span {
+                font-weight: 700;
+                letter-spacing: 0.4rem;
+                margin-bottom: 0.8rem;
+                text-transform: uppercase;
+                color: var(--pink);
+            }
+            h1 {
+                font-size: 4rem;
+                font-weight: 500;
+                text-transform: capitalize;
+            }
+        }
+        .services_body {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 -1.5rem;
+            .col_4 {
+                padding: 0 1.5rem;
+                max-width: 33.333%;
+                .card {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    border: 0.1rem solid #f5deef;
+                    padding: 3rem 5rem;
+                    .card_img {
+                        position: absolute;
+                        top: -4rem;
+                        padding: 0 2rem;
+                        background-color: #ffffff;
+                    }
+                    h2 {
+                        font-weight: 500;
+                        margin-top: 2.5rem;
+                        text-transform: capitalize;
+                    }
+                    span {
+                        margin-top: 1.5rem;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ---------------- Break Points -----------------
+// Tablet
+@media (min-width: 768px) and (max-width: 1367px) {
+    .wrapper {
+        .about {
+            width: 100%;
+            .about_header {
+                height: auto;
+                margin-bottom: 2rem;
+                .title {
+                    width: 100%;
+                    h4 {
+                        font-size: 4rem;
+                    }
+                }
+                .title_content {
+                    width: 100%;
+                    margin-left: 0;
+                }
+            }
+            .about_body {
+                width: 100%;
+                height: auto;
+                flex-wrap: wrap;
+                .body_img {
+                    width: 100%;
+                    height: 50rem;
+                }
+                .body_content {
+                    width: 100%;
+                    margin-top: 3rem;
+
+                    .body_content_text {
+                        padding: 5rem;
+                        margin-left: 0;
+                        margin-top: 0;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+    .services {
+        .services_header {
+            span {
+            }
+            h1 {
+            }
+        }
+        .services_body {
+            .col_4 {
+                .card {
+                    .card_img {
+                    }
+                    h2 {
+                        text-align: center;
+                    }
+                    span {
+                    }
+                }
+            }
+        }
+    }
+}

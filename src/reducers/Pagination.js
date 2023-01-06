@@ -8,7 +8,6 @@ const paginateSlice = createSlice({
             _limit: 10,
         },
         filter: {},
-        scale: false,
     },
     reducers: {
         setPaginatePath(state, action) {

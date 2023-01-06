@@ -32,6 +32,9 @@ const Images = {
     funiture: require('../images/pexels-alexander-schimpf-1824189.jpg'),
     girl_florist: require('../images/girl-florist.jpg'),
     Thank: require('../images/Thank.png'),
+    services_1: require('../images/services-1.png'),
+    services_2: require('../images/services-2.png'),
+    services_3: require('../images/services-3.png'),
 };
 
 export default Images;

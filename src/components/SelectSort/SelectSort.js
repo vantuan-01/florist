@@ -3,6 +3,7 @@ import { selectSortOption, sortName, sortPrice } from '~/reducers/Products';
 import { useDispatch, useSelector } from 'react-redux';
 
 import clsx from 'clsx';
+import { setFilter } from '~/reducers/Pagination';
 import styles from './SelectSort.module.scss';
 import { useRef } from 'react';
 
@@ -44,6 +45,7 @@ function SelectSort({ items }) {
                     <li
                         onClick={() => {
                             dispatch(sortPrice({ optionNum: 1, items }));
+                            dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
                     >
@@ -52,6 +54,7 @@ function SelectSort({ items }) {
                     <li
                         onClick={() => {
                             dispatch(sortPrice({ optionNum: 2, items }));
+                            dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
                     >
@@ -60,6 +63,7 @@ function SelectSort({ items }) {
                     <li
                         onClick={() => {
                             dispatch(sortName({ optionNum: 1, items }));
+                            dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
                     >
@@ -68,6 +72,7 @@ function SelectSort({ items }) {
                     <li
                         onClick={() => {
                             dispatch(sortName({ optionNum: 2, items }));
+                            dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
                     >

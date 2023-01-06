@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { deleteDoc, doc, getDoc, onSnapshot, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import {
     removeProduct,
     selectOrderList,
     selectTotalPrice,
+    selectTotalQty,
     setOrderList,
     setTotalPrice,
     setTotalQty,
@@ -16,36 +17,38 @@ import Empty from '~/components/Empty';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { db } from '~/utils/firebase';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { selectLogged } from '~/reducers/Login';
 import styles from './Cart.module.scss';
 
 function Cart() {
     const auth = getAuth();
-    const productList = useSelector(selectOrderList);
+    const orderList = useSelector(selectOrderList);
     const dispatch = useDispatch();
-    const userUID = useSelector(selectLogged);
     const totalPrice = useSelector(selectTotalPrice);
+    const totalQty = useSelector(selectTotalQty);
 
-    useEffect(() => {
-        const unSub = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                getCartHistory(auth);
-            } else {
-                console.log('no user');
-            }
-        });
-        return () => {
-            unSub();
-        };
-    }, []);
+    // useEffect(() => {
+    //     const unSub = onAuthStateChanged(auth, (currentUser) => {
+    //         if (currentUser) {
+    //             getCartHistory();
+    //         } else {
+    //             console.log('no user');
+    //         }
+    //     });
+    //     return () => {
+    //         unSub();
+    //     };
+    // }, []);
 
     const handleDelItem = async (id) => {
         dispatch(removeProduct(id));
-        // const docRef = doc(db, 'cartDetail', `${userUID}`);
-        // await deleteDoc(docRef);
+        // await updateCart();
     };
 
-    const getCartHistory = async (auth) => {
+    const updateCart = async () => {
+        await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
+    };
+
+    const getCartHistory = async () => {
         const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -62,7 +65,7 @@ function Cart() {
     return (
         <div className={styles.cart}>
             <div className={styles.container}>
-                {productList && productList.length !== 0 ? (
+                {orderList && orderList.length !== 0 ? (
                     <>
                         <div className={styles.col_8}>
                             <div className={styles.cart_table}>
@@ -81,9 +84,9 @@ function Cart() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {productList &&
-                                            productList.length !== 0 &&
-                                            productList.map((product, index) => (
+                                        {orderList &&
+                                            orderList.length !== 0 &&
+                                            orderList.map((product, index) => (
                                                 <tr key={index}>
                                                     <td>
                                                         <div className={styles.item}>

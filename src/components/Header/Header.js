@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping, faMagnifyingGlass, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { selectLogged, updateStatus } from '~/reducers/Login';
 import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
@@ -168,7 +168,10 @@ function Header() {
                                             </Link>
                                         </li>
                                         <li>
-                                            <button onClick={SignOut}>LogOut</button>
+                                            <button className={styles.logoutnBtn} onClick={SignOut}>
+                                                <FontAwesomeIcon icon={faRightFromBracket} />
+                                                LogOut
+                                            </button>
                                         </li>
                                     </ul>
                                 ) : (

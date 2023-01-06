@@ -76,7 +76,7 @@ function SignIn() {
                 setIsValid('');
                 navigate('/');
                 dispatch(updateStatus(userUID));
-                getCartHistory(auth);
+                // getCartHistory();
                 console.log('Login successful');
             })
             .catch((error) => {
@@ -86,7 +86,7 @@ function SignIn() {
             });
     };
 
-    const getCartHistory = async (auth) => {
+    const getCartHistory = async () => {
         const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
