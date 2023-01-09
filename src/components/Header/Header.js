@@ -1,4 +1,5 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
 import { faBars, faCartShopping, faMagnifyingGlass, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { selectLogged, updateStatus } from '~/reducers/Login';
@@ -11,6 +12,7 @@ import Images from '~/assets/images/index';
 import SearchResult from '../SearchResult';
 import clsx from 'clsx';
 import config from '~/config/routes';
+import { db } from '~/utils/firebase';
 import navlink from '~/config/navlink';
 import styles from './Header.module.scss';
 import { useRef } from 'react';
@@ -66,6 +68,9 @@ function Header() {
             }
         };
         window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     useEffect(() => {
@@ -76,6 +81,33 @@ function Header() {
             unSub();
         };
     }, []);
+
+    useEffect(() => {
+        const unSub = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                getCartHistory();
+            } else {
+                console.log('no user');
+            }
+        });
+        return () => {
+            unSub();
+        };
+    }, []);
+
+    const getCartHistory = async () => {
+        const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const obList = docSnap.data();
+            console.log('Document data:', obList);
+            dispatch(setOrderList(obList.orderList));
+            dispatch(setTotalPrice(obList.totalPrice));
+            dispatch(setTotalQty(obList.totalQty));
+        } else {
+            console.log('No such document!');
+        }
+    };
 
     const handleClose = (value) => {
         setOpenPanel(value);
@@ -153,14 +185,16 @@ function Header() {
                                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                                 </button>
                                             ) : (
-                                                <p>hahaha</p>
+                                                <p>search mobile</p>
                                             )}
                                         </li>
 
                                         <li>
                                             <Link to={config.cart}>
-                                                <FontAwesomeIcon icon={faCartShopping} />
-                                                <span>({totalItems && totalItems !== 0 ? totalItems : 0})</span>
+                                                <div className={styles.total_qty}>
+                                                    <FontAwesomeIcon icon={faCartShopping} />
+                                                    <span>{totalItems && totalItems !== 0 ? totalItems : 0}</span>
+                                                </div>
                                                 <span className={styles.total_price}>
                                                     $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
                                                     .00

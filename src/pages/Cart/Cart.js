@@ -26,18 +26,7 @@ function Cart() {
     const totalPrice = useSelector(selectTotalPrice);
     const totalQty = useSelector(selectTotalQty);
 
-    // useEffect(() => {
-    //     const unSub = onAuthStateChanged(auth, (currentUser) => {
-    //         if (currentUser) {
-    //             getCartHistory();
-    //         } else {
-    //             console.log('no user');
-    //         }
-    //     });
-    //     return () => {
-    //         unSub();
-    //     };
-    // }, []);
+   
 
     const handleDelItem = async (id) => {
         dispatch(removeProduct(id));
@@ -48,19 +37,7 @@ function Cart() {
         await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
     };
 
-    const getCartHistory = async () => {
-        const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const obList = docSnap.data();
-            console.log('Document data:', obList);
-            dispatch(setOrderList(obList.orderList));
-            dispatch(setTotalPrice(obList.totalPrice));
-            dispatch(setTotalQty(obList.totalQty));
-        } else {
-            console.log('No such document!');
-        }
-    };
+  
 
     return (
         <div className={styles.cart}>

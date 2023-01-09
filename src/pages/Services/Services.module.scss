@@ -1,0 +1,149 @@
+.wrapper {
+    display: flex;
+    margin: 0 -1.5rem;
+    .col_4 {
+        width: 33.333%;
+        margin: 0 1.5rem;
+        .service_cards {
+            .card {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                border: 1px solid #f5deef;
+                margin-bottom: 8rem;
+                padding: 3rem 5rem;
+                .card_img {
+                    position: absolute;
+                    top: -4rem;
+                    background-color: #fff;
+                    padding: 0 1rem;
+                }
+                h2 {
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    margin-top: 2.5rem;
+                }
+                span {
+                    text-align: center;
+                    margin-top: 2.5rem;
+                }
+            }
+        }
+    }
+    .col_8 {
+        width: 66.666%;
+        margin: 0 1.5rem;
+        .service_contents {
+            .video {
+                position: relative;
+                img {
+                    width: 100%;
+                }
+                h2 {
+                    text-transform: capitalize;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    padding: 1rem 3rem 1rem 0;
+                    background-color: #fff;
+                    font-size: 4rem;
+                }
+            }
+            .text {
+                margin-top: 2rem;
+                .price {
+                    font-weight: 700;
+                    color: var(--pink);
+                    margin-bottom: 3rem;
+                }
+                .foreword {
+                    margin-bottom: 2rem;
+                }
+                .sub_content {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0 -1.5rem;
+                    .sub_content_inner {
+                        margin-bottom: 3rem;
+                        width: 50%;
+                        padding: 0 1.5rem;
+                        .sub_content_icon {
+                            float: left;
+                            margin-right: 1rem;
+                            img {
+                            }
+                        }
+                        .sub_content_text {
+                            overflow: hidden;
+                            p {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ---------------- Break Points -----------------
+// Tablet
+@media (min-width: 768px) and (max-width: 1367px) {
+    .wrapper {
+        display: block;
+        .col_4 {
+            width: 100%;
+            margin: 0;
+            .service_cards {
+                .card {
+                    .card_img {
+                    }
+                    h2 {
+                    }
+                    span {
+                    }
+                }
+            }
+        }
+        .col_8 {
+            width: 100%;
+            margin: 0;
+            .service_contents {
+                .video {
+                    img {
+                    }
+                    h2 {
+                    }
+                }
+                .text {
+                    .price {
+                    }
+                    .foreword {
+                    }
+                    .sub_content {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin: 0 -1.5rem;
+                        .sub_content_inner {
+                            margin-bottom: 3rem;
+                            width: 50%;
+                            padding: 0 1.5rem;
+                            .sub_content_icon {
+                                float: left;
+                                margin-right: 1rem;
+                                img {
+                                }
+                            }
+                            .sub_content_text {
+                                overflow: hidden;
+                                p {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

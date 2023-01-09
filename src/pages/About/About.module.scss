@@ -190,23 +190,27 @@
                 }
             }
         }
-    }
-    .services {
-        .services_header {
-            span {
+        .services {
+            .services_header {
+                margin-bottom: 0;
+                span {
+                }
+                h1 {
+                }
             }
-            h1 {
-            }
-        }
-        .services_body {
-            .col_4 {
-                .card {
-                    .card_img {
-                    }
-                    h2 {
-                        text-align: center;
-                    }
-                    span {
+            .services_body {
+                flex-direction: column;
+                .col_4 {
+                    max-width: 100%;
+                    padding: 8rem 0 0;
+                    .card {
+                        .card_img {
+                        }
+                        h2 {
+                            text-align: center;
+                        }
+                        span {
+                        }
                     }
                 }
             }

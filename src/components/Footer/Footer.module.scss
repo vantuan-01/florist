@@ -173,19 +173,10 @@
 }
 
 // ---------------- Break Points -----------------
-// PC
-@media (min-width: 1024px) {
-    .footer {
-        // margin-top: 10rem;
-        .container {
-            width: 155rem;
-        }
-    }
-}
 // Tablet
 @media (min-width: 769px) and (max-width: 1023px) {
     .footer {
-        margin-top: 10rem;
+        margin-top: 0;
         .container {
             width: 80rem;
             .instagram_container {
@@ -253,7 +244,7 @@
 // Mobile
 @media (max-width: 768px) {
     .footer {
-        margin-top: 5rem;
+        margin-top: 0;
         .container {
             width: 100%;
             .instagram_container {

@@ -35,6 +35,8 @@ const Images = {
     services_1: require('../images/services-1.png'),
     services_2: require('../images/services-2.png'),
     services_3: require('../images/services-3.png'),
+    mark_icon: require('../images/mark-icon.png'),
+    services_video: require('../images/services-video.png'),
 };
 
 export default Images;

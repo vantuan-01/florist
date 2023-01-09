@@ -88,6 +88,7 @@
             align-items: center;
             a,
             button {
+                position: relative;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -96,10 +97,21 @@
                 font-size: 2.3rem;
                 font-weight: 500;
                 gap: 1rem;
-                span {
-                    font-size: 1.6rem;
+                .total_qty {
+                    span {
+                        position: absolute;
+                        padding: 0rem 0.6rem;
+                        background-color: var(--pink);
+                        border-radius: 50%;
+                        font-size: 1.3rem;
+                        color: #ffffff;
+                        font-weight: 600;
+                        top: -0.2rem;
+                        left: 1.4rem;
+                    }
                 }
                 .total_price {
+                    font-size: 2rem;
                     color: var(--pink);
                 }
             }
