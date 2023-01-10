@@ -1,95 +1,142 @@
 .cart {
     width: 100%;
-}
-
-.container {
-    display: flex;
-    justify-items: center;
-    align-items: center;
-}
-
-.col_8 {
-    padding: 0 1.5rem;
-    width: 66.67%;
-}
-
-.cart_table {
-    margin-top: -3.5rem;
-    padding-right: 4rem;
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        tr {
-            border-bottom: 0.1rem solid #e1e1e1;
-        }
-        td,
-        th {
-            text-align: left;
-            padding: 3.5rem 0;
-        }
-    }
-}
-
-.item {
-    display: flex;
-    .item_img {
-        img {
-            width: 10rem;
-            height: 10rem;
-        }
-    }
-
-    .item_text {
-        margin-left: 3rem;
+    .container {
         display: flex;
-        flex-direction: column;
-        h4 {
-            margin-top: 1rem;
-            font-size: 2.4rem;
-            text-transform: capitalize;
-            font-weight: 400;
+        justify-items: center;
+        margin: 0 -1.5rem;
+        .col_8 {
+            padding: 0 1.5rem;
+            width: 66.67%;
+            .cart_table {
+                margin-top: -3.5rem;
+                padding-right: 4rem;
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    tr {
+                        border-bottom: 0.1rem solid #e1e1e1;
+                    }
+                    td,
+                    th {
+                        text-align: left;
+                        padding: 3.5rem 0;
+                    }
+                }
+                .item {
+                    display: flex;
+                    .item_img {
+                        img {
+                            width: 10rem;
+                            height: 10rem;
+                        }
+                    }
+
+                    .item_text {
+                        margin-left: 3rem;
+                        display: flex;
+                        flex-direction: column;
+                        h4 {
+                            margin-top: 1rem;
+                            font-size: 2.4rem;
+                            text-transform: capitalize;
+                            font-weight: 400;
+                        }
+                        span {
+                            margin-top: 1rem;
+                            font-size: 2rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .qty_btn {
+                    font-size: 2rem;
+                    font-weight: 500;
+                    width: 12rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .total {
+                    width: 100%;
+                    width: 12rem;
+                    font-size: 2rem;
+                    font-weight: 500;
+                }
+
+                .del_btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        padding: 1rem;
+                        svg {
+                            path {
+                                color: var(--pink);
+                            }
+                        }
+                    }
+                }
+            }
         }
-        span {
-            margin-top: 1rem;
-            font-size: 2rem;
-            font-weight: 500;
+        .col_4 {
+            padding: 0 1.5rem;
+            width: 33.33%;
         }
     }
 }
 
-.qty_btn {
-    font-size: 2rem;
-    font-weight: 500;
-    width: 12rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+// ---------------- Break Points -----------------
+// Tablet
+@media (min-width: 768px) and (max-width: 1367px) {
+    .cart {
+        .container {
+            flex-wrap: wrap;
+            .col_8 {
+                width: 100%;
+                .cart_table {
+                    table {
+                        tr {
+                        }
+                        td,
+                        th {
+                        }
+                    }
+                    .item {
+                        .item_img {
+                            img {
+                            }
+                        }
+                        .item_text {
+                            h4 {
+                                font-size: 2rem;
+                            }
+                            span {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                    .qty_btn {
+                    }
 
-.total {
-    width: 100%;
-    width: 12rem;
-    font-size: 2rem;
-    font-weight: 500;
-}
+                    .total {
+                    }
 
-.del_btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    button {
-        background-color: transparent;
-        border: none;
-        padding: 1rem;
-        svg {
-            path {
-                color: var(--pink);
+                    .del_btn {
+                        button {
+                            svg {
+                                path {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .col_4 {
+                width: 100%;
             }
         }
     }
-}
-
-.col_4 {
-    padding: 0 1.5rem;
-    width: 33.33%;
 }

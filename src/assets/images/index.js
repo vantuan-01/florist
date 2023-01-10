@@ -37,6 +37,15 @@ const Images = {
     services_3: require('../images/services-3.png'),
     mark_icon: require('../images/mark-icon.png'),
     services_video: require('../images/services-video.png'),
+    blog_1: require('../images/blog-1.png'),
+    blog_2: require('../images/blog-2.png'),
+    blog_3: require('../images/blog-3.png'),
+    blog_4: require('../images/blog-4.png'),
+    blog_5: require('../images/blog-5.png'),
+    blog_6: require('../images/blog-6.png'),
+    blog_7: require('../images/blog-7.png'),
+    blog_8: require('../images/blog-8.png'),
+    blog_9: require('../images/blog-9.png'),
 };
 
 export default Images;
