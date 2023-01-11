@@ -2,6 +2,7 @@ import { Fragment, Suspense } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import { DefaultLayout } from '~/Layout';
+import Loading from './components/Loading';
 import ScrollToTop from '~/components/ScrollToTop';
 import { publicRoutes } from '~/routes';
 
@@ -9,7 +10,7 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <Suspense fallback={<h1>Loading...</h1>}>
+                <Suspense fallback={<Loading />}>
                     <ScrollToTop>
                         <Routes>
                             {publicRoutes.map((route, index) => {
@@ -21,6 +22,7 @@ function App() {
                                     Layout = Fragment;
                                 }
                                 const Page = route.component;
+
                                 return (
                                     <Route
                                         key={index}
