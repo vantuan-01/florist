@@ -2,6 +2,7 @@ import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-i
 import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import Loading from '~/components/Loading';
 import Pagination from '~/components/Pagination';
 import SelectSort from '~/components/SelectSort';
 import Widget from '~/components/Widget';
@@ -16,6 +17,11 @@ function ListItem({ items }) {
             setProductList(items);
         }
     }, [items]);
+
+    if (!items) {
+        document.body.style.overflow = 'hidden';
+        return <Loading />;
+    } else document.body.style.overflow = '';
     return (
         <>
             {items && items.length !== 0 && (

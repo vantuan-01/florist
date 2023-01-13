@@ -46,7 +46,6 @@ function SignIn() {
     useEffect(() => {
         if (isLogged.length !== 0) {
             navigate('/');
-            // getCartHistory(isLogged);
         }
     }, [isLogged]);
 
@@ -54,7 +53,6 @@ function SignIn() {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Register
-                // const user = userCredential.user;
                 setIsValid('');
                 setIsRegist(false);
                 alert('Resgist successful');
@@ -72,11 +70,9 @@ function SignIn() {
             .then(() => {
                 // Sign in
                 const userUID = auth.currentUser ? auth.currentUser.uid : null;
-                // const user = { userUID, email };
                 setIsValid('');
                 navigate('/');
                 dispatch(updateStatus(userUID));
-                // getCartHistory();
                 console.log('Login successful');
             })
             .catch((error) => {
@@ -84,21 +80,6 @@ function SignIn() {
                 setIsValid(error.code);
                 console.log(`login error: ${errorCode}`);
             });
-    };
-
-    const getCartHistory = async () => {
-        const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const obList = docSnap.data();
-            console.log('Document data:', obList);
-            dispatch(setOrderList(obList.orderList));
-            dispatch(setTotalPrice(obList.totalPrice));
-            dispatch(setTotalQty(obList.totalQty));
-            console.log(obList.orderList);
-        } else {
-            console.log('No such document!');
-        }
     };
 
     const handleChangeForm = () => {
@@ -131,9 +112,6 @@ function SignIn() {
                             placeholder="password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {/* {isRegist && (
-                            <input className={styles.login_input} type="password" placeholder="confirm password" />
-                        )} */}
                         {!isRegist ? (
                             <button onClick={SignIn} className={styles.login_btn} type="submit">
                                 log in

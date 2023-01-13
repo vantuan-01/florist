@@ -13,6 +13,7 @@ import { db } from '~/utils/firebase';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { getAuth } from 'firebase/auth';
 import styles from './ProductDetail.module.scss';
+import { updateCart } from '~/features';
 import { useParams } from 'react-router-dom';
 
 function ProductDetail() {
@@ -33,12 +34,9 @@ function ProductDetail() {
             setDetailItems(res.data);
         });
     }, [id]);
-    // useEffect(() => {
-    //     const updateCart = async () => {
-    //         await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
-    //     };
-    //     updateCart();
-    // }, [orderList]);
+    useEffect(() => {
+        updateCart(orderList, totalPrice, totalQty);
+    }, [orderList]);
 
     const handleAddToCart = () => {
         const groupDetailItem = { detailItems, presentQty };

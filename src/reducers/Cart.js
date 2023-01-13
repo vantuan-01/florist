@@ -11,7 +11,7 @@ const cartSlice = createSlice({
     reducers: {
         setOrderList(state, action) {
             state.orderList = action.payload;
-            console.log('state:', state.orderList);
+            console.log('orderList in reducer:', state.orderList);
         },
         setTotalPrice(state, action) {
             state.totalPrice = action.payload;
@@ -36,7 +36,6 @@ const cartSlice = createSlice({
             }, 0);
             // localStorage.setItem('totalQty', state.totalQty);
             state.presentQty = 1;
-            console.log('list  add:', state.orderList);
         },
         removeProduct(state, action) {
             let index = state.orderList.findIndex((item) => item.detailItems.id === action.payload);
@@ -50,10 +49,8 @@ const cartSlice = createSlice({
                 return total + item.presentQty;
             }, 0);
             // localStorage.setItem('totalQty', state.totalQty);
-            console.log('list  del:', state.orderList);
         },
         removeAllProducts(state, action) {
-            localStorage.clear();
             state.orderList = [];
             state.totalQty = 0;
             state.totalPrice = 0;

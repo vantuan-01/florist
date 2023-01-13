@@ -67,18 +67,12 @@ function Header() {
 
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (currentUser) => {
-            dispatch(updateStatus(currentUser ? currentUser.uid : ''));
-        });
-        return () => {
-            unSub();
-        };
-    }, []);
-
-    useEffect(() => {
-        const unSub = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 getCartHistory();
+                dispatch(updateStatus(currentUser.uid));
             } else {
+                dispatch(updateStatus(''));
+
                 console.log('no user');
             }
         });
@@ -137,98 +131,98 @@ function Header() {
             });
     };
 
-    if (!totalItems && !totalPrices && isLogged) {
-        document.body.style.overflow = 'hidden';
-        return <Loading />;
-    } else
-        return (
-            <>
-                <div
-                    className={clsx(styles.header, {
-                        [styles.header_onScroll]: resize,
-                    })}
-                >
-                    <div className={styles.container}>
-                        <div className={styles.col_2}>
-                            {scale && (
-                                <button onClick={handleOpen}>
-                                    <FontAwesomeIcon icon={faBars} size="2x" />
-                                </button>
-                            )}
-                            <Link to={config.home}>
-                                <img className={styles.logo} src={Images.logo} alt="logo" />
-                            </Link>
-                        </div>
-                        <div className={styles.col_10}>
-                            <div className={styles.options}>
-                                {!scale ? (
-                                    <div className={styles.options_6}>
-                                        <ul>
-                                            {navlink &&
-                                                navlink.map((item, index) => (
-                                                    <li key={index}>
-                                                        <NavLink
-                                                            end
-                                                            className={(nav) =>
-                                                                clsx(styles.navItem, {
-                                                                    [styles.active]: nav.isActive,
-                                                                })
-                                                            }
-                                                            to={item.config}
-                                                        >
-                                                            {item.name}
-                                                        </NavLink>
-                                                    </li>
-                                                ))}
-                                        </ul>
-                                    </div>
-                                ) : null}
-                                <div className={styles.options_3}>
-                                    {isLogged && isLogged.length !== 0 ? (
-                                        <ul>
-                                            <li>
-                                                {!scale ? (
-                                                    <button onClick={handleOpen}>
-                                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                                    </button>
-                                                ) : (
-                                                    <p>search mobile</p>
-                                                )}
-                                            </li>
-
-                                            <li>
-                                                <Link to={config.cart}>
-                                                    <div className={styles.total_qty}>
-                                                        <FontAwesomeIcon icon={faCartShopping} />
-                                                        <span>{totalItems && totalItems !== 0 ? totalItems : 0}</span>
-                                                    </div>
-                                                    <span className={styles.total_price}>
-                                                        $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
-                                                        .00
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <button className={styles.logoutnBtn} onClick={SignOut}>
-                                                    <FontAwesomeIcon icon={faRightFromBracket} />
-                                                    LogOut
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    ) : (
-                                        <Link className={styles.loginBtn} to={config.signIn}>
-                                            log in
-                                        </Link>
-                                    )}
+    // if (!totalItems && !totalPrices && isLogged) {
+    //     document.body.style.overflow = 'hidden';
+    //     return <Loading />;
+    // } else
+    return (
+        <>
+            <div
+                className={clsx(styles.header, {
+                    [styles.header_onScroll]: resize,
+                })}
+            >
+                <div className={styles.container}>
+                    <div className={styles.col_2}>
+                        {scale && (
+                            <button onClick={handleOpen}>
+                                <FontAwesomeIcon icon={faBars} size="2x" />
+                            </button>
+                        )}
+                        <Link to={config.home}>
+                            <img className={styles.logo} src={Images.logo} alt="logo" />
+                        </Link>
+                    </div>
+                    <div className={styles.col_10}>
+                        <div className={styles.options}>
+                            {!scale ? (
+                                <div className={styles.options_6}>
+                                    <ul>
+                                        {navlink &&
+                                            navlink.map((item, index) => (
+                                                <li key={index}>
+                                                    <NavLink
+                                                        end
+                                                        className={(nav) =>
+                                                            clsx(styles.navItem, {
+                                                                [styles.active]: nav.isActive,
+                                                            })
+                                                        }
+                                                        to={item.config}
+                                                    >
+                                                        {item.name}
+                                                    </NavLink>
+                                                </li>
+                                            ))}
+                                    </ul>
                                 </div>
+                            ) : null}
+                            <div className={styles.options_3}>
+                                {isLogged && isLogged.length !== 0 ? (
+                                    <ul>
+                                        <li>
+                                            {!scale ? (
+                                                <button onClick={handleOpen}>
+                                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                                </button>
+                                            ) : (
+                                                <p>search mobile</p>
+                                            )}
+                                        </li>
+
+                                        <li>
+                                            <Link to={config.cart}>
+                                                <div className={styles.total_qty}>
+                                                    <FontAwesomeIcon icon={faCartShopping} />
+                                                    <span>{totalItems && totalItems !== 0 ? totalItems : 0}</span>
+                                                </div>
+                                                <span className={styles.total_price}>
+                                                    $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
+                                                    .00
+                                                </span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <button className={styles.logoutnBtn} onClick={SignOut}>
+                                                <FontAwesomeIcon icon={faRightFromBracket} />
+                                                LogOut
+                                            </button>
+                                        </li>
+                                    </ul>
+                                ) : (
+                                    <Link className={styles.loginBtn} to={config.signIn}>
+                                        log in
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} scale={scale} />
-            </>
-        );
+            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} scale={scale} />
+        </>
+    );
 }
 
 export default Header;

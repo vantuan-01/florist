@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { db } from '~/utils/firebase';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.scss';
+import { updateCart } from '~/features';
 
 function Cart() {
     const auth = getAuth();
@@ -26,18 +27,12 @@ function Cart() {
     const totalPrice = useSelector(selectTotalPrice);
     const totalQty = useSelector(selectTotalQty);
 
-   
-
     const handleDelItem = async (id) => {
         dispatch(removeProduct(id));
-        // await updateCart();
     };
-
-    const updateCart = async () => {
-        await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), { orderList, totalPrice, totalQty });
-    };
-
-  
+    useEffect(() => {
+        updateCart(orderList, totalPrice, totalQty);
+    }, [orderList]);
 
     return (
         <div className={styles.cart}>

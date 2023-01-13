@@ -61,11 +61,12 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+                .invalid_text {
+                    text-transform: capitalize;
+                    color: red;
+                    font-weight: 600;
+                }
                 .login_input {
-                    .invalid_text {
-                        text-transform: capitalize;
-                        color: red;
-                    }
                     width: 30rem;
                     height: 4rem;
                     margin-bottom: 2rem;

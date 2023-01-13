@@ -1,14 +1,28 @@
+import { deleteDoc, doc } from 'firebase/firestore';
 import { removeAllProducts, selectOrderList, selectTotalPrice } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import config from '~/config/routes';
+import { db } from '~/utils/firebase';
+import { getAuth } from 'firebase/auth';
 import styles from './Bill.module.scss';
+import { useEffect } from 'react';
 
 function Bill({ checkout }) {
-    const productList = useSelector(selectOrderList);
-    const totalPrice = useSelector(selectTotalPrice);
+    const auth = getAuth();
     const dispatch = useDispatch();
+    const orderList = useSelector(selectOrderList);
+    const totalPrice = useSelector(selectTotalPrice);
+
+    const handleCheckOut = async () => {
+        dispatch(removeAllProducts());
+        await deleteDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'));
+    };
+
+    useEffect(() => {
+        console.log('checkout', orderList);
+    }, [orderList]);
 
     return (
         <div className={styles.payment}>
@@ -18,8 +32,8 @@ function Bill({ checkout }) {
                 </h2>
                 {checkout && (
                     <div className={styles.bill_details}>
-                        {productList && productList.lenght !== 0
-                            ? productList.map((product, index) => (
+                        {orderList && orderList.lenght !== 0
+                            ? orderList.map((product, index) => (
                                   <ul key={index}>
                                       <li>
                                           {product.presentQty}x {product.detailItems.category}
@@ -42,13 +56,7 @@ function Bill({ checkout }) {
                 </div>
 
                 {checkout ? (
-                    <Link
-                        className={styles.payment_btn}
-                        to={config.thankyou}
-                        onClick={() => {
-                            dispatch(removeAllProducts());
-                        }}
-                    >
+                    <Link className={styles.payment_btn} to={config.thankyou} onClick={handleCheckOut}>
                         Accept payment
                     </Link>
                 ) : (
