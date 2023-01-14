@@ -1,233 +1,301 @@
 .productDetail {
     width: 100%;
-    // background-color: #ccc;
-}
+    .container {
+        display: flex;
+        .groupImg {
+            width: 50%;
+            display: flex;
+            .main_img {
+                width: 80%;
 
-.container {
-    display: flex;
-}
+                img {
+                    height: 72rem;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            .sub_img {
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-.groupImg {
-    width: 50%;
-    display: flex;
-}
-
-.main_img {
-    width: 80%;
-
-    img {
-        // width: 55rem;
-        height: 72rem;
-        width: 100%;
-        object-fit: cover;
-    }
-}
-
-.sub_img {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    ul {
-        height: 100%;
-        li {
-            margin-bottom: 1rem;
-            list-style: none;
-            img {
-                width: 10rem;
-                height: 10rem;
-                cursor: pointer;
+                ul {
+                    height: 100%;
+                    li {
+                        margin-bottom: 1rem;
+                        list-style: none;
+                        img {
+                            width: 10rem;
+                            height: 10rem;
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
         }
-    }
-}
+        .groupInfo {
+            width: 50%;
+            padding-left: 5rem;
+            .groupInfo_row {
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 4rem;
+                .main_info {
+                    position: relative;
+                    display: flex;
+                    .name_rate {
+                        text-transform: capitalize;
+                        .category {
+                            font-size: 2rem;
+                            color: var(--pink);
+                        }
+                        .name {
+                            font-size: 2.8rem;
+                        }
+                        .reviews {
+                            display: flex;
+                            li {
+                                position: relative;
+                                display: inline-block;
+                                list-style: none;
+                                margin-right: 4rem;
+                                font-size: 1.8rem;
+                                &:after {
+                                    position: absolute;
+                                    right: -2.5rem;
+                                    top: -1px;
+                                    content: '|';
+                                    color: #888888;
+                                }
+                                svg {
+                                    margin-bottom: 0.1rem;
+                                    path {
+                                        color: #f1c40f;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .price {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        font-size: 3rem;
+                        color: var(--pink);
+                    }
+                }
+                .sub_info {
+                    margin-top: 4rem;
+                    text-transform: capitalize;
+                    font-weight: 400;
+                    ul {
+                        li {
+                            color: #888;
+                            list-style: none;
+                            font-size: 1.8rem;
+                            margin-bottom: 0.5rem;
+                            span {
+                                margin-left: 0.5rem;
+                            }
+                        }
+                    }
+                }
+                .btn_group {
+                    margin-top: 4rem;
+                    display: flex;
+                    gap: 2rem;
+                    .btn_amount {
+                        width: 17rem;
+                        height: 5rem;
+                        padding: 1rem;
+                        border: 1px solid #ccc;
+                        border-radius: 3rem;
+                    }
+                    .btn_add {
+                        position: relative;
+                        width: 20rem;
+                        height: 5rem;
+                        background-color: #000;
+                        border-radius: 3rem;
+                        border: none;
+                        padding: 0 2rem 0 0;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        &:hover .cart_icon {
+                        }
 
-.groupInfo {
-    width: 50%;
-    padding-left: 5rem;
-}
+                        .cart_icon {
+                            position: absolute;
+                            width: 5rem;
+                            height: 5rem;
+                            top: 0;
+                            left: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: var(--pink);
+                            border-radius: 50%;
 
-.groupInfo_row {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 4rem;
-}
+                            svg {
+                                font-size: 2rem;
 
-.main_info {
-    position: relative;
-    display: flex;
-}
-
-.name_rate {
-    text-transform: capitalize;
-    .category {
-        font-size: 2rem;
-        color: var(--pink);
-    }
-    .name {
-        font-size: 2.8rem;
-    }
-    .reviews {
-        display: flex;
-        li {
-            position: relative;
-            display: inline-block;
-            list-style: none;
-            margin-right: 4rem;
-            font-size: 1.8rem;
-            &:after {
-                position: absolute;
-                right: -2.5rem;
-                top: -1px;
-                content: '|';
-                color: #888888;
-            }
-            svg {
-                margin-bottom: 0.1rem;
-                path {
-                    color: #f1c40f;
+                                path {
+                                    color: #fff;
+                                }
+                            }
+                        }
+                        span {
+                            color: #fff;
+                            text-transform: uppercase;
+                            font-size: 1.8rem;
+                            font-weight: 700;
+                        }
+                    }
+                    .btn_love {
+                        width: 5rem;
+                        height: 5rem;
+                        border-radius: 30rem;
+                        border: none;
+                        font-size: 2rem;
+                    }
+                    .btn_love_active {
+                        background-color: var(--pink);
+                        svg {
+                            path {
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+                .description {
+                    margin-top: 3rem;
+                    ul {
+                        display: flex;
+                        gap: 5rem;
+                        li {
+                            position: relative;
+                            list-style: none;
+                            button {
+                                font-size: 2.5rem;
+                                background-color: transparent;
+                                border: none;
+                            }
+                            &:after {
+                                content: '/';
+                                position: absolute;
+                                top: -2px;
+                                right: -28px;
+                                font-size: 2rem;
+                            }
+                        }
+                    }
+                    p {
+                        margin-top: 2rem;
+                    }
                 }
             }
         }
     }
 }
 
-.price {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 3rem;
-    color: var(--pink);
-}
-
-.sub_info {
-    margin-top: 4rem;
-    text-transform: capitalize;
-    font-weight: 400;
-    ul {
-        li {
-            color: #888;
-            list-style: none;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            span {
-                margin-left: 0.5rem;
+// ---------------- Break Points -----------------
+// Tablet
+@media (min-width: 768px) and (max-width: 1224px) {
+    .productDetail {
+        .container {
+            flex-wrap: wrap;
+            .groupImg {
+                width: 100%;
+                .main_img {
+                    width: 70%;
+                    img {
+                        height: 56rem;
+                    }
+                }
+                .sub_img {
+                    width: 30%;
+                    ul {
+                        li {
+                            img {
+                            }
+                        }
+                    }
+                }
+            }
+            .groupInfo {
+                width: 100%;
+                padding-left: 0;
+                margin-top: 4rem;
+                .groupInfo_row {
+                    .main_info {
+                        .name_rate {
+                            .category {
+                            }
+                            .name {
+                            }
+                            .reviews {
+                                display: flex;
+                                li {
+                                    &:after {
+                                    }
+                                    svg {
+                                        path {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .price {
+                            top: 2rem;
+                            font-weight: 600;
+                        }
+                    }
+                    .sub_info {
+                        ul {
+                            li {
+                                span {
+                                }
+                            }
+                        }
+                    }
+                    .btn_group {
+                        gap: 3rem;
+                        .btn_amount {
+                        }
+                        .btn_add {
+                            .cart_icon {
+                                svg {
+                                    path {
+                                    }
+                                }
+                            }
+                            span {
+                            }
+                        }
+                        .btn_love {
+                        }
+                        .btn_love_active {
+                            svg {
+                                path {
+                                }
+                            }
+                        }
+                    }
+                    .description {
+                        ul {
+                            li {
+                                button {
+                                }
+                                &:after {
+                                }
+                            }
+                        }
+                        p {
+                        }
+                    }
+                }
             }
         }
     }
 }
-
-.btn_group {
-    margin-top: 4rem;
-    display: flex;
-    gap: 2rem;
-}
-
-.btn_amount {
-    width: 17rem;
-    height: 5rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 3rem;
-}
-
-.btn_add {
-    position: relative;
-    width: 20rem;
-    height: 5rem;
-    background-color: #000;
-    border-radius: 3rem;
-    border: none;
-    padding: 0 2rem 0 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    &:hover .cart_icon {
-    }
-
-    .cart_icon {
-        position: absolute;
-        width: 5rem;
-        height: 5rem;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--pink);
-        border-radius: 50%;
-
-        svg {
-            font-size: 2rem;
-
-            path {
-                color: #fff;
-            }
-        }
-    }
-    span {
-        color: #fff;
-        text-transform: uppercase;
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-}
-
-.btn_love {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 30rem;
-    border: none;
-    font-size: 2rem;
-}
-
-.btn_love_active {
-    background-color: var(--pink);
-    svg {
-        path {
-            color: #fff;
-        }
-    }
-}
-
-.description {
-    margin-top: 3rem;
-    ul {
-        display: flex;
-        gap: 5rem;
-        li {
-            position: relative;
-            list-style: none;
-            button {
-                font-size: 2.5rem;
-                background-color: transparent;
-                border: none;
-            }
-            &:after {
-                content: '/';
-                position: absolute;
-                top: -2px;
-                right: -28px;
-                font-size: 2rem;
-            }
-        }
-    }
-    p {
-        margin-top: 2rem;
-    }
-}
-
-// .add {
-//     width: 20rem;
-//     height: 5rem;
-//     background-color: transparent;
-//     border-radius: 0.5rem;
-//     border: 0.2rem solid #e1e1e1;
-//     font-size: 1.8rem;
-//     font-weight: 600;
-//     transition: all 300ms ease-in-out;
-//     &:hover {
-//         border: 0.5rem solid var(--pink);
-//         color: var(--pink);
-//     }
-// }

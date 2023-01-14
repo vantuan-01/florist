@@ -1,27 +1,16 @@
 import React, { useEffect } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import {
-    removeProduct,
-    selectOrderList,
-    selectTotalPrice,
-    selectTotalQty,
-    setOrderList,
-    setTotalPrice,
-    setTotalQty,
-} from '~/reducers/Cart';
+import { removeProduct, selectOrderList, selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Bill from '~/components/Bill';
 import Empty from '~/components/Empty';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { db } from '~/utils/firebase';
+import { Link } from 'react-router-dom';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.module.scss';
 import { updateCart } from '~/features';
 
 function Cart() {
-    const auth = getAuth();
     const orderList = useSelector(selectOrderList);
     const dispatch = useDispatch();
     const totalPrice = useSelector(selectTotalPrice);
@@ -61,18 +50,20 @@ function Cart() {
                                             orderList.map((product, index) => (
                                                 <tr key={index}>
                                                     <td>
-                                                        <div className={styles.item}>
-                                                            <div className={styles.item_img}>
-                                                                <img
-                                                                    src={product.detailItems.imageUrl}
-                                                                    alt="img_item"
-                                                                />
+                                                        <Link to={`/products/${product.detailItems.id}`}>
+                                                            <div className={styles.item}>
+                                                                <div className={styles.item_img}>
+                                                                    <img
+                                                                        src={product.detailItems.imageUrl}
+                                                                        alt="img_item"
+                                                                    />
+                                                                </div>
+                                                                <div className={styles.item_text}>
+                                                                    <h4>{product.detailItems.name}</h4>
+                                                                    <span>{`$ ${product.detailItems.price}.00`}</span>
+                                                                </div>
                                                             </div>
-                                                            <div className={styles.item_text}>
-                                                                <h4>{product.detailItems.name}</h4>
-                                                                <span>{`$ ${product.detailItems.price}.00`}</span>
-                                                            </div>
-                                                        </div>
+                                                        </Link>
                                                     </td>
                                                     <td>
                                                         <div className={styles.qty_btn}>{product.presentQty}</div>

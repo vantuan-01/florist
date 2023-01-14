@@ -36,9 +36,7 @@ function ListItem({ items }) {
                         return (
                             <li className={styles.item} key={index}>
                                 <div className={styles.block_img}>
-                                    {/* <Link to={`/products/${item.id}`}> */}
                                     <img src={item.imageUrl} alt={item.imageUrl} />
-                                    {/* </Link> */}
                                     <div className={styles.menu_link_widget}>
                                         <Widget icon={faMagnifyingGlass} id={item.id} />
                                         <Widget icon={faCartShopping} addOne={item} />

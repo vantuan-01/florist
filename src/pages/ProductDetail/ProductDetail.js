@@ -1,7 +1,6 @@
 import * as httpRequest from '~/utils/httpRequest';
 
 import { addProduct, selectOrderList, selectQty, selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
-import { doc, setDoc } from 'firebase/firestore';
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -9,15 +8,12 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QtyButton from '~/components/QtyButton';
 import clsx from 'clsx';
-import { db } from '~/utils/firebase';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { getAuth } from 'firebase/auth';
 import styles from './ProductDetail.module.scss';
 import { updateCart } from '~/features';
 import { useParams } from 'react-router-dom';
 
 function ProductDetail() {
-    const auth = getAuth();
     const dispatch = useDispatch();
     const { id } = useParams();
     const [detailItems, setDetailItems] = useState();

@@ -191,7 +191,7 @@ function Header() {
                                         </li>
 
                                         <li>
-                                            <Link to={config.cart}>
+                                            <NavLink to={config.cart}>
                                                 <div className={styles.total_qty}>
                                                     <FontAwesomeIcon icon={faCartShopping} />
                                                     <span>{totalItems && totalItems !== 0 ? totalItems : 0}</span>
@@ -200,7 +200,7 @@ function Header() {
                                                     $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
                                                     .00
                                                 </span>
-                                            </Link>
+                                            </NavLink>
                                         </li>
                                         <li>
                                             <button className={styles.logoutnBtn} onClick={SignOut}>
