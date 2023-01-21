@@ -24,19 +24,19 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
     const [listProduct, setListProduct] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        if (openPanel && !scale) {
-            inputRef.current.focus();
-        } else if (!openPanel && !scale) {
-            setSearchValue('');
-            setListProduct([]);
-        }
-    }, [openPanel]);
-
-    useEffect(() => {
         httpRequest.get('/product/products').then((res) => {
             setListProduct(res.data);
         });
     }, []);
+
+    useEffect(() => {
+        if (openPanel && !scale) {
+            inputRef.current.focus();
+        } else if (!openPanel && !scale) {
+            setSearchValue('');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [openPanel]);
 
     useEffect(() => {
         if (searchValue) {
@@ -56,11 +56,11 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
     const handleClear = () => {
         inputRef.current.focus();
         setSearchValue('');
-        setListProduct([]);
         dispatch(searchName({ listProduct, searchValue: '' }));
     };
     const handleChange = (e) => {
-        const value = e.target.value;
+        // const value = e.target.value.replace(/[^a-z]/gi, '').toLowerCase();
+        const value = e.target.value.toLowerCase();
         if (!value.startsWith(' ')) {
             setSearchValue(value);
         }
@@ -90,7 +90,7 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
                                         value={searchValue}
                                         onChange={handleChange}
                                         type="text"
-                                        placeholder="Name..."
+                                        placeholder="Find name or category ...."
                                     />
                                     {searchValue && !loading && (
                                         <button className={styles.clear_btn} onClick={handleClear}>

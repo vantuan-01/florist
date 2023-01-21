@@ -7,7 +7,6 @@ import config from '~/config/routes';
 import { db } from '~/utils/firebase';
 import { getAuth } from 'firebase/auth';
 import styles from './Bill.module.scss';
-import { useEffect } from 'react';
 
 function Bill({ checkout }) {
     const auth = getAuth();
@@ -19,10 +18,6 @@ function Bill({ checkout }) {
         dispatch(removeAllProducts());
         await deleteDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'));
     };
-
-    useEffect(() => {
-        console.log('checkout', orderList);
-    }, [orderList]);
 
     return (
         <div className={styles.payment}>

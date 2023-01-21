@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
-import Loading from '../Loading';
 import SearchResult from '../SearchResult';
 import clsx from 'clsx';
 import config from '~/config/routes';
@@ -25,18 +24,22 @@ function Header() {
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
     const [openPanel, setOpenPanel] = useState(false);
-    const [resize, setReSize] = useState('');
+    const [isShrink, setIsShrink] = useState(false);
     const [scale, setScale] = useState(false);
     const isLogged = useSelector(selectLogged);
     useEffect(() => {
         const listenToScroll = () => {
-            const limitHeight = 120;
-            const winScroll = window.pageYOffset || document.documentElement.scrollTop;
-            if (winScroll > limitHeight) {
-                setReSize('header_onScroll');
-            } else if (winScroll <= limitHeight) {
-                setReSize('');
-            }
+            setIsShrink((isShrink) => {
+                if (!isShrink && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) {
+                    return true;
+                }
+
+                if (isShrink && document.body.scrollTop < 4 && document.documentElement.scrollTop < 4) {
+                    return false;
+                }
+
+                return isShrink;
+            });
         };
         window.addEventListener('scroll', listenToScroll);
         return () => {
@@ -73,12 +76,13 @@ function Header() {
             } else {
                 dispatch(updateStatus(''));
 
-                console.log('no user');
+                // console.log('no user');
             }
         });
         return () => {
             unSub();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleResize = () => {
@@ -97,12 +101,12 @@ function Header() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const obList = docSnap.data();
-            console.log('Document data:', obList);
+            // console.log('Document data:', obList);
             dispatch(setOrderList(obList.orderList));
             dispatch(setTotalPrice(obList.totalPrice));
             dispatch(setTotalQty(obList.totalQty));
         } else {
-            console.log('No such document!');
+            // console.log('No such document!');
         }
     };
 
@@ -139,7 +143,7 @@ function Header() {
         <>
             <div
                 className={clsx(styles.header, {
-                    [styles.header_onScroll]: resize,
+                    [styles.header_onScroll]: isShrink,
                 })}
             >
                 <div className={styles.container}>

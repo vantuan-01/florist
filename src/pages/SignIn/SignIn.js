@@ -1,12 +1,10 @@
-import app, { db } from '~/utils/firebase';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
 import { selectLogged, updateStatus } from '~/reducers/Login';
-import { setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 import Images from '~/assets/images';
+import app from '~/utils/firebase';
 import styles from './SignIn.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -47,6 +45,7 @@ function SignIn() {
         if (isLogged.length !== 0) {
             navigate('/');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLogged]);
 
     const Register = () => {
