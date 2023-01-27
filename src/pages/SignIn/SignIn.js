@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { selectLogged, updateStatus } from '~/reducers/Login';
+import { loginStatus, selectLogged } from '~/reducers/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
@@ -42,11 +42,13 @@ function SignIn() {
     });
 
     useEffect(() => {
-        if (isLogged.length !== 0) {
+        const loggedInUser = localStorage.getItem('userUID');
+        if (loggedInUser && isLogged.length !== 0) {
             navigate('/');
+        } else if (!loggedInUser) {
+            navigate('/SignIn');
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLogged]);
+    }, [navigate]);
 
     const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -55,12 +57,12 @@ function SignIn() {
                 setIsValid('');
                 setIsRegist(false);
                 alert('Resgist successful');
-                console.log('Create account successful');
+                // console.log('Create account successful');
             })
             .catch((error) => {
                 const errorCode = error.code;
                 setIsValid(error.code);
-                console.log(`register error: ${errorCode}`);
+                // console.log(`register error: ${errorCode}`);
             });
     };
 
@@ -71,13 +73,13 @@ function SignIn() {
                 const userUID = auth.currentUser ? auth.currentUser.uid : null;
                 setIsValid('');
                 navigate('/');
-                dispatch(updateStatus(userUID));
-                console.log('Login successful');
+                dispatch(loginStatus(userUID));
+                // console.log('Login successful');
             })
             .catch((error) => {
                 const errorCode = error.code;
                 setIsValid(error.code);
-                console.log(`login error: ${errorCode}`);
+                // console.log(`login error: ${errorCode}`);
             });
     };
 

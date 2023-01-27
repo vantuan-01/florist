@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { faBars, faCartShopping, faMagnifyingGlass, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { selectLogged, updateStatus } from '~/reducers/Login';
+import { logOutStatus, loginStatus, selectLogged } from '~/reducers/Login';
 import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -72,9 +72,9 @@ function Header() {
         const unSub = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 getCartHistory();
-                dispatch(updateStatus(currentUser.uid));
+                dispatch(loginStatus(currentUser.uid));
             } else {
-                dispatch(updateStatus(''));
+                dispatch(loginStatus(''));
 
                 // console.log('no user');
             }
@@ -84,6 +84,8 @@ function Header() {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {}, []);
 
     const handleResize = () => {
         const width = window.innerWidth;
@@ -123,22 +125,17 @@ function Header() {
     const SignOut = () => {
         signOut(auth)
             .then(() => {
-                console.log('logged out');
+                // console.log('logged out');
                 navigate('/signIn');
-                dispatch(updateStatus(''));
+                dispatch(logOutStatus(''));
                 dispatch(setOrderList([]));
                 dispatch(setTotalPrice(0));
                 dispatch(setTotalQty(0));
             })
             .catch((error) => {
-                console.log('logout not worked');
+                // console.log('logout not worked');
             });
     };
-
-    // if (!totalItems && !totalPrices && isLogged) {
-    //     document.body.style.overflow = 'hidden';
-    //     return <Loading />;
-    // } else
     return (
         <>
             <div

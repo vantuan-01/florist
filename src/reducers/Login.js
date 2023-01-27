@@ -6,13 +6,17 @@ const loginSlice = createSlice({
         logged: '',
     },
     reducers: {
-        updateStatus(state, action) {
+        loginStatus(state, action) {
             state.logged = action.payload;
-            console.log(state.logged);
+            localStorage.setItem('userUID', action.payload);
+        },
+        logOutStatus(state, action) {
+            state.logged = action.payload;
+            localStorage.removeItem('userUID');
         },
     },
 });
 
-export const { updateStatus } = loginSlice.actions;
+export const { loginStatus, logOutStatus } = loginSlice.actions;
 export const loginReducer = loginSlice.reducer;
 export const selectLogged = (state) => state.loginReducer.logged;

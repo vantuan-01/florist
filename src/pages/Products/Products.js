@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import ListItems from './ListItems';
+import Loading from '~/components/Loading';
 import ProductDetail from '~/pages/ProductDetail';
 import { selectSortPath } from '~/reducers/Products';
 import styles from './Products.module.scss';
@@ -26,6 +27,10 @@ function Products() {
             });
     }, [filter, sortPath]);
 
+    if (!items) {
+        document.body.style.overflow = 'hidden';
+        return <Loading />;
+    } else document.body.style.overflow = '';
     return (
         <div className={styles.products}>
             <div className={styles.container}>

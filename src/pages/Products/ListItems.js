@@ -18,10 +18,6 @@ function ListItem({ items }) {
         }
     }, [items]);
 
-    if (!items) {
-        document.body.style.overflow = 'hidden';
-        return <Loading />;
-    } else document.body.style.overflow = '';
     return (
         <>
             {items && items.length !== 0 && (

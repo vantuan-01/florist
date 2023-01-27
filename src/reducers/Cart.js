@@ -61,7 +61,7 @@ const cartSlice = createSlice({
             } else if (state.presentQty === action.payload.qty) {
                 return;
             } else {
-                console.log('increaseAmount error');
+                // console.log('increaseAmount error');
             }
         },
         decreaseQty(state, action) {
@@ -70,7 +70,7 @@ const cartSlice = createSlice({
             } else if (state.presentQty === 1) {
                 return;
             } else {
-                console.log('decreaseAmount error');
+                // console.log('decreaseAmount error');
             }
         },
     },
