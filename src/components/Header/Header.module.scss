@@ -12,143 +12,139 @@
     align-items: center;
     font-family: 'Quicksand', sans-serif;
     transition: height 200ms;
-}
-.header_onScroll {
-    height: 6rem;
-    box-shadow: 0 0.3rem 2rem rgb(99 134 137 / 20%);
-}
-.container {
-    width: 141rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #fff;
-}
-
-.col_2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 2rem;
-    a {
-        // margin-left: 3rem;
-    }
-    button {
-        background-color: transparent;
-        border: none;
-    }
-}
-
-.logo {
-}
-
-.col_10 {
-    padding: 0 2rem;
-}
-
-.options {
-    display: flex;
-    align-items: center;
-}
-
-.options_6 {
-    margin-right: 6rem;
-    ul {
+    .container {
+        width: 141rem;
+        height: 100%;
         display: flex;
-        li {
-            font-size: 1.8rem;
-            font-weight: 500;
-            line-height: 4rem;
-            list-style: none;
-            text-transform: uppercase;
-            .navItem {
-                padding: 2.5rem;
-                transition: color 200ms ease-out;
-                &:hover {
-                    color: var(--pink);
-                }
-            }
-            .active {
-                font-weight: 600;
-                color: var(--pink);
-            }
-        }
-    }
-}
-
-.options_3 {
-    ul {
-        display: flex;
-        gap: 4rem;
-        li {
-            list-style: none;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        .col_2 {
             display: flex;
             justify-content: center;
             align-items: center;
-            a,
+            padding: 0 2rem;
+            a {
+                // margin-left: 3rem;
+            }
             button {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 background-color: transparent;
                 border: none;
-                font-size: 2.3rem;
-                font-weight: 500;
-                gap: 1rem;
-                .total_qty {
-                    span {
-                        position: absolute;
-                        padding: 0rem 0.6rem;
-                        background-color: var(--pink);
-                        border-radius: 50%;
-                        font-size: 1.3rem;
-                        color: #ffffff;
-                        font-weight: 600;
-                        top: -0.2rem;
-                        left: 1.4rem;
+            }
+            .logo {
+            }
+        }
+        .col_10 {
+            padding: 0 2rem;
+            .options {
+                display: flex;
+                align-items: center;
+                .options_6 {
+                    margin-right: 6rem;
+                    ul {
+                        display: flex;
+                        li {
+                            font-size: 1.8rem;
+                            font-weight: 500;
+                            line-height: 4rem;
+                            list-style: none;
+                            text-transform: uppercase;
+                            .navItem {
+                                padding: 2.5rem;
+                                transition: color 200ms ease-out;
+                                &:hover {
+                                    color: var(--pink);
+                                }
+                            }
+                            .active {
+                                font-weight: 600;
+                                color: var(--pink);
+                            }
+                        }
                     }
                 }
-                .total_price {
-                    font-size: 2rem;
-                    color: var(--pink);
+
+                .options_3 {
+                    ul {
+                        display: flex;
+                        gap: 4rem;
+                        li {
+                            list-style: none;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            a,
+                            button {
+                                position: relative;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: transparent;
+                                border: none;
+                                font-size: 2.3rem;
+                                font-weight: 500;
+                                gap: 1rem;
+                                .total_qty {
+                                    span {
+                                        position: absolute;
+                                        padding: 0rem 0.6rem;
+                                        background-color: var(--pink);
+                                        border-radius: 50%;
+                                        font-size: 1.3rem;
+                                        color: #ffffff;
+                                        font-weight: 600;
+                                        top: -0.2rem;
+                                        left: 1.4rem;
+                                    }
+                                }
+                                .total_price {
+                                    font-size: 2rem;
+                                    color: var(--pink);
+                                }
+                            }
+                        }
+                    }
+                    .loginBtn,
+                    .logoutnBtn {
+                        width: 10rem;
+                        padding: 0.6rem 5rem;
+                        border: 0.2rem solid var(--pink);
+                        border-radius: 2rem;
+                        text-transform: capitalize;
+                        color: var(--pink);
+                        font-size: 1.8rem;
+                        font-weight: 600;
+                        transition: all 300ms linear;
+                        &:hover {
+                            background-color: var(--pink);
+                            color: #fff;
+                        }
+                    }
+                    .logoutnBtn {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0.6rem 6rem;
+                        color: #fff;
+                        background-color: var(--pink);
+                        svg {
+                            path {
+                                color: #fff;
+                            }
+                        }
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
                 }
             }
         }
     }
-    .loginBtn,
-    .logoutnBtn {
-        width: 10rem;
-        padding: 0.6rem 5rem;
-        border: 0.2rem solid var(--pink);
-        border-radius: 2rem;
-        text-transform: capitalize;
-        color: var(--pink);
-        font-size: 1.8rem;
-        font-weight: 600;
-        transition: all 300ms linear;
-        &:hover {
-            background-color: var(--pink);
-            color: #fff;
-        }
-    }
-    .logoutnBtn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.6rem 6rem;
-        color: #fff;
-        background-color: var(--pink);
-        svg {
-            path {
-                color: #fff;
-            }
-        }
-        &:hover {
-            opacity: 0.8;
-        }
-    }
+}
+
+.header_onScroll {
+    height: 6rem;
+    box-shadow: 0 0.3rem 2rem rgb(99 134 137 / 20%);
 }
 
 // ---------------- Break Points -----------------
@@ -186,13 +182,136 @@
 }
 // Mobile
 @media (max-width: 768px) {
+    // .header {
+    //     padding: 0rem;
+    //     height: 5rem;
+    //     .container {
+    //         width: 100%;
+    //         .logo {
+    //             width: 10rem;
+    //         }
+    //     }
+    // }
     .header {
         padding: 0rem;
         height: 5rem;
         .container {
             width: 100%;
-            .logo {
-                width: 10rem;
+            .col_2 {
+                a {
+                    display: flex;
+                }
+                button {
+                }
+                .logo {
+                    width: 10rem;
+                    margin-left: 1rem;
+                }
+            }
+            .col_10 {
+                padding: 0 2rem;
+                .options {
+                    display: flex;
+                    align-items: center;
+                    .options_6 {
+                        margin-right: 6rem;
+                        ul {
+                            display: flex;
+                            li {
+                                font-size: 1.8rem;
+                                font-weight: 500;
+                                line-height: 4rem;
+                                list-style: none;
+                                text-transform: uppercase;
+                                .navItem {
+                                    padding: 2.5rem;
+                                    transition: color 200ms ease-out;
+                                    &:hover {
+                                        color: var(--pink);
+                                    }
+                                }
+                                .active {
+                                    font-weight: 600;
+                                    color: var(--pink);
+                                }
+                            }
+                        }
+                    }
+
+                    .options_3 {
+                        ul {
+                            display: flex;
+                            gap: 4rem;
+                            li {
+                                list-style: none;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                a,
+                                button {
+                                    position: relative;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    background-color: transparent;
+                                    border: none;
+                                    font-size: 2.3rem;
+                                    font-weight: 500;
+                                    gap: 1rem;
+                                    .total_qty {
+                                        span {
+                                            position: absolute;
+                                            padding: 0rem 0.6rem;
+                                            background-color: var(--pink);
+                                            border-radius: 50%;
+                                            font-size: 1.3rem;
+                                            color: #ffffff;
+                                            font-weight: 600;
+                                            top: -0.2rem;
+                                            left: 1.4rem;
+                                        }
+                                    }
+                                    .total_price {
+                                        font-size: 2rem;
+                                        color: var(--pink);
+                                    }
+                                }
+                            }
+                        }
+                        .loginBtn,
+                        .logoutnBtn {
+                            width: 10rem;
+                            padding: 0.6rem 5rem;
+                            border: 0.2rem solid var(--pink);
+                            border-radius: 2rem;
+                            text-transform: capitalize;
+                            color: var(--pink);
+                            font-size: 1.8rem;
+                            font-weight: 600;
+                            transition: all 300ms linear;
+                            &:hover {
+                                background-color: var(--pink);
+                                color: #fff;
+                            }
+                        }
+                        .logoutnBtn {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 0.6rem 6rem;
+                            color: #fff;
+                            background-color: var(--pink);
+                            svg {
+                                path {
+                                    color: #fff;
+                                }
+                            }
+                            &:hover {
+                                opacity: 0.8;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

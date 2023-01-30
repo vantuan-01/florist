@@ -239,7 +239,7 @@
                     }
                 }
                 .about {
-                    padding: 4rem;
+                    padding: 0;
                     .header {
                         height: auto;
                         flex-wrap: wrap;
@@ -282,4 +282,124 @@
 }
 // Mobile
 @media (max-width: 768px) {
+    .home {
+        .carousel_container {
+            height: 30rem;
+            .carousel_inner {
+                img {
+                }
+                .carousel_text {
+                    width: 100%;
+                    position: absolute;
+                    padding: 0 2rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    span {
+                        margin-bottom: 0.5rem;
+                    }
+                    h2 {
+                        text-align: center;
+                        font-size: 3rem;
+                        margin-bottom: 2rem;
+                    }
+                    a {
+                    }
+                }
+            }
+        }
+        .padding_side {
+            padding: 0 2rem;
+            .row {
+                margin: 0 -15px;
+                .reputation {
+                    padding: 4rem 0 3rem;
+                    flex-direction: column;
+                    .reputation_inner {
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        img {
+                        }
+                        .reputation_text {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: column;
+                            margin-left: 0;
+                            margin-top: 1rem;
+                            h2 {
+                            }
+                            span {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+                .categories {
+                    flex-direction: column;
+                    margin-bottom: 0;
+                    .categories_inner {
+                        width: 100%;
+                        height: 30rem;
+                        margin-bottom: 3rem;
+                        img {
+                        }
+                        .categories_text {
+                            h2 {
+                            }
+                        }
+                    }
+                }
+                .about {
+                    padding: 0;
+                    .header {
+                        height: auto;
+                        flex-wrap: wrap;
+                        margin-bottom: 2rem;
+                        .title {
+                            width: 100%;
+                            h4 {
+                                font-size: 3rem;
+                            }
+                        }
+                        .title_content {
+                            width: 100%;
+                            margin-left: 0;
+                        }
+                    }
+                    .body {
+                        width: 100%;
+                        height: auto;
+                        flex-wrap: wrap;
+                        .body_img {
+                            width: 100%;
+                            height: 50rem;
+                        }
+                        .body_content {
+                            width: 100%;
+                            margin-top: 3rem;
+
+                            .body_content_text {
+                                padding: 0 0 2rem 0;
+                                margin-left: 0;
+                                margin-top: 0;
+                                margin-bottom: 0;
+                                h4 {
+                                    font-size: 3rem;
+                                    margin-bottom: 1rem;
+                                }
+                                p {
+                                    margin-bottom: 2rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -92,12 +92,12 @@ html *::-webkit-scrollbar-track {
 
 // ---------------- Break Points -----------------
 // PC
-@media (min-width: 1224px) {
-    .container,
-    .container_home {
-        width: 100%;
-    }
-}
+// @media (min-width: 1224px) {
+//     .container,
+//     .container_home {
+//         width: 100%;
+//     }
+// }
 // Tablet
 @media (min-width: 768px) and (max-width: 1224px) {
     .container {
@@ -110,6 +110,9 @@ html *::-webkit-scrollbar-track {
 }
 // Mobile
 @media (max-width: 768px) {
+    .container {
+        padding: 1rem 2rem;
+    }
     .container,
     .container_home {
         width: 100%;

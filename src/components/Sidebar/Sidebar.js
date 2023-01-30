@@ -7,7 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import navlink from '~/config/navlink';
 import styles from './Sidebar.module.scss';
 
-function Sidebar({}) {
+function Sidebar() {
     return (
         <Portal id="sidebar-id">
             {/* <div className={styles.modal}></div> */}

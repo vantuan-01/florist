@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
+import Loading from '../Loading';
 import SearchResult from '../SearchResult';
 import clsx from 'clsx';
 import config from '~/config/routes';
@@ -18,6 +19,7 @@ import styles from './Header.module.scss';
 import { useRef } from 'react';
 
 function Header() {
+    const auth = getAuth();
     const ref = useRef();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -66,7 +68,7 @@ function Header() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [window.innerWidth]);
 
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (currentUser) => {
@@ -85,14 +87,12 @@ function Header() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {}, []);
-
     const handleResize = () => {
         const width = window.innerWidth;
-        if (width <= 1229) {
+        if (width <= 1300) {
             setScale(true);
             setOpenPanel(false);
-        } else if (width > 1229) {
+        } else if (width > 1300) {
             setScale(false);
             setOpenPanel(false);
         }
@@ -121,7 +121,6 @@ function Header() {
         document.body.style.overflow = 'hidden';
     };
 
-    const auth = getAuth();
     const SignOut = () => {
         signOut(auth)
             .then(() => {
@@ -136,6 +135,12 @@ function Header() {
                 // console.log('logout not worked');
             });
     };
+
+    if (!totalItems && !totalPrices && isLogged.length !== 0) {
+        document.body.style.overflow = 'hidden';
+        return <Loading />;
+    } else document.body.style.overflow = '';
+
     return (
         <>
             <div
@@ -187,7 +192,7 @@ function Header() {
                                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                                 </button>
                                             ) : (
-                                                <p>search mobile</p>
+                                                <p></p>
                                             )}
                                         </li>
 

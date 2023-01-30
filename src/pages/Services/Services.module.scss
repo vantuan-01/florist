@@ -147,3 +147,57 @@
         }
     }
 }
+
+// Mobile
+@media (max-width: 768px) {
+    .wrapper {
+        margin: 10rem -1.5rem 0;
+        flex-wrap: wrap;
+        .col_4 {
+            width: 100%;
+            margin: 0 1.5rem;
+            .service_cards {
+                .card {
+                    margin-bottom: 6rem;
+                    padding: 1rem 0rem;
+                    .card_img {
+                    }
+                    h2 {
+                    }
+                    span {
+                        margin-top: 1rem;
+                    }
+                }
+            }
+        }
+        .col_8 {
+            width: 100%;
+            margin: 0 1.5rem;
+            .service_contents {
+                .video {
+                    img {
+                        height: 30rem;
+                    }
+                    h2 {
+                        font-size: 2rem;
+                    }
+                }
+                .text {
+                    .price {
+                    }
+                    .foreword {
+                    }
+                    .sub_content {
+                        .sub_content_inner {
+                            width: 100%;
+                            .sub_content_icon {
+                            }
+                            .sub_content_text {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
