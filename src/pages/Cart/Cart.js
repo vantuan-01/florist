@@ -42,6 +42,9 @@ function Cart() {
                                             <th>
                                                 <h2>Total</h2>
                                             </th>
+                                            <th>
+                                                <h2>Remove</h2>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>

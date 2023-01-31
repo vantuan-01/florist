@@ -11,7 +11,7 @@ import Home from '~/pages/Home';
 import Products from '~/pages/Products';
 import Services from '~/pages/Services';
 import SignIn from '~/pages/SignIn';
-import ThankYou from '~/components/ThankYou';
+import ThankYou from '~/pages/ThankYou';
 import routesConfig from '~/config/routes';
 
 // import ProductDetail from '~/pages/ProductDetail';

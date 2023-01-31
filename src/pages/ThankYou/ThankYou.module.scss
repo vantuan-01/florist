@@ -114,3 +114,45 @@
         }
     }
 }
+
+// ---------------- Break Points -----------------
+// Mobile
+@media (max-width: 768px) {
+    .wrapper {
+        .container {
+        }
+        .plant1 {
+            top: 7rem;
+        }
+
+        .plant2 {
+            bottom: 7rem;
+        }
+
+        .card {
+            width: 80%;
+            height: 40rem;
+
+            img {
+            }
+            .content {
+                span {
+                }
+            }
+            .btns {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+                margin-top: 3rem;
+                .backBtn {
+                    gap: 1rem;
+                    svg {
+                        path {
+                        }
+                    }
+                    &:hover {
+                    }
+                }
+            }
+        }
+    }
+}

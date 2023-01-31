@@ -136,10 +136,10 @@ function Header() {
             });
     };
 
-    if (!totalItems && !totalPrices && isLogged.length !== 0) {
-        document.body.style.overflow = 'hidden';
-        return <Loading />;
-    } else document.body.style.overflow = '';
+    // if (!totalItems && !totalPrices && isLogged.length !== 0) {
+    //     document.body.style.overflow = 'hidden';
+    //     return <Loading />;
+    // } else document.body.style.overflow = '';
 
     return (
         <>

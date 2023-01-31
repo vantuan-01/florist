@@ -97,11 +97,13 @@
             .col_8 {
                 width: 100%;
                 .cart_table {
+                    padding-right: 0;
                     table {
                         tr {
-                        }
-                        td,
-                        th {
+                            th,
+                            td {
+                                text-align: left;
+                            }
                         }
                     }
                     .item {
@@ -119,12 +121,17 @@
                         }
                     }
                     .qty_btn {
+                        width: 100%;
+                        justify-content: start;
+                        padding-left: 5rem;
                     }
 
                     .total {
+                        width: 100%;
                     }
 
                     .del_btn {
+                        padding-right: 6rem;
                         button {
                             svg {
                                 path {
@@ -135,6 +142,99 @@
                 }
             }
             .col_4 {
+                width: 100%;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 768px) {
+    .cart {
+        .container {
+            flex-wrap: wrap;
+            margin: 0;
+            .col_8 {
+                padding: 0;
+                width: 100%;
+                .cart_table {
+                    margin-top: 0;
+                    padding-right: 0;
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        tr {
+                            border-bottom: 0.1rem solid #e1e1e1;
+                            font-size: 1rem;
+                        }
+                        td,
+                        th {
+                            text-align: center;
+                            padding: 3rem 0;
+                        }
+                    }
+                    .item {
+                        display: flex;
+                        flex-direction: column;
+                        .item_img {
+                            img {
+                                width: 6rem;
+                                height: 6rem;
+                            }
+                        }
+
+                        .item_text {
+                            margin-left: 0;
+                            display: flex;
+                            flex-direction: column;
+                            h4 {
+                                margin-top: 1rem;
+                                font-size: 2rem;
+                                text-transform: capitalize;
+                                font-weight: 400;
+                            }
+                            span {
+                                margin-top: 1rem;
+                                font-size: 2rem;
+                                font-weight: 900;
+                            }
+                        }
+                    }
+                    .qty_btn {
+                        font-size: 2rem;
+                        font-weight: 500;
+                        width: 10rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .total {
+                        width: 10rem;
+                        font-size: 2rem;
+                        font-weight: 500;
+                        color: var(--pink);
+                    }
+
+                    .del_btn {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        button {
+                            background-color: transparent;
+                            border: none;
+                            padding: 1rem;
+                            svg {
+                                path {
+                                    color: var(--pink);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .col_4 {
+                padding: 0;
                 width: 100%;
             }
         }

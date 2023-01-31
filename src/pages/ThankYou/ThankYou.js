@@ -3,7 +3,7 @@ import { faGifts, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images';
 import { Link } from 'react-router-dom';
-import Plants from '../Plants';
+import Plants from '../../components/Plants';
 import config from '~/config/routes';
 import styles from './ThankYou.module.scss';
 
