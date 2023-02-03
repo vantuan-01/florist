@@ -6,6 +6,7 @@ import { searchName, selectSearch } from '~/reducers/Products';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
+import AuthBtn from '../AuthBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images';
 import Portal from '~/components/Portal';
@@ -69,7 +70,7 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
     return (
         <Portal id="search-result-id">
             <div className={clsx(styles.modal, { [styles.modal_slide]: !openPanel })}></div>
-            {!scale ? (
+            {scale === 'web' ? (
                 <div ref={ref} className={clsx(styles.searchResult, { [styles.searchResult_slide]: !openPanel })}>
                     <div className={styles.wrapper_search}>
                         <div className={styles.searchResult_inner}>
@@ -161,6 +162,9 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
                                             </NavLink>
                                         </li>
                                     ))}
+                                <li style={{ marginTop: '1rem' }}>
+                                    <AuthBtn signout />
+                                </li>
                             </ul>
                         </div>
                     </div>

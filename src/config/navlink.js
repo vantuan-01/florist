@@ -10,21 +10,21 @@ const navlink = [
         config: config.about,
     },
     {
-        name: 'services',
-        config: config.services,
-    },
-    {
         name: 'shop',
         config: config.product,
+    },
+    {
+        name: 'services',
+        config: config.services,
     },
     {
         name: 'blog',
         config: config.blog,
     },
-    {
-        name: 'contact',
-        config: config.contact,
-    },
+    // {
+    //     name: 'contact',
+    //     config: config.contact,
+    // },
 ];
 
 export default navlink;

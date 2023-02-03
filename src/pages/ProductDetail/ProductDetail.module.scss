@@ -201,7 +201,7 @@
 
 // ---------------- Break Points -----------------
 // Tablet
-@media (min-width: 768px) and (max-width: 1224px) {
+@media (min-width: 800px) and (max-width: 1224px) {
     .productDetail {
         .container {
             flex-wrap: wrap;
@@ -301,7 +301,7 @@
 }
 
 // Mobile
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .productDetail {
         .container {
             flex-wrap: wrap;

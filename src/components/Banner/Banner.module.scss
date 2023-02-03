@@ -56,9 +56,27 @@
     }
 }
 
+// Banner for mobile devices
+.container_mb {
+    padding: 0 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    a {
+    }
+    .icon_mb {
+    }
+    b {
+        text-transform: capitalize;
+        color: var(--pink);
+    }
+}
+
 // ---------------- Break Points -----------------
 // Tablet
-@media (min-width: 768px) and (max-width: 1367px) {
+@media (min-width: 800px) and (max-width: 1367px) {
     .banner {
         .banner_img {
         }

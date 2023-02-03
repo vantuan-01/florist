@@ -89,7 +89,7 @@
 
 // ---------------- Break Points -----------------
 // Tablet
-@media (min-width: 768px) and (max-width: 1367px) {
+@media (min-width: 800px) and (max-width: 1367px) {
     .wrapper {
         display: block;
         .col_4 {
@@ -149,9 +149,9 @@
 }
 
 // Mobile
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .wrapper {
-        margin: 10rem -1.5rem 0;
+        margin: 3rem -1.5rem 0;
         flex-wrap: wrap;
         .col_4 {
             width: 100%;

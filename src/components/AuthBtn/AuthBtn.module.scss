@@ -1,0 +1,62 @@
+.logoutnBtn_auth {
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 6rem;
+    color: #fff;
+    background-color: var(--pink);
+    border: 0.2rem solid var(--pink);
+    border-radius: 2rem;
+    text-transform: capitalize;
+    font-size: 1.8rem;
+    font-weight: 600;
+    transition: all 300ms linear;
+    svg {
+        path {
+            color: #fff;
+        }
+    }
+    &:hover {
+        background-color: var(--pink);
+        color: #fff;
+    }
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.login_btn {
+    position: relative;
+    width: 30rem;
+    height: 4rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: #000;
+    color: #fff;
+    z-index: 1;
+    overflow: hidden;
+    border: none;
+    text-transform: capitalize;
+    &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        left: -20%;
+        right: -20%;
+        bottom: 0;
+        background-color: var(--pink);
+        z-index: -1;
+        transition: all 0.3s ease;
+        transform: skewX(-45deg) scale(0, 1);
+    }
+    @media (hover: hover) {
+        &:hover {
+            &:after {
+                transition: all 0.3s ease-out;
+                transform: skewX(-45deg) scale(1, 1);
+            }
+        }
+    }
+}

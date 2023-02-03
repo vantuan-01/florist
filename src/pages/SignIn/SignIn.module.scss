@@ -101,10 +101,12 @@
                         transition: all 0.3s ease;
                         transform: skewX(-45deg) scale(0, 1);
                     }
-                    &:hover {
-                        &:after {
-                            transition: all 0.3s ease-out;
-                            transform: skewX(-45deg) scale(1, 1);
+                    @media (hover: hover) {
+                        &:hover {
+                            &:after {
+                                transition: all 0.3s ease-out;
+                                transform: skewX(-45deg) scale(1, 1);
+                            }
                         }
                     }
                 }
@@ -116,22 +118,72 @@
                 align-items: center;
                 gap: 2rem;
                 position: relative;
-                // &:after {
-                //     content: '';
-                //     position: absolute;
-                //     background-color: var(--text-color);
-                //     width: 0.2rem;
-                //     height: 100%;
-                // }
                 .fogot_btn {
                     text-transform: capitalize;
                     font-size: 1.8rem;
                     font-weight: 500;
                     border: none;
                     background: none;
+                    @media (hover: hover) {
+                        &:hover {
+                            color: var(--pink);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
-                    &:hover {
-                        color: var(--pink);
+// ---------------- Break Points -----------------
+// Mobile
+@media (max-width: 800px) {
+    .wrapper {
+        .login_bg {
+        }
+        .login_wrapper {
+            padding: 2rem;
+            .login {
+                width: 30rem;
+                .header {
+                    margin-bottom: 5rem;
+                    h1 {
+                        font-size: 2rem;
+                    }
+                    .login_logo {
+                        width: 40%;
+                    }
+                }
+                .body {
+                    .invalid_text {
+                    }
+                    .login_input {
+                        width: 80%;
+                        height: 4rem;
+                        &::placeholder {
+                        }
+                    }
+                    .login_btn {
+                        width: 80%;
+                        height: 4rem;
+                        font-weight: 700;
+                        background-color: var(--pink);
+                        &:after {
+                            content: '';
+                        }
+                        &:hover {
+                            &:after {
+                            }
+                        }
+                    }
+                }
+                .footer {
+                    margin-top: 2rem;
+                    .fogot_btn {
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        &:hover {
+                        }
                     }
                 }
             }

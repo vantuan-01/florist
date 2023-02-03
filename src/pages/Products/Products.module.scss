@@ -100,7 +100,7 @@
 
 // ---------------- Break Points -----------------
 // Tablet
-@media (min-width: 768px) and (max-width: 1367px) {
+@media (min-width: 800px) and (max-width: 1367px) {
     .list_items {
         justify-content: center;
         .item {
@@ -129,7 +129,7 @@
 }
 
 // Mobile
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .list_items {
         justify-content: center;
         .item {

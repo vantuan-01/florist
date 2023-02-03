@@ -1,45 +1,23 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { loginStatus, selectLogged } from '~/reducers/Login';
+import { selectIsRegist, selectIsValid, setEmail, setIsRegist, setPassword } from '~/reducers/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
+import AuthBtn from '~/components/AuthBtn';
 import Images from '~/assets/images';
-import app from '~/utils/firebase';
+import { selectLogged } from '~/reducers/Login';
 import styles from './SignIn.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 function SignIn() {
-    const auth = getAuth(app);
-    const [isRegist, setIsRegist] = useState(false);
-    const [isValid, setIsValid] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const inputRef = useRef();
-    const isLogged = useSelector(selectLogged);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isValid = useSelector(selectIsValid);
+    const isRegist = useSelector(selectIsRegist);
+    const inputRef = useRef();
+    const isLogged = useSelector(selectLogged);
     useEffect(() => {
         inputRef.current.focus();
     }, [isRegist]);
-
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (isRegist) {
-                if (e.isComposing || e.key === 'Enter') {
-                    Register();
-                }
-            } else if (!isRegist) {
-                if (e.isComposing || e.key === 'Enter') {
-                    SignIn();
-                }
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    });
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userUID');
@@ -50,43 +28,10 @@ function SignIn() {
         }
     }, [navigate]);
 
-    const Register = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Register
-                setIsValid('');
-                setIsRegist(false);
-                alert('Resgist successful');
-                // console.log('Create account successful');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                setIsValid(error.code);
-                // console.log(`register error: ${errorCode}`);
-            });
-    };
-
-    const SignIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                // Sign in
-                const userUID = auth.currentUser ? auth.currentUser.uid : null;
-                setIsValid('');
-                navigate('/');
-                dispatch(loginStatus(userUID));
-                // console.log('Login successful');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                setIsValid(error.code);
-                // console.log(`login error: ${errorCode}`);
-            });
-    };
-
     const handleChangeForm = () => {
-        setIsRegist(!isRegist);
-        setEmail('');
-        setPassword('');
+        dispatch(setIsRegist(!isRegist));
+        dispatch(setEmail(''));
+        dispatch(setPassword(''));
     };
 
     return (
@@ -105,23 +50,15 @@ function SignIn() {
                             className={styles.login_input}
                             type="text"
                             placeholder="Email"
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => dispatch(setEmail(e.target.value))}
                         />
                         <input
                             className={styles.login_input}
                             type="password"
                             placeholder="password"
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => dispatch(setPassword(e.target.value))}
                         />
-                        {!isRegist ? (
-                            <button onClick={SignIn} className={styles.login_btn} type="submit">
-                                log in
-                            </button>
-                        ) : (
-                            <button onClick={Register} className={styles.login_btn} type="submit">
-                                register
-                            </button>
-                        )}
+                        {!isRegist ? <AuthBtn signin /> : <AuthBtn register />}
                     </div>
                     <div className={styles.footer}>
                         <button className={styles.fogot_btn} onClick={handleChangeForm}>

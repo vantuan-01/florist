@@ -74,7 +74,7 @@
                             justify-content: center;
                             align-items: center;
                             a,
-                            button {
+                            .search_btn {
                                 position: relative;
                                 display: flex;
                                 justify-content: center;
@@ -104,8 +104,7 @@
                             }
                         }
                     }
-                    .loginBtn,
-                    .logoutnBtn {
+                    .loginBtn {
                         width: 10rem;
                         padding: 0.6rem 5rem;
                         border: 0.2rem solid var(--pink);
@@ -118,22 +117,6 @@
                         &:hover {
                             background-color: var(--pink);
                             color: #fff;
-                        }
-                    }
-                    .logoutnBtn {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 0.6rem 6rem;
-                        color: #fff;
-                        background-color: var(--pink);
-                        svg {
-                            path {
-                                color: #fff;
-                            }
-                        }
-                        &:hover {
-                            opacity: 0.8;
                         }
                     }
                 }
@@ -149,7 +132,7 @@
 
 // ---------------- Break Points -----------------
 // Tablet
-@media (min-width: 768px) and (max-width: 1224px) {
+@media (min-width: 800px) and (max-width: 1224px) {
     .header {
         padding: 0 2rem;
         .container {
@@ -181,17 +164,7 @@
     }
 }
 // Mobile
-@media (max-width: 768px) {
-    // .header {
-    //     padding: 0rem;
-    //     height: 5rem;
-    //     .container {
-    //         width: 100%;
-    //         .logo {
-    //             width: 10rem;
-    //         }
-    //     }
-    // }
+@media (max-width: 800px) {
     .header {
         padding: 0rem;
         height: 5rem;
@@ -247,8 +220,7 @@
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                                a,
-                                button {
+                                a {
                                     position: relative;
                                     display: flex;
                                     justify-content: center;
@@ -278,8 +250,7 @@
                                 }
                             }
                         }
-                        .loginBtn,
-                        .logoutnBtn {
+                        .loginBtn {
                             width: 10rem;
                             padding: 0.6rem 5rem;
                             border: 0.2rem solid var(--pink);
@@ -292,22 +263,6 @@
                             &:hover {
                                 background-color: var(--pink);
                                 color: #fff;
-                            }
-                        }
-                        .logoutnBtn {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 0.6rem 6rem;
-                            color: #fff;
-                            background-color: var(--pink);
-                            svg {
-                                path {
-                                    color: #fff;
-                                }
-                            }
-                            &:hover {
-                                opacity: 0.8;
                             }
                         }
                     }

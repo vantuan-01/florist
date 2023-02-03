@@ -1,12 +1,14 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { faBars, faCartShopping, faMagnifyingGlass, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { logOutStatus, loginStatus, selectLogged } from '~/reducers/Login';
+import { loginStatus, selectLogged } from '~/reducers/Login';
+import { selectScale, setScale } from '~/reducers/Devices';
 import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
+import AuthBtn from '../AuthBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
 import Loading from '../Loading';
@@ -21,14 +23,13 @@ import { useRef } from 'react';
 function Header() {
     const auth = getAuth();
     const ref = useRef();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
     const [openPanel, setOpenPanel] = useState(false);
     const [isShrink, setIsShrink] = useState(false);
-    const [scale, setScale] = useState(false);
     const isLogged = useSelector(selectLogged);
+    const scale = useSelector(selectScale);
     useEffect(() => {
         const listenToScroll = () => {
             setIsShrink((isShrink) => {
@@ -72,13 +73,17 @@ function Header() {
 
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                getCartHistory();
-                dispatch(loginStatus(currentUser.uid));
-            } else {
-                dispatch(loginStatus(''));
+            try {
+                if (currentUser) {
+                    getCartHistory();
+                    dispatch(loginStatus(currentUser.uid));
+                } else {
+                    dispatch(loginStatus(''));
 
-                // console.log('no user');
+                    // console.log('no user');
+                }
+            } catch (error) {
+                console.log(error.message);
             }
         });
         return () => {
@@ -89,11 +94,14 @@ function Header() {
 
     const handleResize = () => {
         const width = window.innerWidth;
-        if (width <= 1300) {
-            setScale(true);
+        if (width <= 1300 && width > 800) {
+            dispatch(setScale('tablet'));
             setOpenPanel(false);
-        } else if (width > 1300) {
-            setScale(false);
+        } else if (width <= 800) {
+            dispatch(setScale('mobile'));
+            setOpenPanel(false);
+        } else {
+            dispatch(setScale('web'));
             setOpenPanel(false);
         }
     };
@@ -121,21 +129,6 @@ function Header() {
         document.body.style.overflow = 'hidden';
     };
 
-    const SignOut = () => {
-        signOut(auth)
-            .then(() => {
-                // console.log('logged out');
-                navigate('/signIn');
-                dispatch(logOutStatus(''));
-                dispatch(setOrderList([]));
-                dispatch(setTotalPrice(0));
-                dispatch(setTotalQty(0));
-            })
-            .catch((error) => {
-                // console.log('logout not worked');
-            });
-    };
-
     // if (!totalItems && !totalPrices && isLogged.length !== 0) {
     //     document.body.style.overflow = 'hidden';
     //     return <Loading />;
@@ -150,18 +143,18 @@ function Header() {
             >
                 <div className={styles.container}>
                     <div className={styles.col_2}>
-                        {scale && (
+                        {scale === 'tablet' || scale === 'mobile' ? (
                             <button onClick={handleOpen}>
                                 <FontAwesomeIcon icon={faBars} size="2x" />
                             </button>
-                        )}
+                        ) : null}
                         <Link to={config.home}>
                             <img className={styles.logo} src={Images.logo} alt="logo" />
                         </Link>
                     </div>
                     <div className={styles.col_10}>
                         <div className={styles.options}>
-                            {!scale ? (
+                            {scale === 'web' ? (
                                 <div className={styles.options_6}>
                                     <ul>
                                         {navlink &&
@@ -187,8 +180,8 @@ function Header() {
                                 {isLogged && isLogged.length !== 0 ? (
                                     <ul>
                                         <li>
-                                            {!scale ? (
-                                                <button onClick={handleOpen}>
+                                            {scale === 'web' ? (
+                                                <button className={styles.search_btn} onClick={handleOpen}>
                                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                                 </button>
                                             ) : (
@@ -208,12 +201,11 @@ function Header() {
                                                 </span>
                                             </NavLink>
                                         </li>
-                                        <li>
-                                            <button className={styles.logoutnBtn} onClick={SignOut}>
-                                                <FontAwesomeIcon icon={faRightFromBracket} />
-                                                LogOut
-                                            </button>
-                                        </li>
+                                        {scale !== 'mobile' && (
+                                            <li>
+                                                <AuthBtn signout />
+                                            </li>
+                                        )}
                                     </ul>
                                 ) : (
                                     <Link className={styles.loginBtn} to={config.signIn}>
