@@ -36,7 +36,7 @@ function ListItem({ items }) {
                                     <div className={styles.menu_link_widget}>
                                         <Widget icon={faMagnifyingGlass} id={item.id} />
                                         <Widget icon={faCartShopping} addOne={item} />
-                                        <Widget icon={faHeart} />
+                                        <Widget icon={faHeart} love />
                                     </div>
                                 </div>
                                 <div className={styles.block_content}>

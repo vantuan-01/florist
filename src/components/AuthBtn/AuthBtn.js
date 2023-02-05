@@ -54,12 +54,12 @@ function AuthBtn({ signin, signout, register }) {
 
     const SignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const userUID = auth.currentUser ? auth.currentUser.uid : null;
+            .then((currentUser) => {
+                const useruid = auth.currentUser ? auth.currentUser.uid : null;
+                const useremail = auth.currentUser ? auth.currentUser.email : null;
                 dispatch(setIsValid(''));
                 navigate('/');
-                dispatch(loginStatus(userUID));
-                console.log('userCredential: ', userCredential);
+                dispatch(loginStatus({ useruid, useremail }));
             })
             .catch((error) => {
                 const errorCode = error.code;

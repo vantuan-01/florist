@@ -8,11 +8,12 @@ const loginSlice = createSlice({
     reducers: {
         loginStatus(state, action) {
             state.logged = action.payload;
-            localStorage.setItem('userUID', action.payload);
+            localStorage.setItem('userUID', action.payload.useruid);
+            localStorage.setItem('userEmail', action.payload.useremail);
         },
         logOutStatus(state, action) {
             state.logged = action.payload;
-            localStorage.removeItem('userUID');
+            localStorage.clear();
         },
     },
 });

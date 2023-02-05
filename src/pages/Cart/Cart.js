@@ -7,6 +7,7 @@ import Empty from '~/components/Empty';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { selectLogged } from '~/reducers/Login';
 import styles from './Cart.module.scss';
 import { updateCart } from '~/features';
 
@@ -15,6 +16,7 @@ function Cart() {
     const dispatch = useDispatch();
     const totalPrice = useSelector(selectTotalPrice);
     const totalQty = useSelector(selectTotalQty);
+    const isLogged = useSelector(selectLogged);
 
     const handleDelItem = async (id) => {
         dispatch(removeProduct(id));

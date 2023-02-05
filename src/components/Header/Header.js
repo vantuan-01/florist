@@ -1,7 +1,7 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { loginStatus, selectLogged } from '~/reducers/Login';
 import { selectScale, setScale } from '~/reducers/Devices';
 import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
@@ -75,8 +75,10 @@ function Header() {
         const unSub = onAuthStateChanged(auth, (currentUser) => {
             try {
                 if (currentUser) {
+                    const useruid = auth.currentUser ? auth.currentUser.uid : null;
+                    const useremail = auth.currentUser ? auth.currentUser.email : null;
+                    dispatch(loginStatus({ useruid, useremail }));
                     getCartHistory();
-                    dispatch(loginStatus(currentUser.uid));
                 } else {
                     dispatch(loginStatus(''));
 
@@ -125,7 +127,7 @@ function Header() {
         document.body.style.overflow = '';
     };
     const handleOpen = () => {
-        setOpenPanel(!openPanel);
+        setOpenPanel(true);
         document.body.style.overflow = 'hidden';
     };
 
@@ -177,48 +179,52 @@ function Header() {
                                 </div>
                             ) : null}
                             <div className={styles.options_3}>
-                                {isLogged && isLogged.length !== 0 ? (
-                                    <ul>
+                                <ul>
+                                    {scale === 'web' ? (
                                         <li>
-                                            {scale === 'web' ? (
-                                                <button className={styles.search_btn} onClick={handleOpen}>
-                                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                                </button>
-                                            ) : (
-                                                <p></p>
-                                            )}
+                                            <button className={styles.search_btn} onClick={handleOpen}>
+                                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                            </button>
                                         </li>
+                                    ) : null}
 
-                                        <li>
-                                            <NavLink to={config.cart}>
-                                                <div className={styles.total_qty}>
-                                                    <FontAwesomeIcon icon={faCartShopping} />
-                                                    <span>{totalItems && totalItems !== 0 ? totalItems : 0}</span>
-                                                </div>
-                                                <span className={styles.total_price}>
-                                                    $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
-                                                    .00
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        {scale !== 'mobile' && (
-                                            <li>
-                                                <AuthBtn signout />
-                                            </li>
+                                    <li>
+                                        <NavLink to={config.cart}>
+                                            <div className={styles.total_qty}>
+                                                <FontAwesomeIcon icon={faCartShopping} />
+                                                <span>{totalItems && totalItems !== 0 ? totalItems : 0}</span>
+                                            </div>
+                                            <span className={styles.total_price}>
+                                                $ {totalPrices && totalPrices !== 0 ? totalPrices : 0}
+                                                .00
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        {isLogged && isLogged.length !== 0 ? (
+                                            <>
+                                                {scale !== 'mobile' ? (
+                                                    <AuthBtn signout />
+                                                ) : (
+                                                    <Link className={styles.loginBtn} to={config.signIn}>
+                                                        log in
+                                                    </Link>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <Link className={styles.loginBtn} to={config.signIn}>
+                                                log in
+                                            </Link>
                                         )}
-                                    </ul>
-                                ) : (
-                                    <Link className={styles.loginBtn} to={config.signIn}>
-                                        log in
-                                    </Link>
-                                )}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} scale={scale} />
+            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} />
         </>
     );
 }

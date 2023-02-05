@@ -102,21 +102,20 @@
                                     color: var(--pink);
                                 }
                             }
-                        }
-                    }
-                    .loginBtn {
-                        width: 10rem;
-                        padding: 0.6rem 5rem;
-                        border: 0.2rem solid var(--pink);
-                        border-radius: 2rem;
-                        text-transform: capitalize;
-                        color: var(--pink);
-                        font-size: 1.8rem;
-                        font-weight: 600;
-                        transition: all 300ms linear;
-                        &:hover {
-                            background-color: var(--pink);
-                            color: #fff;
+                            .loginBtn {
+                                padding: 0.6rem 5rem;
+                                border: 0.2rem solid var(--pink);
+                                border-radius: 2rem;
+                                text-transform: capitalize;
+                                color: var(--pink);
+                                font-size: 1.8rem;
+                                font-weight: 600;
+                                transition: all 300ms linear;
+                                &:hover {
+                                    background-color: var(--pink);
+                                    color: #fff;
+                                }
+                            }
                         }
                     }
                 }
@@ -244,25 +243,25 @@
                                         }
                                     }
                                     .total_price {
+                                        display: none;
                                         font-size: 2rem;
                                         color: var(--pink);
                                     }
                                 }
-                            }
-                        }
-                        .loginBtn {
-                            width: 10rem;
-                            padding: 0.6rem 5rem;
-                            border: 0.2rem solid var(--pink);
-                            border-radius: 2rem;
-                            text-transform: capitalize;
-                            color: var(--pink);
-                            font-size: 1.8rem;
-                            font-weight: 600;
-                            transition: all 300ms linear;
-                            &:hover {
-                                background-color: var(--pink);
-                                color: #fff;
+                                .loginBtn {
+                                    padding: 0.5rem 3rem;
+                                    border: 0.2rem solid var(--pink);
+                                    border-radius: 2rem;
+                                    text-transform: capitalize;
+                                    color: var(--pink);
+                                    font-size: 1.4rem;
+                                    font-weight: 600;
+                                    transition: all 300ms linear;
+                                    &:hover {
+                                        background-color: var(--pink);
+                                        color: #fff;
+                                    }
+                                }
                             }
                         }
                     }

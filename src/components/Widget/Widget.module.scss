@@ -22,3 +22,16 @@
         }
     }
 }
+
+// ---------------- Break Points -----------------
+// Tablet
+@media (min-width: 800px) and (max-width: 1224px) {
+}
+
+// Mobile
+@media (max-width: 800px) {
+    .widget {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+}

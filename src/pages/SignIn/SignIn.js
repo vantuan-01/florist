@@ -19,14 +19,14 @@ function SignIn() {
         inputRef.current.focus();
     }, [isRegist]);
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem('userUID');
-        if (loggedInUser && isLogged.length !== 0) {
-            navigate('/');
-        } else if (!loggedInUser) {
-            navigate('/SignIn');
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     const loggedInUser = localStorage.getItem('userUID');
+    //     if (loggedInUser && isLogged.length !== 0) {
+    //         navigate('/');
+    //     } else if (!loggedInUser) {
+    //         navigate('/signIn');
+    //     }
+    // }, []);
 
     const handleChangeForm = () => {
         dispatch(setIsRegist(!isRegist));

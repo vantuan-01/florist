@@ -4,22 +4,25 @@ import { addProduct, selectOrderList, selectQty, selectTotalPrice, selectTotalQt
 import { faShoppingBag, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QtyButton from '~/components/QtyButton';
 import clsx from 'clsx';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { selectLogged } from '~/reducers/Login';
 import styles from './ProductDetail.module.scss';
 import { updateCart } from '~/features';
-import { useParams } from 'react-router-dom';
 
 function ProductDetail() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { id } = useParams();
     const [detailItems, setDetailItems] = useState();
     const [description, setDescription] = useState();
     const [changeImg, setChangeImg] = useState();
     const [changeLove, setChangeLove] = useState();
+    const isLogged = useSelector(selectLogged);
     const presentQty = useSelector(selectQty);
     const orderList = useSelector(selectOrderList);
     const totalPrice = useSelector(selectTotalPrice);
@@ -35,8 +38,12 @@ function ProductDetail() {
     }, [orderList]);
 
     const handleAddToCart = () => {
-        const groupDetailItem = { detailItems, presentQty };
-        dispatch(addProduct(groupDetailItem));
+        if (isLogged) {
+            const groupDetailItem = { detailItems, presentQty };
+            dispatch(addProduct(groupDetailItem));
+        } else {
+            const cf = window.confirm('You need to log in to buy stuff') ? navigate('/signIn') : null;
+        }
     };
 
     return (

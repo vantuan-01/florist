@@ -14,13 +14,17 @@ import clsx from 'clsx';
 import config from '~/config/routes';
 import { forwardRef } from 'react';
 import navlink from '~/config/navlink';
+import { selectLogged } from '~/reducers/Login';
+import { selectScale } from '~/reducers/Devices';
 import styles from './SearchResult.module.scss';
 import { useRef } from 'react';
 
-function SearchResult({ openPanel, handleClose, scale }, ref) {
+function SearchResult({ openPanel, handleClose }, ref) {
     const inputRef = useRef();
     const dispatch = useDispatch();
     const searched = useSelector(selectSearch);
+    const scale = useSelector(selectScale);
+    const isLogged = useSelector(selectLogged);
     const [searchValue, setSearchValue] = useState('');
     const [listProduct, setListProduct] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -162,9 +166,11 @@ function SearchResult({ openPanel, handleClose, scale }, ref) {
                                             </NavLink>
                                         </li>
                                     ))}
-                                <li style={{ marginTop: '1rem' }}>
-                                    <AuthBtn signout />
-                                </li>
+                                {isLogged && isLogged.length !== 0 && (
+                                    <li style={{ marginTop: '1rem' }}>
+                                        <AuthBtn signout />
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     </div>
