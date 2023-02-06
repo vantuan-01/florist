@@ -18,7 +18,7 @@ function Cart() {
     const totalQty = useSelector(selectTotalQty);
     const isLogged = useSelector(selectLogged);
 
-    const handleDelItem = async (id) => {
+    const handleDelItem = (id) => {
         dispatch(removeProduct(id));
     };
     useEffect(() => {

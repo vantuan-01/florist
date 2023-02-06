@@ -1,10 +1,12 @@
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { logOutStatus, loginStatus } from '~/reducers/Login';
 import { selectEmail, selectIsRegist, selectPassword, setIsRegist, setIsValid } from '~/reducers/Auth';
-import { setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
+import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { db } from '~/utils/firebase';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import styles from './AuthBtn.module.scss';
 import { useEffect } from 'react';
@@ -17,6 +19,8 @@ function AuthBtn({ signin, signout, register }) {
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
     const isRegist = useSelector(selectIsRegist);
+    const TPrice = useSelector(selectTotalPrice);
+    const TQty = useSelector(selectTotalQty);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -39,7 +43,6 @@ function AuthBtn({ signin, signout, register }) {
     const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Register
                 dispatch(setIsValid(''));
                 dispatch(setIsRegist(false));
                 alert('Resgist successful');
@@ -58,12 +61,13 @@ function AuthBtn({ signin, signout, register }) {
                 const useruid = auth.currentUser ? auth.currentUser.uid : null;
                 const useremail = auth.currentUser ? auth.currentUser.email : null;
                 dispatch(setIsValid(''));
-                navigate('/');
                 dispatch(loginStatus({ useruid, useremail }));
+                // getCartFirtTime(TPrice, TQty);
+                navigate('/');
             })
             .catch((error) => {
                 const errorCode = error.code;
-                dispatch(setIsValid(error.code));
+                dispatch(setIsValid(errorCode));
 
                 // console.log(`login error: ${errorCode}`);
             });
@@ -80,6 +84,15 @@ function AuthBtn({ signin, signout, register }) {
             .catch((error) => {
                 console.log('logout not worked');
             });
+    };
+
+    const getCartFirtTime = async (totalPrice, totalQty) => {
+        await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), {
+            totalPrice,
+            totalQty,
+        });
+        localStorage.setItem('totalPrice', totalPrice);
+        localStorage.setItem('totalQty', totalQty);
     };
     return (
         <>

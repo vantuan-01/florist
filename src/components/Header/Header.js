@@ -116,7 +116,9 @@ function Header() {
             // console.log('Document data:', obList);
             dispatch(setOrderList(obList.orderList));
             dispatch(setTotalPrice(obList.totalPrice));
+            localStorage.setItem('totalPrice', obList.totalPrice);
             dispatch(setTotalQty(obList.totalQty));
+            localStorage.setItem('totalQty', obList.totalQty);
         } else {
             // console.log('No such document!');
         }
