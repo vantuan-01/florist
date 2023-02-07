@@ -86,14 +86,14 @@ function AuthBtn({ signin, signout, register }) {
             });
     };
 
-    const getCartFirtTime = async (totalPrice, totalQty) => {
-        await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), {
-            totalPrice,
-            totalQty,
-        });
-        localStorage.setItem('totalPrice', totalPrice);
-        localStorage.setItem('totalQty', totalQty);
-    };
+    // const getCartFirtTime = async (totalPrice, totalQty) => {
+    //     await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), {
+    //         totalPrice,
+    //         totalQty,
+    //     });
+    //     localStorage.setItem('totalPrice', totalPrice);
+    //     localStorage.setItem('totalQty', totalQty);
+    // };
     return (
         <>
             {signin ? (

@@ -166,7 +166,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                             </NavLink>
                                         </li>
                                     ))}
-                                {isLogged && isLogged.length !== 0 && (
+                                {isLogged && isLogged.length !== 0 && scale === 'mobile' && (
                                     <li style={{ marginTop: '1rem' }}>
                                         <AuthBtn signout />
                                     </li>

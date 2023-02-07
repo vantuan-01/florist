@@ -1,37 +1,50 @@
-import { selectIsRegist, selectIsValid, setEmail, setIsRegist, setPassword } from '~/reducers/Auth';
+import {
+    selectEmail,
+    selectIsRegist,
+    selectIsValid,
+    selectPassword,
+    setEmail,
+    setIsRegist,
+    setIsValid,
+    setPassword,
+} from '~/reducers/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 import AuthBtn from '~/components/AuthBtn';
 import Images from '~/assets/images';
-import { selectLogged } from '~/reducers/Login';
 import styles from './SignIn.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const isValid = useSelector(selectIsValid);
     const isRegist = useSelector(selectIsRegist);
     const inputRef = useRef();
-    const isLogged = useSelector(selectLogged);
+    const mail = useSelector(selectEmail);
+    const pass = useSelector(selectPassword);
     useEffect(() => {
         inputRef.current.focus();
     }, [isRegist]);
 
-    // useEffect(() => {
-    //     const loggedInUser = localStorage.getItem('userUID');
-    //     if (loggedInUser && isLogged.length !== 0) {
-    //         navigate('/');
-    //     } else if (!loggedInUser) {
-    //         navigate('/signIn');
-    //     }
-    // }, []);
+    useEffect(() => {
+        dispatch(setIsValid(''));
+    }, [mail, pass]);
 
     const handleChangeForm = () => {
         dispatch(setIsRegist(!isRegist));
         dispatch(setEmail(''));
         dispatch(setPassword(''));
+    };
+
+    const handleChangeEmail = (e) => {
+        const email = e.target.value.replace(/\s/g, '');
+        dispatch(setEmail(email));
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === ' ') {
+            e.preventDefault();
+        }
     };
 
     return (
@@ -50,7 +63,8 @@ function SignIn() {
                             className={styles.login_input}
                             type="text"
                             placeholder="Email"
-                            onChange={(e) => dispatch(setEmail(e.target.value))}
+                            onKeyDown={handleKeyDown}
+                            onChange={handleChangeEmail}
                         />
                         <input
                             className={styles.login_input}

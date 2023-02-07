@@ -115,6 +115,7 @@ function Header() {
             const obList = docSnap.data();
             // console.log('Document data:', obList);
             dispatch(setOrderList(obList.orderList));
+            localStorage.setItem('orderList', obList.orderList);
             dispatch(setTotalPrice(obList.totalPrice));
             localStorage.setItem('totalPrice', obList.totalPrice);
             dispatch(setTotalQty(obList.totalQty));
@@ -204,15 +205,7 @@ function Header() {
                                     </li>
                                     <li>
                                         {isLogged && isLogged.length !== 0 ? (
-                                            <>
-                                                {scale !== 'mobile' ? (
-                                                    <AuthBtn signout />
-                                                ) : (
-                                                    <Link className={styles.loginBtn} to={config.signIn}>
-                                                        log in
-                                                    </Link>
-                                                )}
-                                            </>
+                                            <>{scale !== 'mobile' ? <AuthBtn signout /> : null}</>
                                         ) : (
                                             <Link className={styles.loginBtn} to={config.signIn}>
                                                 log in
