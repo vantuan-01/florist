@@ -27,15 +27,9 @@ function Checkout() {
                     <input type="text" placeholder="Email or phone number" />
                 </div>
                 <h2>Shipping address</h2>
-                <div className={styles.row_2}>
-                    <div className={styles.input_group}>
-                        <label htmlFor="">First name</label>
-                        <input type="text" />
-                    </div>
-                    <div className={styles.input_group}>
-                        <label htmlFor="">Last name</label>
-                        <input type="text" />
-                    </div>
+                <div className={styles.input_group}>
+                    <label htmlFor="">Full name</label>
+                    <input type="text" />
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="">

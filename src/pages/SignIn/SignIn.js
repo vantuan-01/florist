@@ -86,7 +86,7 @@ function SignIn() {
                     </div>
                     <div className={styles.footer}>
                         <button className={styles.fogot_btn} onClick={handleChangeForm}>
-                            {isRegist ? '<- Back to login' : "don't have account?"}
+                            {isRegist ? 'Back to login' : "don't have account?"}
                         </button>
                         <button className={styles.fogot_btn} onClick={() => alert('Features coming soon')}>
                             forgot your account?
