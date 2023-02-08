@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react';
 import AuthBtn from '../AuthBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images/index';
-import Loading from '../Loading';
 import SearchResult from '../SearchResult';
 import clsx from 'clsx';
 import config from '~/config/routes';
@@ -78,14 +77,14 @@ function Header() {
                     const useruid = auth.currentUser ? auth.currentUser.uid : null;
                     const useremail = auth.currentUser ? auth.currentUser.email : null;
                     dispatch(loginStatus({ useruid, useremail }));
-                    getCartHistory();
+                    getCartHistory(auth.currentUser.email);
                 } else {
-                    dispatch(loginStatus(''));
+                    dispatch(loginStatus());
 
                     // console.log('no user');
                 }
             } catch (error) {
-                console.log(error.message);
+                // console.log(error.message);
             }
         });
         return () => {
@@ -108,14 +107,13 @@ function Header() {
         }
     };
 
-    const getCartHistory = async () => {
+    const getCartHistory = async (email) => {
         const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const obList = docSnap.data();
             // console.log('Document data:', obList);
             dispatch(setOrderList(obList.orderList));
-            localStorage.setItem('orderList', obList.orderList);
             dispatch(setTotalPrice(obList.totalPrice));
             localStorage.setItem('totalPrice', obList.totalPrice);
             dispatch(setTotalQty(obList.totalQty));

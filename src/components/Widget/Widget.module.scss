@@ -26,6 +26,14 @@
 // ---------------- Break Points -----------------
 // Tablet
 @media (min-width: 800px) and (max-width: 1224px) {
+    .widget {
+        background-color: #f1faee;
+        svg {
+            path {
+                color: var(--pink);
+            }
+        }
+    }
 }
 
 // Mobile
@@ -33,5 +41,11 @@
     .widget {
         width: 3.5rem;
         height: 3.5rem;
+        background-color: #f1faee;
+        svg {
+            path {
+                color: var(--pink);
+            }
+        }
     }
 }

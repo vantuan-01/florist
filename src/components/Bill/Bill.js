@@ -16,6 +16,7 @@ function Bill({ checkout }) {
 
     const handleCheckOut = async () => {
         dispatch(removeAllProducts());
+        localStorage.clear('totalPrice', 'totalQty');
         await deleteDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'));
     };
 

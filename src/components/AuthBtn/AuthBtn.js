@@ -19,8 +19,6 @@ function AuthBtn({ signin, signout, register }) {
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
     const isRegist = useSelector(selectIsRegist);
-    const TPrice = useSelector(selectTotalPrice);
-    const TQty = useSelector(selectTotalQty);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -62,7 +60,6 @@ function AuthBtn({ signin, signout, register }) {
                 const useremail = auth.currentUser ? auth.currentUser.email : null;
                 dispatch(setIsValid(''));
                 dispatch(loginStatus({ useruid, useremail }));
-                // getCartFirtTime(TPrice, TQty);
                 navigate('/');
             })
             .catch((error) => {
@@ -76,24 +73,17 @@ function AuthBtn({ signin, signout, register }) {
     const SignOut = () => {
         signOut(auth)
             .then(() => {
-                dispatch(logOutStatus(''));
-                dispatch(setOrderList([]));
-                dispatch(setTotalPrice(0));
-                dispatch(setTotalQty(0));
+                dispatch(logOutStatus());
+                dispatch(setOrderList());
+                dispatch(setTotalPrice());
+                dispatch(setTotalQty());
+                window.localStorage.clear();
             })
             .catch((error) => {
                 console.log('logout not worked');
             });
     };
 
-    // const getCartFirtTime = async (totalPrice, totalQty) => {
-    //     await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), {
-    //         totalPrice,
-    //         totalQty,
-    //     });
-    //     localStorage.setItem('totalPrice', totalPrice);
-    //     localStorage.setItem('totalQty', totalQty);
-    // };
     return (
         <>
             {signin ? (

@@ -93,9 +93,9 @@ function Footer() {
                             <div className={styles.menu_link_news}>
                                 <h2>Newletter</h2>
                                 <p>Subcribe to our newsletter to get more free tips. No Spam, Promise.</p>
-                                <form action="">
+                                <form>
                                     <input type="text" placeholder="Email" />
-                                    <button>Subscribe</button>
+                                    <button type="button">Subscribe</button>
                                 </form>
                             </div>
                         </div>

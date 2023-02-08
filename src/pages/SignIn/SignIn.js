@@ -14,8 +14,10 @@ import { useEffect, useRef } from 'react';
 import AuthBtn from '~/components/AuthBtn';
 import Images from '~/assets/images';
 import styles from './SignIn.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const isValid = useSelector(selectIsValid);
     const isRegist = useSelector(selectIsRegist);
@@ -29,6 +31,14 @@ function SignIn() {
     useEffect(() => {
         dispatch(setIsValid(''));
     }, [mail, pass]);
+
+    useEffect(() => {
+        const userUID = localStorage.getItem('userUID');
+        if (userUID && userUID.length !== 0) {
+            navigate('/');
+            console.log('run', userUID);
+        }
+    }, [navigate]);
 
     const handleChangeForm = () => {
         dispatch(setIsRegist(!isRegist));
@@ -76,9 +86,9 @@ function SignIn() {
                     </div>
                     <div className={styles.footer}>
                         <button className={styles.fogot_btn} onClick={handleChangeForm}>
-                            {isRegist ? 'have an account?' : "don't have account?"}
+                            {isRegist ? '<- Back to login' : "don't have account?"}
                         </button>
-                        <button className={styles.fogot_btn} onClick={() => alert('kememay')}>
+                        <button className={styles.fogot_btn} onClick={() => alert('Features coming soon')}>
                             forgot your account?
                         </button>
                     </div>

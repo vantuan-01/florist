@@ -25,10 +25,10 @@ const cartSlice = createSlice({
             let findId = state.orderList.findIndex((item) => item.detailItems.id === action.payload.detailItems.id);
             if (findId === -1) {
                 state.orderList = [...state.orderList, action.payload];
-                localStorage.setItem('orderList', JSON.stringify(state.orderList));
+                // localStorage.setItem('orderList', JSON.stringify(state.orderList));
             } else {
                 state.orderList[findId].presentQty = action.payload.presentQty;
-                localStorage.setItem('orderList', JSON.stringify(state.orderList));
+                // localStorage.setItem('orderList', JSON.stringify(state.orderList));
             }
             state.totalPrice = state.orderList.reduce((total, item) => {
                 return total + item.presentQty * item.detailItems.price;
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
             let index = state.orderList.findIndex((item) => item.detailItems.id === action.payload);
             state.orderList.splice(index, 1);
             // localStorage.setItem('orderList', state.orderList);
-            localStorage.setItem('orderList', JSON.stringify(state.orderList));
+            // localStorage.setItem('orderList', JSON.stringify(state.orderList));
             state.totalPrice = state.orderList.reduce((total, item) => {
                 return total + item.presentQty * item.detailItems.price;
             }, 0);
