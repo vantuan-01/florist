@@ -10,7 +10,7 @@ import styles from './AuthBtn.module.scss';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AuthBtn({ signin, signout, register }) {
+function AuthBtn({ signin, signout, register, openPanel, handleClose }) {
     const auth = getAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -76,6 +76,7 @@ function AuthBtn({ signin, signout, register }) {
                 dispatch(setTotalPrice());
                 dispatch(setTotalQty());
                 localStorage.clear();
+                handleClose(!openPanel);
                 navigate('/');
             })
             .catch((error) => {

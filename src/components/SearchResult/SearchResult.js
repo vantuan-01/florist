@@ -168,7 +168,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                     ))}
                                 {isLogged && isLogged.length !== 0 && scale === 'mobile' && (
                                     <li style={{ marginTop: '1rem' }}>
-                                        <AuthBtn signout />
+                                        <AuthBtn signout openPanel={openPanel} handleClose={handleClose} />
                                     </li>
                                 )}
                             </ul>

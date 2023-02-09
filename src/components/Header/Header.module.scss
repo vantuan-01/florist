@@ -250,16 +250,9 @@
                                 }
                                 .loginBtn {
                                     padding: 0.5rem 3rem;
-                                    border: 0.2rem solid var(--pink);
-                                    border-radius: 2rem;
-                                    text-transform: capitalize;
-                                    color: var(--pink);
                                     font-size: 1.4rem;
-                                    font-weight: 600;
-                                    transition: all 300ms linear;
+                                    margin-left: 2rem;
                                     &:hover {
-                                        background-color: var(--pink);
-                                        color: #fff;
                                     }
                                 }
                             }
