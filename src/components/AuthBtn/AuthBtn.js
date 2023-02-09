@@ -1,12 +1,10 @@
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
 import { logOutStatus, loginStatus } from '~/reducers/Login';
 import { selectEmail, selectIsRegist, selectPassword, setIsRegist, setIsValid } from '~/reducers/Auth';
-import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
+import { setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { db } from '~/utils/firebase';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import styles from './AuthBtn.module.scss';
 import { useEffect } from 'react';
@@ -77,7 +75,8 @@ function AuthBtn({ signin, signout, register }) {
                 dispatch(setOrderList());
                 dispatch(setTotalPrice());
                 dispatch(setTotalQty());
-                window.localStorage.clear();
+                localStorage.clear();
+                navigate('/');
             })
             .catch((error) => {
                 console.log('logout not worked');

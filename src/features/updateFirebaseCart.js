@@ -6,7 +6,8 @@ import { getAuth } from 'firebase/auth';
 const auth = getAuth();
 
 const getCart = async (orderList, totalPrice, totalQty) => {
-    await setDoc(doc(db, `${auth.currentUser.email}`, 'cartDetails'), {
+    const mail = auth.currentUser.email;
+    await setDoc(doc(db, `${mail}`, 'cartDetails'), {
         orderList,
         totalPrice,
         totalQty,
@@ -14,5 +15,7 @@ const getCart = async (orderList, totalPrice, totalQty) => {
 };
 export const updateCart = (orderList, totalPrice, totalQty) => {
     const useruid = localStorage.getItem('userUID');
-    if (useruid && useruid !== 0) getCart(orderList, totalPrice, totalQty);
+    if (useruid && useruid.length !== 0 && useruid !== null) {
+        getCart(orderList, totalPrice, totalQty);
+    }
 };

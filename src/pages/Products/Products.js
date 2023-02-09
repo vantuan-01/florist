@@ -2,6 +2,7 @@ import * as httpRequest from '~/utils/httpRequest';
 
 import { Route, Routes } from 'react-router-dom';
 import { selectFilter, selectPaginatePath, setFilter, setPaginatePath } from '~/reducers/Pagination';
+import { selectOrderList, selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -10,12 +11,16 @@ import Loading from '~/components/Loading';
 import ProductDetail from '~/pages/ProductDetail';
 import { selectSortPath } from '~/reducers/Products';
 import styles from './Products.module.scss';
+import { updateCart } from '~/features';
 
 function Products() {
     const dispatch = useDispatch();
     const [items, setItems] = useState();
     const filter = useSelector(selectFilter);
     const sortPath = useSelector(selectSortPath);
+    const orderList = useSelector(selectOrderList);
+    const totalPrice = useSelector(selectTotalPrice);
+    const totalQty = useSelector(selectTotalQty);
     useEffect(() => {
         httpRequest
             .get(
@@ -26,6 +31,10 @@ function Products() {
                 dispatch(setPaginatePath(res.data.pagination));
             });
     }, [filter, sortPath]);
+
+    useEffect(() => {
+        updateCart(orderList, totalPrice, totalQty);
+    }, [orderList]);
 
     if (!items) {
         document.body.style.overflow = 'hidden';

@@ -77,7 +77,7 @@ function Header() {
                     const useruid = auth.currentUser ? auth.currentUser.uid : null;
                     const useremail = auth.currentUser ? auth.currentUser.email : null;
                     dispatch(loginStatus({ useruid, useremail }));
-                    getCartHistory(auth.currentUser.email);
+                    getCartHistory();
                 } else {
                     dispatch(loginStatus());
 
@@ -107,17 +107,18 @@ function Header() {
         }
     };
 
-    const getCartHistory = async (email) => {
+    const getCartHistory = async () => {
         const docRef = doc(db, `${auth.currentUser.email}`, `cartDetails`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const obList = docSnap.data();
             // console.log('Document data:', obList);
             dispatch(setOrderList(obList.orderList));
+            localStorage.setItem('orderList', JSON.stringify(obList.orderList));
             dispatch(setTotalPrice(obList.totalPrice));
-            localStorage.setItem('totalPrice', obList.totalPrice);
+            localStorage.setItem('totalPrice', JSON.stringify(obList.totalPrice));
             dispatch(setTotalQty(obList.totalQty));
-            localStorage.setItem('totalQty', obList.totalQty);
+            localStorage.setItem('totalQty', JSON.stringify(obList.totalQty));
         } else {
             // console.log('No such document!');
         }

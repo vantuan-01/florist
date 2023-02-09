@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const cartSlice = createSlice({
     name: 'cartSlice',
     initialState: {
-        // orderList: JSON.parse(localStorage.getItem('orderList')) || [],
-        orderList: [],
+        orderList: JSON.parse(localStorage.getItem('orderList')) || [],
+        // orderList: [],
         presentQty: 1,
         totalPrice: JSON.parse(localStorage.getItem('totalPrice')) || 0,
         // totalPrice: 0,
@@ -25,10 +25,10 @@ const cartSlice = createSlice({
             let findId = state.orderList.findIndex((item) => item.detailItems.id === action.payload.detailItems.id);
             if (findId === -1) {
                 state.orderList = [...state.orderList, action.payload];
-                // localStorage.setItem('orderList', JSON.stringify(state.orderList));
+                localStorage.setItem('orderList', JSON.stringify(state.orderList));
             } else {
                 state.orderList[findId].presentQty = action.payload.presentQty;
-                // localStorage.setItem('orderList', JSON.stringify(state.orderList));
+                localStorage.setItem('orderList', JSON.stringify(state.orderList));
             }
             state.totalPrice = state.orderList.reduce((total, item) => {
                 return total + item.presentQty * item.detailItems.price;
@@ -43,8 +43,7 @@ const cartSlice = createSlice({
         removeProduct(state, action) {
             let index = state.orderList.findIndex((item) => item.detailItems.id === action.payload);
             state.orderList.splice(index, 1);
-            // localStorage.setItem('orderList', state.orderList);
-            // localStorage.setItem('orderList', JSON.stringify(state.orderList));
+            localStorage.setItem('orderList', JSON.stringify(state.orderList));
             state.totalPrice = state.orderList.reduce((total, item) => {
                 return total + item.presentQty * item.detailItems.price;
             }, 0);
