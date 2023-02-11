@@ -348,6 +348,8 @@
                             .category {
                                 font-size: 2rem;
                                 color: var(--pink);
+                                margin-bottom: 1.5rem;
+                                display: block;
                             }
                             .name {
                                 font-size: 2.8rem;
@@ -380,7 +382,7 @@
                             position: absolute;
                             top: 0;
                             right: 0;
-                            font-size: 3rem;
+                            font-size: 2.5rem;
                             color: var(--pink);
                         }
                     }
@@ -473,7 +475,7 @@
                         margin-top: 1rem;
                         ul {
                             display: flex;
-                            gap: 5rem;
+                            gap: 2rem;
                             li {
                                 position: relative;
                                 list-style: none;
@@ -483,11 +485,7 @@
                                     border: none;
                                 }
                                 &:after {
-                                    content: '/';
-                                    position: absolute;
-                                    top: -2px;
-                                    right: -28px;
-                                    font-size: 2rem;
+                                    content: '';
                                 }
                             }
                         }
