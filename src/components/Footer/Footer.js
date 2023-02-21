@@ -105,7 +105,7 @@ function Footer() {
                                 <ul>
                                     <li>69 North Cleveland Street, Memphis,USA</li>
                                     <li>(123) 8111 9210 - (012) 1111 6868</li>
-                                    <li>Florisr@supportthem.com</li>
+                                    <li>Florist@supportthem.com</li>
                                 </ul>
                             </div>
                         </div>

@@ -1,8 +1,8 @@
+import { IsOpenPanel, loginStatus, selectLogged } from '~/reducers/Login';
 import { Link, NavLink } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { faBars, faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { loginStatus, selectLogged } from '~/reducers/Login';
 import { selectScale, setScale } from '~/reducers/Devices';
 import { selectTotalPrice, selectTotalQty, setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +25,7 @@ function Header() {
     const dispatch = useDispatch();
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    const [openPanel, setOpenPanel] = useState(false);
+    // const [openPanel, setOpenPanel] = useState(false);
     const [isShrink, setIsShrink] = useState(false);
     const isLogged = useSelector(selectLogged);
     const scale = useSelector(selectScale);
@@ -52,7 +52,8 @@ function Header() {
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (ref.current && !ref.current.contains(e.target)) {
-                setOpenPanel(false);
+                // setOpenPanel(false);
+                dispatch(IsOpenPanel(false));
                 document.body.style.overflow = '';
             }
         };
@@ -97,13 +98,16 @@ function Header() {
         const width = window.innerWidth;
         if (width <= 1300 && width > 800) {
             dispatch(setScale('tablet'));
-            setOpenPanel(false);
+            // setOpenPanel(false);
+            dispatch(IsOpenPanel(false));
         } else if (width <= 800) {
             dispatch(setScale('mobile'));
-            setOpenPanel(false);
+            // setOpenPanel(false);
+            dispatch(IsOpenPanel(false));
         } else {
             dispatch(setScale('web'));
-            setOpenPanel(false);
+            // setOpenPanel(false);
+            dispatch(IsOpenPanel(false));
         }
     };
 
@@ -124,12 +128,15 @@ function Header() {
         }
     };
 
-    const handleClose = (value) => {
-        setOpenPanel(value);
-        document.body.style.overflow = '';
-    };
+    // const handleClose = (value) => {
+    //     // setOpenPanel(value);
+    //     dispatch(IsOpenPanel(value));
+
+    //     document.body.style.overflow = '';
+    // };
     const handleOpen = () => {
-        setOpenPanel(true);
+        // setOpenPanel(true);
+        dispatch(IsOpenPanel(true));
         document.body.style.overflow = 'hidden';
     };
 
@@ -218,7 +225,7 @@ function Header() {
                 </div>
             </div>
 
-            <SearchResult handleClose={handleClose} openPanel={openPanel} ref={ref} />
+            <SearchResult ref={ref} />
         </>
     );
 }

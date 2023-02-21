@@ -1,5 +1,6 @@
 import * as httpRequest from '~/utils/httpRequest';
 
+import { IsOpenPanel, selectLogged, selectOpenPanel } from '~/reducers/Login';
 import { Link, NavLink } from 'react-router-dom';
 import { faCircleXmark, faMagnifyingGlass, faSpinner, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { searchName, selectSearch } from '~/reducers/Products';
@@ -14,17 +15,17 @@ import clsx from 'clsx';
 import config from '~/config/routes';
 import { forwardRef } from 'react';
 import navlink from '~/config/navlink';
-import { selectLogged } from '~/reducers/Login';
 import { selectScale } from '~/reducers/Devices';
 import styles from './SearchResult.module.scss';
 import { useRef } from 'react';
 
-function SearchResult({ openPanel, handleClose }, ref) {
+function SearchResult({}, ref) {
     const inputRef = useRef();
     const dispatch = useDispatch();
     const searched = useSelector(selectSearch);
     const scale = useSelector(selectScale);
     const isLogged = useSelector(selectLogged);
+    const openPanel = useSelector(selectOpenPanel);
     const [searchValue, setSearchValue] = useState('');
     const [listProduct, setListProduct] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -81,7 +82,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                             <button
                                 className={styles.searchResult_delbtn}
                                 onClick={() => {
-                                    handleClose(!openPanel);
+                                    dispatch(IsOpenPanel(false));
                                     handleClear();
                                 }}
                             >
@@ -116,7 +117,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                                         to={`${config.product}/${item.id}`}
                                                         onClick={() => {
                                                             document.body.style.overflow = '';
-                                                            handleClose(!openPanel);
+                                                            dispatch(IsOpenPanel(false));
                                                         }}
                                                     >
                                                         <img src={item.imageUrl} alt="searchResult_item" />
@@ -140,7 +141,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                 <div ref={ref} className={clsx(styles.wrapper, { [styles.wrapper_slide]: !openPanel })}>
                     <div className={styles.container}>
                         <div className={clsx(styles.header, { [styles.header_slide]: !openPanel })}>
-                            <button className={styles.header_backbtn} onClick={() => handleClose(!openPanel)}>
+                            <button className={styles.header_backbtn} onClick={() => dispatch(IsOpenPanel(false))}>
                                 <FontAwesomeIcon icon={faXmark} size="3x" />
                             </button>
                             <div className={styles.header_logo}>
@@ -160,7 +161,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                                     })
                                                 }
                                                 to={item.config}
-                                                onClick={() => handleClose(!openPanel)}
+                                                onClick={() => dispatch(IsOpenPanel(false))}
                                             >
                                                 {item.name}
                                             </NavLink>
@@ -168,7 +169,7 @@ function SearchResult({ openPanel, handleClose }, ref) {
                                     ))}
                                 {isLogged && isLogged.length !== 0 && scale === 'mobile' && (
                                     <li style={{ marginTop: '1rem' }}>
-                                        <AuthBtn signout openPanel={openPanel} handleClose={handleClose} />
+                                        <AuthBtn signout />
                                     </li>
                                 )}
                             </ul>

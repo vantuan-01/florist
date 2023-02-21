@@ -1,5 +1,5 @@
+import { IsOpenPanel, logOutStatus, loginStatus, selectOpenPanel } from '~/reducers/Login';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { logOutStatus, loginStatus } from '~/reducers/Login';
 import { selectEmail, selectIsRegist, selectPassword, setIsRegist, setIsValid } from '~/reducers/Auth';
 import { setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,14 @@ import styles from './AuthBtn.module.scss';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AuthBtn({ signin, signout, register, openPanel, handleClose }) {
+function AuthBtn({ signin, signout, register }) {
     const auth = getAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
     const isRegist = useSelector(selectIsRegist);
+    const openPanel = useSelector(selectOpenPanel);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -45,7 +46,6 @@ function AuthBtn({ signin, signout, register, openPanel, handleClose }) {
                 // console.log('Create account successful');
             })
             .catch((error) => {
-                const errorCode = error.code;
                 dispatch(setIsValid(error.code));
                 // console.log(`register error: ${errorCode}`);
             });
@@ -61,8 +61,7 @@ function AuthBtn({ signin, signout, register, openPanel, handleClose }) {
                 navigate('/');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                dispatch(setIsValid(errorCode));
+                dispatch(setIsValid(error.code));
 
                 // console.log(`login error: ${errorCode}`);
             });
@@ -76,11 +75,11 @@ function AuthBtn({ signin, signout, register, openPanel, handleClose }) {
                 dispatch(setTotalPrice());
                 dispatch(setTotalQty());
                 localStorage.clear();
-                handleClose(!openPanel);
+                dispatch(IsOpenPanel(false));
                 navigate('/');
             })
             .catch((error) => {
-                console.log('logout not worked');
+                console.log('logout not worked', error.message);
             });
     };
 
