@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const productSlice = createSlice({
     name: 'productSlice',
     initialState: {
+        items: [],
         sortPath: {
             _sort: '',
             _order: '',
@@ -11,6 +12,9 @@ const productSlice = createSlice({
         listSearched: [],
     },
     reducers: {
+        setItems(state, action) {
+            state.items = action.payload;
+        },
         sortPrice(state, action) {
             // if (action.payload.optionNum === 1) {
             //     const copyListItems = [...action.payload.items].sort((a, b) => a.price - b.price);
@@ -67,8 +71,9 @@ const productSlice = createSlice({
     },
 });
 
-export const { sortPrice, sortName, searchName } = productSlice.actions;
+export const { sortPrice, sortName, searchName, setItems } = productSlice.actions;
 export const productReducer = productSlice.reducer;
 export const selectSortPath = (state) => state.productReducer.sortPath;
 export const selectSortOption = (state) => state.productReducer.sortOption;
 export const selectSearch = (state) => state.productReducer.listSearched;
+export const selectItems = (state) => state.productReducer.items;

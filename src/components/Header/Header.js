@@ -25,18 +25,17 @@ function Header() {
     const dispatch = useDispatch();
     const totalItems = useSelector(selectTotalQty);
     const totalPrices = useSelector(selectTotalPrice);
-    // const [openPanel, setOpenPanel] = useState(false);
     const [isShrink, setIsShrink] = useState(false);
     const isLogged = useSelector(selectLogged);
     const scale = useSelector(selectScale);
     useEffect(() => {
         const listenToScroll = () => {
             setIsShrink((isShrink) => {
-                if (!isShrink && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) {
+                if (!isShrink && (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40)) {
                     return true;
                 }
 
-                if (isShrink && document.body.scrollTop < 4 && document.documentElement.scrollTop < 4) {
+                if (isShrink && document.body.scrollTop < 20 && document.documentElement.scrollTop < 20) {
                     return false;
                 }
 
@@ -52,7 +51,6 @@ function Header() {
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (ref.current && !ref.current.contains(e.target)) {
-                // setOpenPanel(false);
                 dispatch(IsOpenPanel(false));
                 document.body.style.overflow = '';
             }
@@ -98,15 +96,12 @@ function Header() {
         const width = window.innerWidth;
         if (width <= 1300 && width > 800) {
             dispatch(setScale('tablet'));
-            // setOpenPanel(false);
             dispatch(IsOpenPanel(false));
         } else if (width <= 800) {
             dispatch(setScale('mobile'));
-            // setOpenPanel(false);
             dispatch(IsOpenPanel(false));
         } else {
             dispatch(setScale('web'));
-            // setOpenPanel(false);
             dispatch(IsOpenPanel(false));
         }
     };
@@ -135,7 +130,6 @@ function Header() {
     //     document.body.style.overflow = '';
     // };
     const handleOpen = () => {
-        // setOpenPanel(true);
         dispatch(IsOpenPanel(true));
         document.body.style.overflow = 'hidden';
     };

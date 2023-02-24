@@ -7,17 +7,12 @@ import Pagination from '~/components/Pagination';
 import SelectSort from '~/components/SelectSort';
 import Widget from '~/components/Widget';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { selectItems } from '~/reducers/Products';
 import styles from './Products.module.scss';
+import { useSelector } from 'react-redux';
 
-function ListItem({ items }) {
-    const [productList, setProductList] = useState();
-
-    useEffect(() => {
-        if (items) {
-            setProductList(items);
-        }
-    }, [items]);
-
+function ListItem() {
+    const items = useSelector(selectItems);
     return (
         <>
             {items && items.length !== 0 && (
@@ -26,9 +21,9 @@ function ListItem({ items }) {
                 </div>
             )}
             <ul className={styles.list_items}>
-                {productList &&
-                    productList.length !== 0 &&
-                    productList.map((item, index) => {
+                {items &&
+                    items.length !== 0 &&
+                    items.map((item, index) => {
                         return (
                             <li className={styles.item} key={index}>
                                 <div className={styles.block_img}>
