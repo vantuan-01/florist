@@ -1,4 +1,4 @@
-import { IsOpenPanel, logOutStatus, loginStatus, selectOpenPanel } from '~/reducers/Login';
+import { IsOpenPanel, logOutStatus, loginStatus } from '~/reducers/Login';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { selectEmail, selectIsRegist, selectPassword, setIsRegist, setIsValid } from '~/reducers/Auth';
 import { setOrderList, setTotalPrice, setTotalQty } from '~/reducers/Cart';
@@ -17,7 +17,6 @@ function AuthBtn({ signin, signout, register }) {
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
     const isRegist = useSelector(selectIsRegist);
-    const openPanel = useSelector(selectOpenPanel);
 
     useEffect(() => {
         const handleKeyDown = (e) => {

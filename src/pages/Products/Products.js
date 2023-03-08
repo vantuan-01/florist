@@ -1,17 +1,16 @@
-import * as httpRequest from '~/utils/httpRequest';
-
 import { Route, Routes } from 'react-router-dom';
-import { selectFilter, selectPaginatePath, setFilter, setPaginatePath } from '~/reducers/Pagination';
-import { selectItems, selectSortPath, setItems } from '~/reducers/Products';
+import { selectItems, selectSortPath } from '~/reducers/Products';
 import { selectOrderList, selectTotalPrice, selectTotalQty } from '~/reducers/Cart';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 
 import ListItems from './ListItems';
 import Loading from '~/components/Loading';
 import ProductDetail from '~/pages/ProductDetail';
+import { fetchProductsApi } from './ProductsThunk';
+import { selectFilter } from '~/reducers/Pagination';
 import styles from './Products.module.scss';
 import { updateCart } from '~/features';
+import { useEffect } from 'react';
 
 function Products() {
     const dispatch = useDispatch();
@@ -23,14 +22,7 @@ function Products() {
     const totalQty = useSelector(selectTotalQty);
 
     useEffect(() => {
-        httpRequest
-            .get(
-                `/product/products?_sort=${sortPath._sort}&_order=${sortPath._order}&_page=${filter._page}&_limit=${filter._limit}`,
-            )
-            .then((res) => {
-                dispatch(setItems(res.data.data));
-                dispatch(setPaginatePath(res.data.pagination));
-            });
+        dispatch(fetchProductsApi());
     }, [filter, sortPath]);
 
     useEffect(() => {

@@ -44,7 +44,7 @@ function SelectSort({ items }) {
                 <ul className={clsx(styles.custom_select, { [styles.custom_select_slide]: openOption })}>
                     <li
                         onClick={() => {
-                            dispatch(sortPrice({ optionNum: 1, items }));
+                            dispatch(sortPrice({ optionNum: 1 }));
                             dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
@@ -53,7 +53,7 @@ function SelectSort({ items }) {
                     </li>
                     <li
                         onClick={() => {
-                            dispatch(sortPrice({ optionNum: 2, items }));
+                            dispatch(sortPrice({ optionNum: 2 }));
                             dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
@@ -62,7 +62,7 @@ function SelectSort({ items }) {
                     </li>
                     <li
                         onClick={() => {
-                            dispatch(sortName({ optionNum: 1, items }));
+                            dispatch(sortName({ optionNum: 1 }));
                             dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}
@@ -71,7 +71,7 @@ function SelectSort({ items }) {
                     </li>
                     <li
                         onClick={() => {
-                            dispatch(sortName({ optionNum: 2, items }));
+                            dispatch(sortName({ optionNum: 2 }));
                             dispatch(setFilter({ _page: 1 }));
                         }}
                         className={styles.custom_option}

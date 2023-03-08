@@ -31,7 +31,7 @@ function SearchResult({}, ref) {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         httpRequest.get('/product/products').then((res) => {
-            setListProduct(res.data);
+            setListProduct(res);
         });
     }, []);
 
