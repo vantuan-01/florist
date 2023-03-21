@@ -1,13 +1,14 @@
+import { Link, useNavigate } from 'react-router-dom';
 import { faFacebookF, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Images from '~/assets/images';
-import { Link } from 'react-router-dom';
 import config from '~/config/routes';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import styles from './Footer.module.scss';
 
 function Footer() {
+    const navigate = useNavigate();
     return (
         <div className={styles.footer}>
             <div className={styles.container}>
@@ -73,8 +74,8 @@ function Footer() {
                             <div className={styles.menu_link_widget}>
                                 <h2>Company</h2>
                                 <ul>
-                                    <li>About us</li>
-                                    <li>Servcies </li>
+                                    <li onClick={() => navigate('/about')}>About us</li>
+                                    <li onClick={() => navigate('/services')}>Services </li>
                                     <li>Contact us</li>
                                 </ul>
                             </div>
@@ -83,9 +84,9 @@ function Footer() {
                             <div className={styles.menu_link_widget}>
                                 <h2>Account</h2>
                                 <ul>
-                                    <li>My cart</li>
-                                    <li>Wisslist</li>
-                                    <li>Login/Register</li>
+                                    <li onClick={() => navigate('/cart')}>My cart</li>
+                                    <li>Wishlist</li>
+                                    <li onClick={() => navigate('/signIn')}>Login/Register</li>
                                 </ul>
                             </div>
                         </div>

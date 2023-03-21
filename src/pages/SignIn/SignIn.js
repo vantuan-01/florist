@@ -30,6 +30,7 @@ function SignIn() {
 
     useEffect(() => {
         dispatch(setIsValid(''));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mail, pass]);
 
     useEffect(() => {
@@ -64,7 +65,7 @@ function SignIn() {
                 <div className={styles.login}>
                     <div className={styles.header}>
                         <h1>Welcome to </h1>
-                        <img className={styles.login_logo} src={Images.logo} alt="logo" />
+                        <img onClick={() => navigate('/')} className={styles.login_logo} src={Images.logo} alt="logo" />
                     </div>
                     <div className={styles.body}>
                         {isValid && <span className={styles.invalid_text}>{isValid}</span>}
