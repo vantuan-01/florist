@@ -30,7 +30,7 @@ function ProductDetail() {
 
     useEffect(() => {
         httpRequest.get(`/product/products/${id}`).then((res) => {
-            setDetailItems(res.data);
+            setDetailItems(res);
         });
     }, [id]);
     useEffect(() => {
@@ -42,6 +42,7 @@ function ProductDetail() {
             const groupDetailItem = { detailItems, presentQty };
             dispatch(addProduct(groupDetailItem));
         } else {
+            // eslint-disable-next-line no-unused-vars
             const cf = window.confirm('You need to log in to buy stuff') ? navigate('/signIn') : null;
         }
     };
